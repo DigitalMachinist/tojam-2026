@@ -11,3 +11,12 @@
 ## Tech Stuff
 
 - Unity 6 (6000.3.8f1 LTS)
+- 3D Software?
+
+## Our Concept
+
+TBD
+
+## Itch.io
+
+Link to that from here once it exists
