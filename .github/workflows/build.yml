@@ -3,7 +3,7 @@ name: Build ✨
 on: [push, pull_request]
 
 permissions:
-  contents: read
+  contents: write
   checks: write
 
 jobs:
@@ -34,10 +34,36 @@ jobs:
           targetPlatform: WebGL
           allowDirtyBuild: true
 
-      # Output
       - name: Save build artifacts
         uses: actions/upload-artifact@v4
-        if: always()
+        if: success()
         with:
           name: Build
           path: build
+
+      - name: Compute release tag
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        id: tag
+        run: |
+          DATE=$(date -u +'%Y.%m.%d')
+          echo "tag=v${DATE}-build-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - name: Zip WebGL build
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          cd build
+          zip -r "../tojam-2026-webgl-${{ steps.tag.outputs.tag }}.zip" .
+
+      - name: Create GitHub pre-release
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.tag.outputs.tag }}
+          prerelease: true
+          files: tojam-2026-webgl-${{ steps.tag.outputs.tag }}.zip
+          body: |
+            Automated WebGL pre-release from main.
+
+            Commit: ${{ github.sha }}
+            Run: ${{ github.run_id }}
