@@ -1,6 +1,7 @@
 # TOJam 2026: Twenty Years, One Weekend
 
-[![Build & Test Status](https://github.com/DigitalMachinist/tojam-2026/actions/workflows/main.yml/badge.svg)](https://github.com/DigitalMachinist/tojam-2026/actions/workflows/main.yml)
+[![Test Status](https://github.com/DigitalMachinist/tojam-2026/actions/workflows/test.yml/badge.svg)](https://github.com/DigitalMachinist/tojam-2026/actions/workflows/test.yml)
+[![Build Status](https://github.com/DigitalMachinist/tojam-2026/actions/workflows/build.yml/badge.svg)](https://github.com/DigitalMachinist/tojam-2026/actions/workflows/build.yml)
 
 ## Theme
 

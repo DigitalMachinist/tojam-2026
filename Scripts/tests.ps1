@@ -2,7 +2,7 @@
 [CmdletBinding()]
 param(
     [string]$UnityPath = "D:\Program Files\Unity Hub\6000.3.8f1\Editor\Unity.exe",
-    [string]$ProjectPath = $PSScriptRoot,
+    [string]$ProjectPath = (Split-Path $PSScriptRoot -Parent),
     [ValidateSet('EditMode','PlayMode','All')]
     [string]$Platform = 'All'
 )

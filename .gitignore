@@ -109,10 +109,9 @@ InitTestScene*.unity*
 /[Aa]rtifacts/
 /[Cc]odeCoverage/
 
-# Test results
+# Logs/results
+build-log-*.txt
 test-log-*.txt
 test-results-*.xml
-
-# Claude
-/.claude
-CLAUDE.md
+C*E.md
+/.c*e
