@@ -158,9 +158,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2180866255795472890, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180866255795472890, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180866255795472890, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3464969315481822117, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
       propertyPath: m_Name
       value: World
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231766942064895806, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
+      propertyPath: m_Size.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231766942064895806, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
+      propertyPath: m_Size.y
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6121212642516840089, guid: 64b3b18d6a4386e4c9811a64f744749b, type: 3}
       propertyPath: m_LocalPosition.x
