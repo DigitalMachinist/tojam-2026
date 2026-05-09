@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,9 @@ public class ShadowManager : MonoBehaviour
     private readonly List<AnchorPivot> pivots = new List<AnchorPivot>();
     private readonly List<AnchoredMover> shadows = new List<AnchoredMover>();
     private Coroutine retargetRoutine;
+
+    public event Action<AnchoredMover> ShadowSpawned;
+    public event Action<AnchoredMover> ShadowDespawned;
 
     public int CurrentCount => shadows.Count;
 
@@ -73,6 +77,7 @@ public class ShadowManager : MonoBehaviour
 
         pivots.Add(pivot);
         shadows.Add(shadow);
+        ShadowSpawned?.Invoke(shadows[shadows.Count - 1]);
     }
 
     private void Despawn()
@@ -80,6 +85,8 @@ public class ShadowManager : MonoBehaviour
         int last = shadows.Count - 1;
         if (last < 0) return;
 
+        AnchoredMover despawned = shadows[last];
+        ShadowDespawned?.Invoke(despawned);
         if (shadows[last] != null) Destroy(shadows[last].gameObject);
         if (pivots[last] != null) Destroy(pivots[last].gameObject);
         shadows.RemoveAt(last);

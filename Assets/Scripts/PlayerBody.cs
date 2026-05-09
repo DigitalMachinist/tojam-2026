@@ -23,7 +23,7 @@ public class PlayerBody : MonoBehaviour
         if (hazard == null || IndexOf(hazard) >= 0) return;
 
         contacts.Add(new Contact { Hazard = hazard, NextTickTime = Time.time + hazard.DamageInterval });
-        GameLog.Contact($"Entered: {hazard.name}", hazard);
+        GameLog.Contact($"Hazard entered: {hazard.name}", hazard);
         HazardContactEntered?.Invoke(hazard);
     }
 
@@ -36,7 +36,7 @@ public class PlayerBody : MonoBehaviour
         if (i < 0) return;
 
         contacts.RemoveAt(i);
-        GameLog.Contact($"Exited: {hazard.name}", hazard);
+        GameLog.Contact($"Hazard exited: {hazard.name}", hazard);
         HazardContactExited?.Invoke(hazard);
     }
 
@@ -53,7 +53,7 @@ public class PlayerBody : MonoBehaviour
             }
             if (now >= c.NextTickTime)
             {
-                GameLog.Contact($"Tick: {c.Hazard.name}", c.Hazard);
+                GameLog.Contact($"Hazard tick: {c.Hazard.name}", c.Hazard);
                 HazardContactTicked?.Invoke(c.Hazard);
                 c.NextTickTime = now + c.Hazard.DamageInterval;
                 contacts[i] = c;

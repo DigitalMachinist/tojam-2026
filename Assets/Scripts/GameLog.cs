@@ -9,6 +9,7 @@ public static class GameLog
     private const string IframeColor = "F1C40F";
     private const string ContactColor = "E67E22";
     private const string ShadowColor = "9B59B6";
+    private const string WeaponColor = "F39C12";
     private const string InputColor = "3498DB";
     private const string HealthColor = "95A5A6";
 
@@ -19,6 +20,7 @@ public static class GameLog
     public static void Iframe(string msg, Object context = null)  => Tag(IframeColor,  "Iframe",  msg, context);
     public static void Contact(string msg, Object context = null) => Tag(ContactColor, "Contact", msg, context);
     public static void Shadow(string msg, Object context = null)  => Tag(ShadowColor,  "Shadow",  msg, context);
+    public static void Weapon(string msg, Object context = null)  => Tag(WeaponColor,  "Weapon",  msg, context);
     public static void Input(string msg, Object context = null)   => Tag(InputColor,   "Input",   msg, context);
     public static void Health(string msg, Object context = null)  => Tag(HealthColor,  "Health",  msg, context);
 

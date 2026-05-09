@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 4042231494707810678}
   - component: {fileID: 5431597674748364865}
   - component: {fileID: 2423470611431777720}
+  - component: {fileID: 539753317351408091}
   - component: {fileID: 4349997275128109440}
   - component: {fileID: 8628972149727686988}
   m_Layer: 7
@@ -534,6 +535,24 @@ MonoBehaviour:
   shadowManager: {fileID: 0}
   target: {fileID: 0}
   duration: 1
+--- !u!114 &539753317351408091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8411875650125640662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42321ce33313cc5408ef9d8495c24ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapons
+  stats: {fileID: 11400000, guid: 6bb352b9ff6a2ef42b500ae28681e18e, type: 2}
+  shadowManager: {fileID: 0}
+  effectManager: {fileID: 0}
+  playerController: {fileID: 4042231494707810678}
+  weaponPrefabs:
+  - {fileID: 5754257079452159257, guid: 3707e486cc1a7a34c9eec348ede3f8d9, type: 3}
 --- !u!50 &4349997275128109440
 Rigidbody2D:
   serializedVersion: 5

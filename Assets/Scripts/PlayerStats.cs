@@ -23,11 +23,15 @@ public class PlayerStats : ScriptableObject
     [Tooltip("Maximum number of shadows the player can have at once.")]
     [SerializeField] private int maxShadows = 4;
 
+    [Tooltip("Maximum number of weapon types the player can wield at once.")]
+    [SerializeField] private int defaultMaxWeaponSlots = 1;
+
     [Tooltip("Damage multiplier per shadow count.")]
     [SerializeField] private ShadowDamageEntry[] shadowDamageScaling = new ShadowDamageEntry[0];
 
     public int DefaultMaxHP => defaultMaxHP;
     public float IframeDurationSeconds => iframeDurationSeconds;
     public int MaxShadows => maxShadows;
+    public int DefaultMaxWeaponSlots => defaultMaxWeaponSlots;
     public ShadowDamageEntry[] ShadowDamageScaling => shadowDamageScaling;
 }

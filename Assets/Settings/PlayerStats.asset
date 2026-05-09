@@ -15,26 +15,13 @@ MonoBehaviour:
   defaultMaxHP: 5
   iframeDurationSeconds: 1
   maxShadows: 4
+  defaultMaxWeaponSlots: 1
   shadowDamageScaling:
   - Shadows: 1
-    DamageMultiplier: 0.5
+    DamageMultiplier: 0.8
   - Shadows: 2
-    DamageMultiplier: 0.333
+    DamageMultiplier: 0.7
   - Shadows: 3
-    DamageMultiplier: 0.25
+    DamageMultiplier: 0.6
   - Shadows: 4
-    DamageMultiplier: 0.2
-  - Shadows: 5
-    DamageMultiplier: 1.666667
-  - Shadows: 6
-    DamageMultiplier: 0.1428571
-  - Shadows: 7
-    DamageMultiplier: 0.125
-  - Shadows: 8
-    DamageMultiplier: 0.1111111
-  - Shadows: 9
-    DamageMultiplier: 0.1
-  - Shadows: 10
-    DamageMultiplier: 0.090909
-  - Shadows: 11
-    DamageMultiplier: 0.083333
+    DamageMultiplier: 0.5

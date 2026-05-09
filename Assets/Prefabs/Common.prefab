@@ -32,6 +32,7 @@ Transform:
   - {fileID: 1239596583333498938}
   - {fileID: 4968493443458457050}
   - {fileID: 3838343051138209164}
+  - {fileID: 1039054808213858600}
   - {fileID: 7404539389073240502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -231,7 +232,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3770851248941258757}
     m_Modifications:
+    - target: {fileID: 539753317351408091, guid: 1999f244abb47dc459ace311046a476e, type: 3}
+      propertyPath: effectManager
+      value: 
+      objectReference: {fileID: 6981179846261672740}
+    - target: {fileID: 539753317351408091, guid: 1999f244abb47dc459ace311046a476e, type: 3}
+      propertyPath: shadowManager
+      value: 
+      objectReference: {fileID: 3997040807798045758}
     - target: {fileID: 1501320923186699919, guid: 1999f244abb47dc459ace311046a476e, type: 3}
+      propertyPath: shadowManager
+      value: 
+      objectReference: {fileID: 3997040807798045758}
+    - target: {fileID: 2423470611431777720, guid: 1999f244abb47dc459ace311046a476e, type: 3}
       propertyPath: shadowManager
       value: 
       objectReference: {fileID: 3997040807798045758}
@@ -394,3 +407,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0855b4904f70ff429403ee838200244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShadowManager
+--- !u!1001 &8752214154349748645
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3770851248941258757}
+    m_Modifications:
+    - target: {fileID: 4781924897488549277, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_Name
+      value: Effect Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+--- !u!4 &1039054808213858600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8583133774313031821, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+  m_PrefabInstance: {fileID: 8752214154349748645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6981179846261672740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1843166814996179585, guid: c6912d0026c07134c9b6db0d8c15484c, type: 3}
+  m_PrefabInstance: {fileID: 8752214154349748645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14dc86d77073d5438fe07a50cddc5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectManager
