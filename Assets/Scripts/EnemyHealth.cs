@@ -38,6 +38,14 @@ public class EnemyHealth : MonoBehaviour
         TakeDamage(effect.Damage);
     }
 
+    public void Initialize(EnemyStats newStats)
+    {
+        stats = newStats;
+        MaxHP = stats != null ? stats.MaxHP : 1;
+        CurrentHP = MaxHP;
+        Died = null;
+    }
+
     public void TakeDamage(int amount)
     {
         if (amount <= 0 || IsDead) return;

@@ -424,6 +424,8 @@ GameObject:
   - component: {fileID: 5431597674748364865}
   - component: {fileID: 2423470611431777720}
   - component: {fileID: 539753317351408091}
+  - component: {fileID: 6474447083382652161}
+  - component: {fileID: 7824972303278123686}
   - component: {fileID: 4349997275128109440}
   - component: {fileID: 8628972149727686988}
   m_Layer: 7
@@ -553,6 +555,39 @@ MonoBehaviour:
   playerController: {fileID: 4042231494707810678}
   weaponPrefabs:
   - {fileID: 5754257079452159257, guid: 3707e486cc1a7a34c9eec348ede3f8d9, type: 3}
+--- !u!114 &6474447083382652161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8411875650125640662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00466604944fd3469d38316c926b101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStart
+  playerController: {fileID: 4042231494707810678}
+  playerWeapons: {fileID: 539753317351408091}
+  playerMover: {fileID: 5431597674748364865}
+  rb: {fileID: 4349997275128109440}
+--- !u!114 &7824972303278123686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8411875650125640662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd4164c5b3efb04883a4abba4c08c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeath
+  health: {fileID: 4086221166191643120}
+  playerController: {fileID: 4042231494707810678}
+  playerWeapons: {fileID: 539753317351408091}
+  playerMover: {fileID: 5431597674748364865}
+  rb: {fileID: 4349997275128109440}
 --- !u!50 &4349997275128109440
 Rigidbody2D:
   serializedVersion: 5

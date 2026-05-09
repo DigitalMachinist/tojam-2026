@@ -5,11 +5,11 @@ public class EffectManager : MonoBehaviour
 {
     private readonly Dictionary<PlayerWeaponEffect, List<PlayerWeaponEffect>> available = new();
 
-    public void Spawn(PlayerWeaponEffect prefab, Vector3 position, Quaternion rotation, Transform effectsParent, int damage)
+    public void Spawn(PlayerWeaponEffect prefab, Vector3 position, Quaternion rotation, Transform effectsParent, int damage, float knockback = 0f, float stunDuration = 0f)
     {
         var effect = Pop(prefab) ?? Instantiate(prefab, transform);
         effect.transform.SetParent(effectsParent != null ? effectsParent : transform);
-        effect.Play(position, rotation, this, damage, prefab);
+        effect.Play(position, rotation, this, damage, knockback, stunDuration, prefab);
     }
 
     public void Return(PlayerWeaponEffect effect, PlayerWeaponEffect prefab)

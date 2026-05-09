@@ -7,6 +7,8 @@ public class PlayerWeaponEffect : MonoBehaviour
     [SerializeField] private AnimationClip attackClip;
 
     public int Damage { get; private set; }
+    public float Knockback { get; private set; }
+    public float StunDuration { get; private set; }
     public PlayerWeaponEffect SourcePrefab { get; private set; }
 
     private Animation _animation;
@@ -16,9 +18,11 @@ public class PlayerWeaponEffect : MonoBehaviour
         _animation = GetComponent<Animation>();
     }
 
-    public void Play(Vector3 position, Quaternion rotation, EffectManager manager, int damage, PlayerWeaponEffect sourcePrefab)
+    public void Play(Vector3 position, Quaternion rotation, EffectManager manager, int damage, float knockback, float stunDuration, PlayerWeaponEffect sourcePrefab)
     {
         Damage = damage;
+        Knockback = knockback;
+        StunDuration = stunDuration;
         SourcePrefab = sourcePrefab;
         transform.SetPositionAndRotation(position, rotation);
         gameObject.SetActive(true);

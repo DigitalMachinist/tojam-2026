@@ -18,9 +18,17 @@ public class PlayerWeaponStats : ScriptableObject
     [Tooltip("Seconds between each effect spawn within a burst.")]
     [SerializeField] private float spawnDelay = 0.1f;
 
+    [Tooltip("Impulse magnitude applied to enemies on hit.")]
+    [SerializeField] private float knockback = 5f;
+
+    [Tooltip("Seconds the enemy's movement is suppressed after being knocked back.")]
+    [SerializeField] private float stunDurationSeconds = 0.15f;
+
     public int BaseDamage => baseDamage;
     public float Cooldown => cooldown;
     public PlayerWeaponEffect EffectPrefab => effectPrefab;
     public int Quantity => quantity;
     public float SpawnDelay => spawnDelay;
+    public float Knockback => knockback;
+    public float StunDurationSeconds => stunDurationSeconds;
 }

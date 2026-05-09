@@ -12,6 +12,7 @@ public static class GameLog
     private const string WeaponColor = "F39C12";
     private const string InputColor = "3498DB";
     private const string HealthColor = "95A5A6";
+    private const string EnemyColor = "1ABC9C";
 
     public static void Damage(string msg, Object context = null)  => Tag(DamageColor,  "Damage",  msg, context);
     public static void Heal(string msg, Object context = null)    => Tag(HealColor,    "Heal",    msg, context);
@@ -23,6 +24,7 @@ public static class GameLog
     public static void Weapon(string msg, Object context = null)  => Tag(WeaponColor,  "Weapon",  msg, context);
     public static void Input(string msg, Object context = null)   => Tag(InputColor,   "Input",   msg, context);
     public static void Health(string msg, Object context = null)  => Tag(HealthColor,  "Health",  msg, context);
+    public static void Enemy(string msg, Object context = null)   => Tag(EnemyColor,   "Enemy",   msg, context);
 
     private static void Tag(string hex, string category, string msg, Object context)
     {

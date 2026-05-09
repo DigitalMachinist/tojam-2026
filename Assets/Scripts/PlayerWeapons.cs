@@ -132,6 +132,12 @@ public class PlayerWeapons : MonoBehaviour
         return shadowEffects;
     }
 
+    public void SetWeaponsEnabled(bool value)
+    {
+        foreach (var w in allInstances)
+            if (w != null) w.enabled = value;
+    }
+
     private float ComputeMultiplier(int shadowCount)
     {
         if (stats == null) return 1f;

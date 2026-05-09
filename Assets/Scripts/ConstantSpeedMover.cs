@@ -5,6 +5,8 @@ public class ConstantSpeedMover : AnchoredMover
     [Tooltip("Constant movement speed in units per second.")]
     [SerializeField] private float speed = 1f;
 
+    public float Speed { set => speed = value; }
+
     [Tooltip("If true, draws a debug line from this object to its anchor each frame.")]
     [SerializeField] private bool drawDebugRayToAnchor = false;
 
@@ -12,6 +14,9 @@ public class ConstantSpeedMover : AnchoredMover
     [SerializeField] private Color debugRayColor = Color.cyan;
 
     private Rigidbody2D rb;
+    private float stunEndTime;
+
+    public void Stun(float duration) => stunEndTime = Time.time + duration;
 
     private void Awake()
     {
@@ -22,6 +27,8 @@ public class ConstantSpeedMover : AnchoredMover
 
     private void FixedUpdate()
     {
+        if (Time.time < stunEndTime) return;
+
         if (anchor == null)
         {
             rb.linearVelocity = Vector2.zero;

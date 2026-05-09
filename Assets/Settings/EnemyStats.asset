@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed25c126c3d67b4ab8db37672403017, type: 3}
   m_Name: EnemyStats
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  maxHP: 100
+  maxHP: 25
   movementSpeed: 2
   knockback: 5
   weight: 1
