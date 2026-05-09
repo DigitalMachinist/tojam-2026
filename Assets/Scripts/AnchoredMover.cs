@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class AnchoredMover : MonoBehaviour
 {
     [Tooltip("Transform this mover targets.")]

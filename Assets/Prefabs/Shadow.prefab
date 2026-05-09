@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6558852054773672172}
   - component: {fileID: 159662770188950306}
   - component: {fileID: 8848860496219100993}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,8 +100,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6106993452158442313}
   - component: {fileID: 933503780442904495}
-  - component: {fileID: 6516288373713127895}
-  m_Layer: 0
+  - component: {fileID: 7145453763819025571}
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -140,30 +140,30 @@ MonoBehaviour:
   speed: 3
   drawDebugRayToAnchor: 1
   debugRayColor: {r: 1, g: 0, b: 1, a: 1}
---- !u!54 &6516288373713127895
-Rigidbody:
+--- !u!50 &7145453763819025571
+Rigidbody2D:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5111981807539266508}
-  serializedVersion: 5
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 56
+  m_Interpolate: 1
+  m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0

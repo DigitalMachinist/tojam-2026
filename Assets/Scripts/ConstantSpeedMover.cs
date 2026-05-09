@@ -11,11 +11,11 @@ public class ConstantSpeedMover : AnchoredMover
     [Tooltip("Color of the debug line drawn to the anchor.")]
     [SerializeField] private Color debugRayColor = Color.cyan;
 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
 
         if (anchor != null) transform.position = anchor.position;
     }
@@ -24,17 +24,18 @@ public class ConstantSpeedMover : AnchoredMover
     {
         if (anchor == null)
         {
-            rb.linearVelocity = Vector3.zero;
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        Vector3 diff = anchor.position - rb.position;
+        Vector2 anchorPos = anchor.position;
+        Vector2 diff = anchorPos - rb.position;
         float distance = diff.magnitude;
 
         if (distance <= speed * Time.fixedDeltaTime)
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.MovePosition(anchor.position);
+            rb.linearVelocity = Vector2.zero;
+            rb.MovePosition(anchorPos);
             return;
         }
 
