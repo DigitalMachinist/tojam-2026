@@ -1,11 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Shadow : MonoBehaviour
+public class ShadowMover : AnchoredMover
 {
-    [Tooltip("Transform to move toward.")]
-    [SerializeField] private Transform anchor;
-
     [Tooltip("Speed constant. Velocity magnitude = speed * distance.")]
     [SerializeField] private float speed = 1f;
 
@@ -29,7 +25,6 @@ public class Shadow : MonoBehaviour
         Vector3 diff = anchor.position - rb.position;
         Vector3 direction = diff.normalized;
         rb.linearVelocity = direction * diff.sqrMagnitude * speed;
-        //rb.linearVelocity = direction * diff.magnitude * speed;
     }
 
     private void Update()
@@ -38,12 +33,5 @@ public class Shadow : MonoBehaviour
         {
             Debug.DrawLine(transform.position, anchor.position, debugRayColor);
         }
-    }
-
-    public Transform Anchor => anchor;
-
-    public void SetAnchor(Transform newAnchor)
-    {
-        anchor = newAnchor;
     }
 }

@@ -1,0 +1,3798 @@
+Initial setup of shadows and player motion.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   .github/workflows/movement-strategy.md
+#	modified:   Assets/InputSystem_Actions.inputactions
+#	new file:   Assets/Scenes/Test_ShadowMotion.unity
+#	new file:   Assets/Scenes/Test_ShadowMotion.unity.meta
+#	new file:   Assets/Scripts.meta
+#	new file:   Assets/Scripts/DebugRayToParent.cs
+#	new file:   Assets/Scripts/DebugRayToParent.cs.meta
+#	new file:   Assets/Scripts/LeafPivot.cs
+#	new file:   Assets/Scripts/LeafPivot.cs.meta
+#	new file:   Assets/Scripts/LeafPivot.prefab
+#	new file:   Assets/Scripts/LeafPivot.prefab.meta
+#	new file:   Assets/Scripts/PingPongBetweenTransforms.cs
+#	new file:   Assets/Scripts/PingPongBetweenTransforms.cs.meta
+#	new file:   Assets/Scripts/PlayerController.cs
+#	new file:   Assets/Scripts/PlayerController.cs.meta
+#	new file:   Assets/Scripts/RotateAroundAxis.cs
+#	new file:   Assets/Scripts/RotateAroundAxis.cs.meta
+#	new file:   Assets/Scripts/Shadow.cs
+#	new file:   Assets/Scripts/Shadow.cs.meta
+#	new file:   Assets/Scripts/Shadow.prefab
+#	new file:   Assets/Scripts/Shadow.prefab.meta
+#	new file:   Assets/Scripts/ShadowManager.cs
+#	new file:   Assets/Scripts/ShadowManager.cs.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png.meta
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/index.html
+#	new file:   Assets/tojam-2026-WebGL-20260502-214837/index.html.meta
+#
+# ------------------------ >8 ------------------------
+# Do not modify or remove the line above.
+# Everything below it will be ignored.
+diff --git a/.github/workflows/movement-strategy.md b/.github/workflows/movement-strategy.md
+new file mode 100644
+index 0000000..fa1d483
+--- /dev/null
++++ b/.github/workflows/movement-strategy.md
+@@ -0,0 +1,60 @@
++# Movement Strategy — Spec
++
++## Goal
++
++Decouple `ShadowManager` and `PlayerController` from the concrete `Shadow` class so any "moves in relation to a Transform" component can drop into the prefab slot. `Shadow` becomes one of N strategies; consumers only need to know "this thing has an anchor Transform I can read and swap."
++
++## Shape: abstract MonoBehaviour base class — NOT a plain C# `interface`
++
++```csharp
++[RequireComponent(typeof(Rigidbody))]
++public abstract class AnchoredMover : MonoBehaviour
++{
++    [SerializeField] protected Transform anchor;
++
++    public Transform Anchor => anchor;
++    public virtual void SetAnchor(Transform t) => anchor = t;
++}
++```
++
++That is the entire contract. Per-strategy fields (speed, easing, endpoints, debug toggles) live on the subclass. No lifecycle hooks, no events, no registry — add those when a second strategy actually needs them.
++
++### Why a base class instead of a C# `interface`
++
++1. **Inspector serialization.** Unity does not serialize plain interface fields. A `Shadow shadowAnchors` field re-typed to `IAnchoredMover` would stop accepting drag-and-drop assignment — you'd need `[SerializeReference]` (plain C# only, not MonoBehaviours), or store a `MonoBehaviour` and cast. Friction with no payoff.
++2. **`[RequireComponent(typeof(Rigidbody))]` lives once** on the base and every subclass inherits it.
++3. **Polymorphic prefab fields just work.** `[SerializeField] AnchoredMover shadowPrefab;` accepts any subclass in the Inspector.
++4. **No duplicated boilerplate** for the `anchor` field, getter, and setter across strategies.
++
++ScriptableObject-injected strategy was considered and rejected for now: only one strategy exists today, runtime per-instance state still has to live on the MonoBehaviour, and SO instances need cloning to avoid shared state. Reserve for when movement params become designer-authored data.
++
++## Concrete implementations
++
++- **`Shadow : AnchoredMover`** — keeps `speed` and the debug-ray fields; `FixedUpdate` becomes the override of an abstract `Tick`-equivalent (or stays as `FixedUpdate` directly — the base doesn't dictate).
++- **Future:** `PingPongMover : AnchoredMover` adapted from `PingPongBetweenTransforms.cs`. Other movement scripts in the project (`RotateAroundAxis`, `LeafPivot`, `DebugRayToParent`) are *not* "move toward a target" and stay outside this hierarchy.
++
++## Consumer changes
++
++| File | Change |
++|---|---|
++| `ShadowManager.cs` line 17 | `[SerializeField] private Shadow shadowPrefab;` → `AnchoredMover shadowPrefab;` |
++| `ShadowManager.cs` line 25 | `List<Shadow> shadows` → `List<AnchoredMover> shadows` |
++| `ShadowManager.cs` line 48 | `Shadow shadow = Instantiate(...)` → `AnchoredMover shadow = Instantiate(...)` |
++| `PlayerController.cs` line 27 | `[SerializeField] private Shadow shadowAnchors;` → `AnchoredMover shadowAnchors;` |
++
++`Anchor` getter and `SetAnchor()` calls in `ShadowManager.RetargetRoutine` (lines 66–67, 74) and `PlayerController.InteractRoutine` (lines 101–102, 106) are unchanged — they hit the base-class members.
++
++## Migration steps
++
++1. Add `Assets/Scripts/AnchoredMover.cs` with the abstract base above.
++2. Edit `Shadow.cs`: change `class Shadow : MonoBehaviour` → `class Shadow : AnchoredMover`. Delete the local `anchor`, `Anchor`, `SetAnchor` — they're inherited. Keep `RequireComponent` on the base only, remove from `Shadow`. Keep `speed` and debug fields.
++3. Re-type `ShadowManager.shadowPrefab` and `shadows` list to `AnchoredMover`.
++4. Re-type `PlayerController.shadowAnchors` to `AnchoredMover`.
++5. Open `Assets/Scenes/Test_ShadowMotion.unity` and `Assets/Scripts/Shadow.prefab`. Inspector references should auto-resolve since `Shadow` still satisfies the `AnchoredMover` slot — verify no missing-script warnings.
++
++## Out of scope
++
++- Strategy registry / factory. `Instantiate` on a typed prefab field is enough.
++- `OnAnchorChanged` events. Add when a second strategy needs to react to swaps.
++- Generalizing `RotateAroundAxis` or `LeafPivot` — different shape, not "anchored mover."
++- ScriptableObject strategy data. Revisit when designers want to tune movement without touching prefabs.
+diff --git a/Assets/InputSystem_Actions.inputactions b/Assets/InputSystem_Actions.inputactions
+index 1a12cb9..d6f1e3e 100644
+--- a/Assets/InputSystem_Actions.inputactions
++++ b/Assets/InputSystem_Actions.inputactions
+@@ -38,7 +38,7 @@
+                     "id": "852140f2-7766-474d-8707-702459ba45f3",
+                     "expectedControlType": "Button",
+                     "processors": "",
+-                    "interactions": "Hold",
++                    "interactions": "",
+                     "initialStateCheck": false
+                 },
+                 {
+diff --git a/Assets/Scenes/Test_ShadowMotion.unity b/Assets/Scenes/Test_ShadowMotion.unity
+new file mode 100644
+index 0000000..3f66016
+--- /dev/null
++++ b/Assets/Scenes/Test_ShadowMotion.unity
+@@ -0,0 +1,1029 @@
++%YAML 1.1
++%TAG !u! tag:unity3d.com,2011:
++--- !u!29 &1
++OcclusionCullingSettings:
++  m_ObjectHideFlags: 0
++  serializedVersion: 2
++  m_OcclusionBakeSettings:
++    smallestOccluder: 5
++    smallestHole: 0.25
++    backfaceThreshold: 100
++  m_SceneGUID: 00000000000000000000000000000000
++  m_OcclusionCullingData: {fileID: 0}
++--- !u!104 &2
++RenderSettings:
++  m_ObjectHideFlags: 0
++  serializedVersion: 10
++  m_Fog: 0
++  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
++  m_FogMode: 3
++  m_FogDensity: 0.01
++  m_LinearFogStart: 0
++  m_LinearFogEnd: 300
++  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
++  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
++  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
++  m_AmbientIntensity: 1
++  m_AmbientMode: 0
++  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
++  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
++  m_HaloStrength: 0.5
++  m_FlareStrength: 1
++  m_FlareFadeSpeed: 3
++  m_HaloTexture: {fileID: 0}
++  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
++  m_DefaultReflectionMode: 0
++  m_DefaultReflectionResolution: 128
++  m_ReflectionBounces: 1
++  m_ReflectionIntensity: 1
++  m_CustomReflection: {fileID: 0}
++  m_Sun: {fileID: 0}
++  m_UseRadianceAmbientProbe: 0
++--- !u!157 &3
++LightmapSettings:
++  m_ObjectHideFlags: 0
++  serializedVersion: 13
++  m_BakeOnSceneLoad: 0
++  m_GISettings:
++    serializedVersion: 2
++    m_BounceScale: 1
++    m_IndirectOutputScale: 1
++    m_AlbedoBoost: 1
++    m_EnvironmentLightingMode: 0
++    m_EnableBakedLightmaps: 1
++    m_EnableRealtimeLightmaps: 0
++  m_LightmapEditorSettings:
++    serializedVersion: 12
++    m_Resolution: 2
++    m_BakeResolution: 40
++    m_AtlasSize: 1024
++    m_AO: 0
++    m_AOMaxDistance: 1
++    m_CompAOExponent: 1
++    m_CompAOExponentDirect: 0
++    m_ExtractAmbientOcclusion: 0
++    m_Padding: 2
++    m_LightmapParameters: {fileID: 0}
++    m_LightmapsBakeMode: 1
++    m_TextureCompression: 1
++    m_ReflectionCompression: 2
++    m_MixedBakeMode: 2
++    m_BakeBackend: 2
++    m_PVRSampling: 1
++    m_PVRDirectSampleCount: 32
++    m_PVRSampleCount: 512
++    m_PVRBounces: 2
++    m_PVREnvironmentSampleCount: 256
++    m_PVREnvironmentReferencePointCount: 2048
++    m_PVRFilteringMode: 1
++    m_PVRDenoiserTypeDirect: 1
++    m_PVRDenoiserTypeIndirect: 1
++    m_PVRDenoiserTypeAO: 1
++    m_PVRFilterTypeDirect: 0
++    m_PVRFilterTypeIndirect: 0
++    m_PVRFilterTypeAO: 0
++    m_PVREnvironmentMIS: 1
++    m_PVRCulling: 1
++    m_PVRFilteringGaussRadiusDirect: 1
++    m_PVRFilteringGaussRadiusIndirect: 1
++    m_PVRFilteringGaussRadiusAO: 1
++    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
++    m_PVRFilteringAtrousPositionSigmaIndirect: 2
++    m_PVRFilteringAtrousPositionSigmaAO: 1
++    m_ExportTrainingData: 0
++    m_TrainingDataDestination: TrainingData
++    m_LightProbeSampleCountMultiplier: 4
++  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
++  m_LightingSettings: {fileID: 0}
++--- !u!196 &4
++NavMeshSettings:
++  serializedVersion: 2
++  m_ObjectHideFlags: 0
++  m_BuildSettings:
++    serializedVersion: 3
++    agentTypeID: 0
++    agentRadius: 0.5
++    agentHeight: 2
++    agentSlope: 45
++    agentClimb: 0.4
++    ledgeDropHeight: 0
++    maxJumpAcrossDistance: 0
++    minRegionArea: 2
++    manualCellSize: 0
++    cellSize: 0.16666667
++    manualTileSize: 0
++    tileSize: 256
++    buildHeightMesh: 0
++    maxJobWorkers: 0
++    preserveTilesOutsideBounds: 0
++    debug:
++      m_Flags: 0
++  m_NavMeshData: {fileID: 0}
++--- !u!1 &243564151
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 243564152}
++  - component: {fileID: 243564154}
++  - component: {fileID: 243564153}
++  m_Layer: 0
++  m_Name: PC
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &243564152
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 243564151}
++  serializedVersion: 2
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 1266730498}
++  m_Father: {fileID: 1426799075}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!54 &243564153
++Rigidbody:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 243564151}
++  serializedVersion: 5
++  m_Mass: 1
++  m_LinearDamping: 0
++  m_AngularDamping: 0.05
++  m_CenterOfMass: {x: 0, y: 0, z: 0}
++  m_InertiaTensor: {x: 1, y: 1, z: 1}
++  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_IncludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ExcludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ImplicitCom: 1
++  m_ImplicitTensor: 1
++  m_UseGravity: 0
++  m_IsKinematic: 0
++  m_Interpolate: 0
++  m_Constraints: 56
++  m_CollisionDetection: 0
++--- !u!114 &243564154
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 243564151}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 70aa40ab5d4064a47b4f96c82138252b, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
++  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
++  attackAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
++  interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
++  speed: 5
++  shadowManager: {fileID: 610270448}
++  attackTarget: {fileID: 448501124}
++  shadowAnchors: {fileID: 279584639}
++  interactTarget: {fileID: 448501124}
++  actionDuration: 1
++--- !u!1 &279584636
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 279584637}
++  - component: {fileID: 279584639}
++  - component: {fileID: 279584638}
++  m_Layer: 0
++  m_Name: Shadow Anchors
++  m_TagString: Untagged
++  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &279584637
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 279584636}
++  serializedVersion: 2
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 1039182196}
++  m_Father: {fileID: 519168862}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!54 &279584638
++Rigidbody:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 279584636}
++  serializedVersion: 5
++  m_Mass: 1
++  m_LinearDamping: 0
++  m_AngularDamping: 0.05
++  m_CenterOfMass: {x: 0, y: 0, z: 0}
++  m_InertiaTensor: {x: 1, y: 1, z: 1}
++  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_IncludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ExcludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ImplicitCom: 1
++  m_ImplicitTensor: 1
++  m_UseGravity: 0
++  m_IsKinematic: 0
++  m_Interpolate: 0
++  m_Constraints: 56
++  m_CollisionDetection: 0
++--- !u!114 &279584639
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 279584636}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 778fbb70c05cb1e44a409944ea4e4375, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::Shadow
++  anchor: {fileID: 243564152}
++  speed: 2
++  drawDebugRayToAnchor: 0
++  debugRayColor: {r: 1, g: 0, b: 1, a: 1}
++--- !u!1 &448501123
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 448501124}
++  m_Layer: 0
++  m_Name: Position 2
++  m_TagString: Untagged
++  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &448501124
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 448501123}
++  serializedVersion: 2
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: 9.99, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 1426799075}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!1 &483695945
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 483695947}
++  - component: {fileID: 483695946}
++  m_Layer: 0
++  m_Name: PlayerInput
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!114 &483695946
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 483695945}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
++  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
++  m_NotificationBehavior: 3
++  m_UIInputModule: {fileID: 0}
++  m_DeviceLostEvent:
++    m_PersistentCalls:
++      m_Calls: []
++  m_DeviceRegainedEvent:
++    m_PersistentCalls:
++      m_Calls: []
++  m_ControlsChangedEvent:
++    m_PersistentCalls:
++      m_Calls: []
++  m_ActionEvents: []
++  m_NeverAutoSwitchControlSchemes: 0
++  m_DefaultControlScheme: Keyboard&Mouse
++  m_DefaultActionMap: Player
++  m_SplitScreenIndex: -1
++  m_Camera: {fileID: 0}
++--- !u!4 &483695947
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 483695945}
++  serializedVersion: 2
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 519168862}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!1 &519168861
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 519168862}
++  m_Layer: 0
++  m_Name: Common
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &519168862
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 519168861}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 483695947}
++  - {fileID: 610270447}
++  - {fileID: 279584637}
++  m_Father: {fileID: 0}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!1 &610270446
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 610270447}
++  - component: {fileID: 610270448}
++  m_Layer: 0
++  m_Name: Shadow Manager
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &610270447
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 610270446}
++  serializedVersion: 2
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 519168862}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &610270448
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 610270446}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: c0855b4904f70ff429403ee838200244, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::ShadowManager
++  leafPivotParent: {fileID: 1451405565}
++  leafPivotPrefab: {fileID: 1525765307703660359, guid: 0fb517268b35d7f47acd2619ff1b3880, type: 3}
++  shadowParent: {fileID: 610270447}
++  shadowPrefab: {fileID: 933503780442904495, guid: b923b81db4877eb4cab02afb71854ac8, type: 3}
++  count: 5
++  radius: 3
++--- !u!1 &1031119600
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1031119603}
++  - component: {fileID: 1031119602}
++  - component: {fileID: 1031119601}
++  - component: {fileID: 1031119604}
++  m_Layer: 0
++  m_Name: Main Camera
++  m_TagString: MainCamera
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!81 &1031119601
++AudioListener:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1031119600}
++  m_Enabled: 1
++--- !u!20 &1031119602
++Camera:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1031119600}
++  m_Enabled: 1
++  serializedVersion: 2
++  m_ClearFlags: 2
++  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
++  m_projectionMatrixMode: 1
++  m_GateFitMode: 2
++  m_FOVAxisMode: 0
++  m_Iso: 200
++  m_ShutterSpeed: 0.005
++  m_Aperture: 16
++  m_FocusDistance: 10
++  m_FocalLength: 50
++  m_BladeCount: 5
++  m_Curvature: {x: 2, y: 11}
++  m_BarrelClipping: 0.25
++  m_Anamorphism: 0
++  m_SensorSize: {x: 36, y: 24}
++  m_LensShift: {x: 0, y: 0}
++  m_NormalizedViewPortRect:
++    serializedVersion: 2
++    x: 0
++    y: 0
++    width: 1
++    height: 1
++  near clip plane: 0.1
++  far clip plane: 10
++  field of view: 60
++  orthographic: 1
++  orthographic size: 10
++  m_Depth: -1
++  m_CullingMask:
++    serializedVersion: 2
++    m_Bits: 4294967295
++  m_RenderingPath: -1
++  m_TargetTexture: {fileID: 0}
++  m_TargetDisplay: 0
++  m_TargetEye: 3
++  m_HDR: 1
++  m_AllowMSAA: 1
++  m_AllowDynamicResolution: 0
++  m_ForceIntoRT: 0
++  m_OcclusionCulling: 1
++  m_StereoConvergence: 10
++  m_StereoSeparation: 0.022
++--- !u!4 &1031119603
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1031119600}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: -1}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 0}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &1031119604
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1031119600}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
++  m_RenderShadows: 1
++  m_RequiresDepthTextureOption: 2
++  m_RequiresOpaqueTextureOption: 2
++  m_CameraType: 0
++  m_Cameras: []
++  m_RendererIndex: 0
++  m_VolumeLayerMask:
++    serializedVersion: 2
++    m_Bits: 1
++  m_VolumeTrigger: {fileID: 0}
++  m_VolumeFrameworkUpdateModeOption: 2
++  m_RenderPostProcessing: 0
++  m_Antialiasing: 0
++  m_AntialiasingQuality: 2
++  m_StopNaN: 0
++  m_Dithering: 0
++  m_ClearDepth: 1
++  m_AllowXRRendering: 1
++  m_AllowHDROutput: 1
++  m_UseScreenCoordOverride: 0
++  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
++  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
++  m_RequiresDepthTexture: 0
++  m_RequiresColorTexture: 0
++  m_TaaSettings:
++    m_Quality: 3
++    m_FrameInfluence: 0.1
++    m_JitterScale: 1
++    m_MipBias: 0
++    m_VarianceClampScale: 0.9
++    m_ContrastAdaptiveSharpening: 0
++  m_Version: 2
++--- !u!1 &1039182195
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1039182196}
++  - component: {fileID: 1039182197}
++  - component: {fileID: 1039182198}
++  m_Layer: 0
++  m_Name: Pivot A
++  m_TagString: Untagged
++  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1039182196
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1039182195}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 1451405565}
++  m_Father: {fileID: 279584637}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &1039182197
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1039182195}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: eceac053b69d53949824e57d6b78dce2, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::RotateAroundAxis
++  axis: {x: 0, y: 0, z: 1}
++  degreesPerSecond: 90
++  randomizeOnStart: 0
++--- !u!114 &1039182198
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1039182195}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
++  color: {r: 0, g: 1, b: 1, a: 1}
++--- !u!1 &1266730497
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1266730498}
++  - component: {fileID: 1266730501}
++  - component: {fileID: 1266730500}
++  - component: {fileID: 1266730499}
++  m_Layer: 0
++  m_Name: Sphere
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1266730498
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1266730497}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 243564152}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!135 &1266730499
++SphereCollider:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1266730497}
++  m_Material: {fileID: 0}
++  m_IncludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ExcludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_LayerOverridePriority: 0
++  m_IsTrigger: 0
++  m_ProvidesContacts: 0
++  m_Enabled: 0
++  serializedVersion: 3
++  m_Radius: 0.5
++  m_Center: {x: 0, y: 0, z: 0}
++--- !u!23 &1266730500
++MeshRenderer:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1266730497}
++  m_Enabled: 1
++  m_CastShadows: 1
++  m_ReceiveShadows: 1
++  m_DynamicOccludee: 1
++  m_StaticShadowCaster: 0
++  m_MotionVectors: 1
++  m_LightProbeUsage: 1
++  m_ReflectionProbeUsage: 1
++  m_RayTracingMode: 2
++  m_RayTraceProcedural: 0
++  m_RayTracingAccelStructBuildFlagsOverride: 0
++  m_RayTracingAccelStructBuildFlags: 1
++  m_SmallMeshCulling: 1
++  m_ForceMeshLod: -1
++  m_MeshLodSelectionBias: 0
++  m_RenderingLayerMask: 1
++  m_RendererPriority: 0
++  m_Materials:
++  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
++  m_StaticBatchInfo:
++    firstSubMesh: 0
++    subMeshCount: 0
++  m_StaticBatchRoot: {fileID: 0}
++  m_ProbeAnchor: {fileID: 0}
++  m_LightProbeVolumeOverride: {fileID: 0}
++  m_ScaleInLightmap: 1
++  m_ReceiveGI: 1
++  m_PreserveUVs: 0
++  m_IgnoreNormalsForChartDetection: 0
++  m_ImportantGI: 0
++  m_StitchLightmapSeams: 1
++  m_SelectedEditorRenderState: 3
++  m_MinimumChartSize: 4
++  m_AutoUVMaxDistance: 0.5
++  m_AutoUVMaxAngle: 89
++  m_LightmapParameters: {fileID: 0}
++  m_GlobalIlluminationMeshLod: 0
++  m_SortingLayerID: 0
++  m_SortingLayer: 0
++  m_SortingOrder: 0
++  m_MaskInteraction: 0
++  m_AdditionalVertexStreams: {fileID: 0}
++--- !u!33 &1266730501
++MeshFilter:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1266730497}
++  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
++--- !u!1 &1426799074
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1426799075}
++  m_Layer: 0
++  m_Name: World
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1426799075
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1426799074}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 1927469286}
++  - {fileID: 448501124}
++  - {fileID: 243564152}
++  m_Father: {fileID: 0}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!1 &1451405564
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1451405565}
++  - component: {fileID: 1451405566}
++  - component: {fileID: 1451405567}
++  m_Layer: 0
++  m_Name: Pivot B
++  m_TagString: Untagged
++  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1451405565
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1451405564}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0.25, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 1039182196}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &1451405566
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1451405564}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: eceac053b69d53949824e57d6b78dce2, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::RotateAroundAxis
++  axis: {x: 0, y: 0, z: 1}
++  degreesPerSecond: -120
++  randomizeOnStart: 0
++--- !u!114 &1451405567
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1451405564}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
++  color: {r: 0, g: 1, b: 1, a: 1}
++--- !u!1 &1927469285
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1927469286}
++  m_Layer: 0
++  m_Name: Position 1
++  m_TagString: Untagged
++  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1927469286
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1927469285}
++  serializedVersion: 2
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: -5, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 1426799075}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!1 &2125719690
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 2125719693}
++  - component: {fileID: 2125719692}
++  - component: {fileID: 2125719691}
++  m_Layer: 0
++  m_Name: Directional Light
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!114 &2125719691
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 2125719690}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
++  m_UsePipelineSettings: 1
++  m_AdditionalLightsShadowResolutionTier: 2
++  m_CustomShadowLayers: 0
++  m_LightCookieSize: {x: 1, y: 1}
++  m_LightCookieOffset: {x: 0, y: 0}
++  m_SoftShadowQuality: 0
++  m_RenderingLayersMask:
++    serializedVersion: 0
++    m_Bits: 1
++  m_ShadowRenderingLayersMask:
++    serializedVersion: 0
++    m_Bits: 1
++  m_Version: 4
++  m_LightLayerMask: 1
++  m_ShadowLayerMask: 1
++  m_RenderingLayers: 1
++  m_ShadowRenderingLayers: 1
++--- !u!108 &2125719692
++Light:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 2125719690}
++  m_Enabled: 1
++  serializedVersion: 12
++  m_Type: 1
++  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
++  m_Intensity: 1
++  m_Range: 10
++  m_SpotAngle: 30
++  m_InnerSpotAngle: 21.80208
++  m_CookieSize2D: {x: 0.5, y: 0.5}
++  m_Shadows:
++    m_Type: 2
++    m_Resolution: -1
++    m_CustomResolution: -1
++    m_Strength: 1
++    m_Bias: 0.05
++    m_NormalBias: 0.4
++    m_NearPlane: 0.2
++    m_CullingMatrixOverride:
++      e00: 1
++      e01: 0
++      e02: 0
++      e03: 0
++      e10: 0
++      e11: 1
++      e12: 0
++      e13: 0
++      e20: 0
++      e21: 0
++      e22: 1
++      e23: 0
++      e30: 0
++      e31: 0
++      e32: 0
++      e33: 1
++    m_UseCullingMatrixOverride: 0
++  m_Cookie: {fileID: 0}
++  m_DrawHalo: 0
++  m_Flare: {fileID: 0}
++  m_RenderMode: 0
++  m_CullingMask:
++    serializedVersion: 2
++    m_Bits: 4294967295
++  m_RenderingLayerMask: 1
++  m_Lightmapping: 4
++  m_LightShadowCasterMode: 0
++  m_AreaSize: {x: 1, y: 1}
++  m_BounceIntensity: 1
++  m_ColorTemperature: 6570
++  m_UseColorTemperature: 0
++  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
++  m_UseBoundingSphereOverride: 0
++  m_UseViewFrustumForShadowCasterCull: 1
++  m_ForceVisible: 0
++  m_ShadowRadius: 0
++  m_ShadowAngle: 0
++  m_LightUnit: 1
++  m_LuxAtDistance: 1
++  m_EnableSpotReflector: 1
++--- !u!4 &2125719693
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 2125719690}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
++  m_LocalPosition: {x: 0, y: 3, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 0}
++  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
++--- !u!1660057539 &9223372036854775807
++SceneRoots:
++  m_ObjectHideFlags: 0
++  m_Roots:
++  - {fileID: 1031119603}
++  - {fileID: 2125719693}
++  - {fileID: 1426799075}
++  - {fileID: 519168862}
+diff --git a/Assets/Scenes/Test_ShadowMotion.unity.meta b/Assets/Scenes/Test_ShadowMotion.unity.meta
+new file mode 100644
+index 0000000..8e323f9
+--- /dev/null
++++ b/Assets/Scenes/Test_ShadowMotion.unity.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 47a9e2330868e0247a93e8241ad71c99
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/Scripts.meta b/Assets/Scripts.meta
+new file mode 100644
+index 0000000..6015190
+--- /dev/null
++++ b/Assets/Scripts.meta
+@@ -0,0 +1,8 @@
++fileFormatVersion: 2
++guid: ebb7b3631567ffa4a9f52fd6b6bf627a
++folderAsset: yes
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/Scripts/DebugRayToParent.cs b/Assets/Scripts/DebugRayToParent.cs
+new file mode 100644
+index 0000000..854812c
+--- /dev/null
++++ b/Assets/Scripts/DebugRayToParent.cs
+@@ -0,0 +1,14 @@
++using UnityEngine;
++
++public class DebugRayToParent : MonoBehaviour
++{
++    [Tooltip("Color of the debug line drawn to the parent.")]
++    [SerializeField] private Color color = Color.cyan;
++
++    private void Update()
++    {
++        if (transform.parent == null) return;
++
++        Debug.DrawLine(transform.position, transform.parent.position, color);
++    }
++}
+diff --git a/Assets/Scripts/DebugRayToParent.cs.meta b/Assets/Scripts/DebugRayToParent.cs.meta
+new file mode 100644
+index 0000000..83330d7
+--- /dev/null
++++ b/Assets/Scripts/DebugRayToParent.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: cebc9423f85a9ce468ce09e622bb12d9
+\ No newline at end of file
+diff --git a/Assets/Scripts/LeafPivot.cs b/Assets/Scripts/LeafPivot.cs
+new file mode 100644
+index 0000000..8df7cdf
+--- /dev/null
++++ b/Assets/Scripts/LeafPivot.cs
+@@ -0,0 +1,9 @@
++using UnityEngine;
++
++public class LeafPivot : MonoBehaviour
++{
++    [Tooltip("Child transform that this pivot exposes.")]
++    [SerializeField] private Transform anchorTransform;
++
++    public Transform AnchorTransform => anchorTransform;
++}
+diff --git a/Assets/Scripts/LeafPivot.cs.meta b/Assets/Scripts/LeafPivot.cs.meta
+new file mode 100644
+index 0000000..28baf05
+--- /dev/null
++++ b/Assets/Scripts/LeafPivot.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: 2a8d2b01bef895c478f81556d88d805a
+\ No newline at end of file
+diff --git a/Assets/Scripts/LeafPivot.prefab b/Assets/Scripts/LeafPivot.prefab
+new file mode 100644
+index 0000000..4e3eb56
+--- /dev/null
++++ b/Assets/Scripts/LeafPivot.prefab
+@@ -0,0 +1,123 @@
++%YAML 1.1
++%TAG !u! tag:unity3d.com,2011:
++--- !u!1 &505629610997289102
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 7225899096357360036}
++  - component: {fileID: 2868559001664081225}
++  m_Layer: 0
++  m_Name: Anchor
++  m_TagString: Untagged
++  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &7225899096357360036
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 505629610997289102}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 1, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 7460813237242478203}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &2868559001664081225
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 505629610997289102}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
++  color: {r: 0, g: 1, b: 1, a: 1}
++--- !u!1 &3877923384626174195
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 7460813237242478203}
++  - component: {fileID: 1525765307703660359}
++  - component: {fileID: 650014900603065736}
++  - component: {fileID: 8911071136784663382}
++  m_Layer: 0
++  m_Name: LeafPivot
++  m_TagString: Untagged
++  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &7460813237242478203
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 3877923384626174195}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 5, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 7225899096357360036}
++  m_Father: {fileID: 0}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &1525765307703660359
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 3877923384626174195}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 2a8d2b01bef895c478f81556d88d805a, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::LeafPivot
++  anchorTransform: {fileID: 7225899096357360036}
++--- !u!114 &650014900603065736
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 3877923384626174195}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: eceac053b69d53949824e57d6b78dce2, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::RotateAroundAxis
++  axis: {x: 0, y: 0, z: 1}
++  degreesPerSecond: 90
++  randomizeOnStart: 1
++--- !u!114 &8911071136784663382
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 3877923384626174195}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
++  color: {r: 0, g: 1, b: 1, a: 1}
+diff --git a/Assets/Scripts/LeafPivot.prefab.meta b/Assets/Scripts/LeafPivot.prefab.meta
+new file mode 100644
+index 0000000..398750f
+--- /dev/null
++++ b/Assets/Scripts/LeafPivot.prefab.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 0fb517268b35d7f47acd2619ff1b3880
++PrefabImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/Scripts/PingPongBetweenTransforms.cs b/Assets/Scripts/PingPongBetweenTransforms.cs
+new file mode 100644
+index 0000000..abc546c
+--- /dev/null
++++ b/Assets/Scripts/PingPongBetweenTransforms.cs
+@@ -0,0 +1,26 @@
++using UnityEngine;
++
++public class PingPongBetweenTransforms : MonoBehaviour
++{
++    [Tooltip("First endpoint of the ping-pong motion.")]
++    [SerializeField] private Transform pointA;
++
++    [Tooltip("Second endpoint of the ping-pong motion.")]
++    [SerializeField] private Transform pointB;
++
++    [Tooltip("Seconds for one full A -> B traversal.")]
++    [SerializeField] private float duration = 1f;
++
++    [Tooltip("If true, eases in/out at the endpoints. If false, motion is linear.")]
++    [SerializeField] private bool smooth = true;
++
++    private void Update()
++    {
++        if (pointA == null || pointB == null || duration <= 0f) return;
++
++        float t = Mathf.PingPong(Time.time / duration, 1f);
++        if (smooth) t = Mathf.SmoothStep(0f, 1f, t);
++
++        transform.position = Vector3.Lerp(pointA.position, pointB.position, t);
++    }
++}
+diff --git a/Assets/Scripts/PingPongBetweenTransforms.cs.meta b/Assets/Scripts/PingPongBetweenTransforms.cs.meta
+new file mode 100644
+index 0000000..1d8c76f
+--- /dev/null
++++ b/Assets/Scripts/PingPongBetweenTransforms.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: 1ed2e4955d7137849a2c26735bef02aa
+\ No newline at end of file
+diff --git a/Assets/Scripts/PlayerController.cs b/Assets/Scripts/PlayerController.cs
+new file mode 100644
+index 0000000..955de12
+--- /dev/null
++++ b/Assets/Scripts/PlayerController.cs
+@@ -0,0 +1,109 @@
++using System.Collections;
++using UnityEngine;
++using UnityEngine.InputSystem;
++
++[RequireComponent(typeof(Rigidbody))]
++public class PlayerController : MonoBehaviour
++{
++    [Tooltip("Reference to the Move action (Value/Vector2) from the Input Actions asset.")]
++    [SerializeField] private InputActionReference moveAction;
++
++    [Tooltip("Reference to the Attack action (Button) from the Input Actions asset.")]
++    [SerializeField] private InputActionReference attackAction;
++
++    [Tooltip("Reference to the Interact action (Button) from the Input Actions asset.")]
++    [SerializeField] private InputActionReference interactAction;
++
++    [Tooltip("Movement speed in world units per second.")]
++    [SerializeField] private float speed = 5f;
++
++    [Tooltip("Shadow manager whose orbit shadows will retarget on attack.")]
++    [SerializeField] private ShadowManager shadowManager;
++
++    [Tooltip("Transform that all orbit shadows will retarget to during an attack.")]
++    [SerializeField] private Transform attackTarget;
++
++    [Tooltip("The Shadow Anchors object's Shadow component. Its anchor will be swapped on interact.")]
++    [SerializeField] private Shadow shadowAnchors;
++
++    [Tooltip("Transform that the Shadow Anchors will retarget to during an interact.")]
++    [SerializeField] private Transform interactTarget;
++
++    [Tooltip("Seconds an attack/interact effect lasts before reverting.")]
++    [SerializeField] private float actionDuration = 1f;
++
++    private Rigidbody rb;
++    private Vector2 moveInput;
++    private Coroutine interactRoutine;
++
++    private void Awake()
++    {
++        rb = GetComponent<Rigidbody>();
++    }
++
++    private void OnEnable()
++    {
++        if (moveAction != null) moveAction.action.Enable();
++        if (attackAction != null)
++        {
++            attackAction.action.performed += OnAttackPerformed;
++            attackAction.action.Enable();
++        }
++        if (interactAction != null)
++        {
++            interactAction.action.performed += OnInteractPerformed;
++            interactAction.action.Enable();
++        }
++    }
++
++    private void OnDisable()
++    {
++        if (moveAction != null) moveAction.action.Disable();
++        if (attackAction != null)
++        {
++            attackAction.action.performed -= OnAttackPerformed;
++            attackAction.action.Disable();
++        }
++        if (interactAction != null)
++        {
++            interactAction.action.performed -= OnInteractPerformed;
++            interactAction.action.Disable();
++        }
++    }
++
++    private void Update()
++    {
++        moveInput = moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
++    }
++
++    private void FixedUpdate()
++    {
++        Vector3 velocity = new Vector3(moveInput.x, moveInput.y, 0f) * speed;
++        rb.linearVelocity = velocity;
++    }
++
++    private void OnAttackPerformed(InputAction.CallbackContext ctx)
++    {
++        if (shadowManager == null || attackTarget == null) return;
++        shadowManager.RetargetTemporarily(attackTarget, actionDuration);
++    }
++
++    private void OnInteractPerformed(InputAction.CallbackContext ctx)
++    {
++        Debug.Log("Interact performed: attempting to retarget shadow anchors.");
++        if (shadowAnchors == null || interactTarget == null || interactRoutine != null) return;
++        interactRoutine = StartCoroutine(InteractRoutine());
++    }
++
++    private IEnumerator InteractRoutine()
++    {
++        Debug.Log("Interact performed: retargeting shadow anchors.");
++        Transform previous = shadowAnchors.Anchor;
++        shadowAnchors.SetAnchor(interactTarget);
++
++        yield return new WaitForSeconds(actionDuration);
++
++        shadowAnchors.SetAnchor(previous);
++        interactRoutine = null;
++    }
++}
+diff --git a/Assets/Scripts/PlayerController.cs.meta b/Assets/Scripts/PlayerController.cs.meta
+new file mode 100644
+index 0000000..cbd4fb8
+--- /dev/null
++++ b/Assets/Scripts/PlayerController.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: 70aa40ab5d4064a47b4f96c82138252b
+\ No newline at end of file
+diff --git a/Assets/Scripts/RotateAroundAxis.cs b/Assets/Scripts/RotateAroundAxis.cs
+new file mode 100644
+index 0000000..f44905d
+--- /dev/null
++++ b/Assets/Scripts/RotateAroundAxis.cs
+@@ -0,0 +1,26 @@
++using UnityEngine;
++
++public class RotateAroundAxis : MonoBehaviour
++{
++    [Tooltip("Axis of rotation in local space.")]
++    [SerializeField] private Vector3 axis = Vector3.up;
++
++    [Tooltip("Rotation speed in degrees per second.")]
++    [SerializeField] private float degreesPerSecond = 90f;
++
++    [Tooltip("If true, applies a random rotation around the axis on Start.")]
++    [SerializeField] private bool randomizeOnStart = false;
++
++    private void Start()
++    {
++        if (randomizeOnStart)
++        {
++            transform.Rotate(axis, Random.Range(0f, 360f), Space.Self);
++        }
++    }
++
++    private void Update()
++    {
++        transform.Rotate(axis, degreesPerSecond * Time.deltaTime, Space.Self);
++    }
++}
+diff --git a/Assets/Scripts/RotateAroundAxis.cs.meta b/Assets/Scripts/RotateAroundAxis.cs.meta
+new file mode 100644
+index 0000000..79f8659
+--- /dev/null
++++ b/Assets/Scripts/RotateAroundAxis.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: eceac053b69d53949824e57d6b78dce2
+\ No newline at end of file
+diff --git a/Assets/Scripts/Shadow.cs b/Assets/Scripts/Shadow.cs
+new file mode 100644
+index 0000000..fb40e38
+--- /dev/null
++++ b/Assets/Scripts/Shadow.cs
+@@ -0,0 +1,49 @@
++using UnityEngine;
++
++[RequireComponent(typeof(Rigidbody))]
++public class Shadow : MonoBehaviour
++{
++    [Tooltip("Transform to move toward.")]
++    [SerializeField] private Transform anchor;
++
++    [Tooltip("Speed constant. Velocity magnitude = speed * distance.")]
++    [SerializeField] private float speed = 1f;
++
++    [Tooltip("If true, draws a debug line from this object to its anchor each frame.")]
++    [SerializeField] private bool drawDebugRayToAnchor = false;
++
++    [Tooltip("Color of the debug line drawn to the anchor.")]
++    [SerializeField] private Color debugRayColor = Color.cyan;
++
++    private Rigidbody rb;
++
++    private void Awake()
++    {
++        rb = GetComponent<Rigidbody>();
++    }
++
++    private void FixedUpdate()
++    {
++        if (anchor == null) return;
++
++        Vector3 diff = anchor.position - rb.position;
++        Vector3 direction = diff.normalized;
++        rb.linearVelocity = direction * diff.sqrMagnitude * speed;
++        //rb.linearVelocity = direction * diff.magnitude * speed;
++    }
++
++    private void Update()
++    {
++        if (drawDebugRayToAnchor && anchor != null)
++        {
++            Debug.DrawLine(transform.position, anchor.position, debugRayColor);
++        }
++    }
++
++    public Transform Anchor => anchor;
++
++    public void SetAnchor(Transform newAnchor)
++    {
++        anchor = newAnchor;
++    }
++}
+diff --git a/Assets/Scripts/Shadow.cs.meta b/Assets/Scripts/Shadow.cs.meta
+new file mode 100644
+index 0000000..5044023
+--- /dev/null
++++ b/Assets/Scripts/Shadow.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: 778fbb70c05cb1e44a409944ea4e4375
+\ No newline at end of file
+diff --git a/Assets/Scripts/Shadow.prefab b/Assets/Scripts/Shadow.prefab
+new file mode 100644
+index 0000000..2feb901
+--- /dev/null
++++ b/Assets/Scripts/Shadow.prefab
+@@ -0,0 +1,289 @@
++%YAML 1.1
++%TAG !u! tag:unity3d.com,2011:
++--- !u!1 &90366533452503404
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 6558852054773672172}
++  - component: {fileID: 159662770188950306}
++  - component: {fileID: 8848860496219100993}
++  m_Layer: 0
++  m_Name: Sphere
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &6558852054773672172
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 90366533452503404}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
++  m_ConstrainProportionsScale: 1
++  m_Children: []
++  m_Father: {fileID: 6106993452158442313}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!33 &159662770188950306
++MeshFilter:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 90366533452503404}
++  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
++--- !u!23 &8848860496219100993
++MeshRenderer:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 90366533452503404}
++  m_Enabled: 1
++  m_CastShadows: 1
++  m_ReceiveShadows: 1
++  m_DynamicOccludee: 1
++  m_StaticShadowCaster: 0
++  m_MotionVectors: 1
++  m_LightProbeUsage: 1
++  m_ReflectionProbeUsage: 1
++  m_RayTracingMode: 2
++  m_RayTraceProcedural: 0
++  m_RayTracingAccelStructBuildFlagsOverride: 0
++  m_RayTracingAccelStructBuildFlags: 1
++  m_SmallMeshCulling: 1
++  m_ForceMeshLod: -1
++  m_MeshLodSelectionBias: 0
++  m_RenderingLayerMask: 1
++  m_RendererPriority: 0
++  m_Materials:
++  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
++  m_StaticBatchInfo:
++    firstSubMesh: 0
++    subMeshCount: 0
++  m_StaticBatchRoot: {fileID: 0}
++  m_ProbeAnchor: {fileID: 0}
++  m_LightProbeVolumeOverride: {fileID: 0}
++  m_ScaleInLightmap: 1
++  m_ReceiveGI: 1
++  m_PreserveUVs: 0
++  m_IgnoreNormalsForChartDetection: 0
++  m_ImportantGI: 0
++  m_StitchLightmapSeams: 1
++  m_SelectedEditorRenderState: 3
++  m_MinimumChartSize: 4
++  m_AutoUVMaxDistance: 0.5
++  m_AutoUVMaxAngle: 89
++  m_LightmapParameters: {fileID: 0}
++  m_GlobalIlluminationMeshLod: 0
++  m_SortingLayerID: 0
++  m_SortingLayer: 0
++  m_SortingOrder: 0
++  m_MaskInteraction: 0
++  m_AdditionalVertexStreams: {fileID: 0}
++--- !u!1 &5111981807539266508
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 6106993452158442313}
++  - component: {fileID: 933503780442904495}
++  - component: {fileID: 6516288373713127895}
++  - component: {fileID: 7364363699191017282}
++  m_Layer: 0
++  m_Name: Shadow
++  m_TagString: Untagged
++  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &6106993452158442313
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 5111981807539266508}
++  serializedVersion: 2
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children:
++  - {fileID: 6558852054773672172}
++  m_Father: {fileID: 0}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++--- !u!114 &933503780442904495
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 5111981807539266508}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 778fbb70c05cb1e44a409944ea4e4375, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: Assembly-CSharp::MoveTowardTarget
++  anchor: {fileID: 0}
++  speed: 1
++  drawDebugRayToAnchor: 1
++  debugRayColor: {r: 1, g: 0, b: 1, a: 1}
++--- !u!54 &6516288373713127895
++Rigidbody:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 5111981807539266508}
++  serializedVersion: 5
++  m_Mass: 1
++  m_LinearDamping: 0
++  m_AngularDamping: 0.05
++  m_CenterOfMass: {x: 0, y: 0, z: 0}
++  m_InertiaTensor: {x: 1, y: 1, z: 1}
++  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_IncludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ExcludeLayers:
++    serializedVersion: 2
++    m_Bits: 0
++  m_ImplicitCom: 1
++  m_ImplicitTensor: 1
++  m_UseGravity: 0
++  m_IsKinematic: 0
++  m_Interpolate: 0
++  m_Constraints: 56
++  m_CollisionDetection: 0
++--- !u!120 &7364363699191017282
++LineRenderer:
++  serializedVersion: 3
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 5111981807539266508}
++  m_Enabled: 1
++  m_CastShadows: 1
++  m_ReceiveShadows: 1
++  m_DynamicOccludee: 1
++  m_StaticShadowCaster: 0
++  m_MotionVectors: 1
++  m_LightProbeUsage: 0
++  m_ReflectionProbeUsage: 0
++  m_RayTracingMode: 0
++  m_RayTraceProcedural: 0
++  m_RayTracingAccelStructBuildFlagsOverride: 0
++  m_RayTracingAccelStructBuildFlags: 1
++  m_SmallMeshCulling: 1
++  m_ForceMeshLod: -1
++  m_MeshLodSelectionBias: 0
++  m_RenderingLayerMask: 1
++  m_RendererPriority: 0
++  m_Materials:
++  - {fileID: 0}
++  m_StaticBatchInfo:
++    firstSubMesh: 0
++    subMeshCount: 0
++  m_StaticBatchRoot: {fileID: 0}
++  m_ProbeAnchor: {fileID: 0}
++  m_LightProbeVolumeOverride: {fileID: 0}
++  m_ScaleInLightmap: 1
++  m_ReceiveGI: 1
++  m_PreserveUVs: 0
++  m_IgnoreNormalsForChartDetection: 0
++  m_ImportantGI: 0
++  m_StitchLightmapSeams: 1
++  m_SelectedEditorRenderState: 3
++  m_MinimumChartSize: 4
++  m_AutoUVMaxDistance: 0.5
++  m_AutoUVMaxAngle: 89
++  m_LightmapParameters: {fileID: 0}
++  m_GlobalIlluminationMeshLod: 0
++  m_SortingLayerID: 0
++  m_SortingLayer: 0
++  m_SortingOrder: 0
++  m_MaskInteraction: 0
++  m_Positions:
++  - {x: 0, y: 0, z: 0}
++  - {x: 0, y: 0, z: 1}
++  m_Parameters:
++    serializedVersion: 3
++    widthMultiplier: 1
++    widthCurve:
++      serializedVersion: 2
++      m_Curve:
++      - serializedVersion: 3
++        time: 0
++        value: 1
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 0
++        weightedMode: 0
++        inWeight: 0.33333334
++        outWeight: 0.33333334
++      - serializedVersion: 3
++        time: 1
++        value: 0
++        inSlope: 0
++        outSlope: 0
++        tangentMode: 0
++        weightedMode: 0
++        inWeight: 0
++        outWeight: 0
++      m_PreInfinity: 2
++      m_PostInfinity: 2
++      m_RotationOrder: 4
++    colorGradient:
++      serializedVersion: 2
++      key0: {r: 1, g: 0, b: 0, a: 1}
++      key1: {r: 0, g: 0, b: 0, a: 1}
++      key2: {r: 0, g: 0, b: 0, a: 0}
++      key3: {r: 0, g: 0, b: 0, a: 0}
++      key4: {r: 0, g: 0, b: 0, a: 0}
++      key5: {r: 0, g: 0, b: 0, a: 0}
++      key6: {r: 0, g: 0, b: 0, a: 0}
++      key7: {r: 0, g: 0, b: 0, a: 0}
++      ctime0: 0
++      ctime1: 65535
++      ctime2: 0
++      ctime3: 0
++      ctime4: 0
++      ctime5: 0
++      ctime6: 0
++      ctime7: 0
++      atime0: 0
++      atime1: 65535
++      atime2: 0
++      atime3: 0
++      atime4: 0
++      atime5: 0
++      atime6: 0
++      atime7: 0
++      m_Mode: 0
++      m_ColorSpace: 0
++      m_NumColorKeys: 2
++      m_NumAlphaKeys: 2
++    numCornerVertices: 0
++    numCapVertices: 0
++    alignment: 0
++    textureMode: 0
++    textureScale: {x: 1, y: 1}
++    shadowBias: 0.5
++    generateLightingData: 0
++  m_UseWorldSpace: 1
++  m_Loop: 0
++  m_ApplyActiveColorSpace: 1
+diff --git a/Assets/Scripts/Shadow.prefab.meta b/Assets/Scripts/Shadow.prefab.meta
+new file mode 100644
+index 0000000..ec62a97
+--- /dev/null
++++ b/Assets/Scripts/Shadow.prefab.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: b923b81db4877eb4cab02afb71854ac8
++PrefabImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/Scripts/ShadowManager.cs b/Assets/Scripts/ShadowManager.cs
+new file mode 100644
+index 0000000..d8b4b40
+--- /dev/null
++++ b/Assets/Scripts/ShadowManager.cs
+@@ -0,0 +1,79 @@
++using System.Collections;
++using System.Collections.Generic;
++using UnityEngine;
++
++public class ShadowManager : MonoBehaviour
++{
++    [Tooltip("Parent transform for leaf pivot prefab instances.")]
++    [SerializeField] private Transform leafPivotParent;
++
++    [Tooltip("Leaf pivot prefab to instantiate around this transform. Parented to this transform.")]
++    [SerializeField] private LeafPivot leafPivotPrefab;
++
++    [Tooltip("Parent transform for shadow prefab instances.")]
++    [SerializeField] private Transform shadowParent;
++
++    [Tooltip("Shadow prefab spawned at the same position as the anchor, parented to followerParent.")]
++    [SerializeField] private Shadow shadowPrefab;
++
++    [Tooltip("Number of instances to spawn evenly around the circle.")]
++    [SerializeField] private int count = 8;
++
++    [Tooltip("Radius of the circle in world units.")]
++    [SerializeField] private float radius = 1f;
++
++    private readonly List<Shadow> shadows = new List<Shadow>();
++    private Coroutine retargetRoutine;
++
++    private void Start()
++    {
++        if (leafPivotParent == null || leafPivotPrefab == null || count <= 0)
++        {
++            return;
++        }
++
++        Vector3 center = leafPivotParent.position;
++        float step = 360f / count;
++
++        for (int i = 0; i < count; i++)
++        {
++            float angleDeg = step * i;
++            float angleRad = angleDeg * Mathf.Deg2Rad;
++            Vector3 position = center + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f) * radius;
++
++            LeafPivot leafPivot = Instantiate(leafPivotPrefab, position, Quaternion.identity, leafPivotParent);
++
++            if (shadowPrefab != null)
++            {
++                Shadow shadow = Instantiate(shadowPrefab, position, Quaternion.identity, shadowParent);
++                shadow.SetAnchor(leafPivot.AnchorTransform);
++                shadows.Add(shadow);
++            }
++        }
++    }
++
++    public void RetargetTemporarily(Transform newTarget, float duration)
++    {
++        if (newTarget == null || retargetRoutine != null) return;
++        retargetRoutine = StartCoroutine(RetargetRoutine(newTarget, duration));
++    }
++
++    private IEnumerator RetargetRoutine(Transform newTarget, float duration)
++    {
++        Transform[] previousAnchors = new Transform[shadows.Count];
++        for (int i = 0; i < shadows.Count; i++)
++        {
++            previousAnchors[i] = shadows[i].Anchor;
++            shadows[i].SetAnchor(newTarget);
++        }
++
++        yield return new WaitForSeconds(duration);
++
++        for (int i = 0; i < shadows.Count; i++)
++        {
++            shadows[i].SetAnchor(previousAnchors[i]);
++        }
++
++        retargetRoutine = null;
++    }
++}
+diff --git a/Assets/Scripts/ShadowManager.cs.meta b/Assets/Scripts/ShadowManager.cs.meta
+new file mode 100644
+index 0000000..f257edf
+--- /dev/null
++++ b/Assets/Scripts/ShadowManager.cs.meta
+@@ -0,0 +1,2 @@
++fileFormatVersion: 2
++guid: c0855b4904f70ff429403ee838200244
+\ No newline at end of file
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837.meta b/Assets/tojam-2026-WebGL-20260502-214837.meta
+new file mode 100644
+index 0000000..d337c9a
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837.meta
+@@ -0,0 +1,8 @@
++fileFormatVersion: 2
++guid: 0f2e1ccd4f0904e4ebf2a632a3501172
++folderAsset: yes
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build.meta b/Assets/tojam-2026-WebGL-20260502-214837/Build.meta
+new file mode 100644
+index 0000000..9cb9de7
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/Build.meta
+@@ -0,0 +1,8 @@
++fileFormatVersion: 2
++guid: bc137e348b2e3a14a9332b40b8377225
++folderAsset: yes
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br
+new file mode 100644
+index 0000000..cd8c29c
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br.meta b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br.meta
+new file mode 100644
+index 0000000..78c8bf6
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.data.br.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 527544eae2e07f74889cb9eb4c34b344
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br
+new file mode 100644
+index 0000000..20efac0
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br.meta b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br.meta
+new file mode 100644
+index 0000000..872898d
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.framework.js.br.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 07c90e0a10ea69349a663829e8b5f69c
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js
+new file mode 100644
+index 0000000..3beefb7
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js
+@@ -0,0 +1 @@
++function createUnityInstance(t,n,d){function c(e,t){if(!c.aborted&&n.showBanner)return"error"==t&&(c.aborted=!0),n.showBanner(e,t);switch(t){case"error":console.error(e);break;case"warning":console.warn(e);break;default:console.log(e)}}function r(e){var t=e.reason||e.error,n=t?t.toString():e.message||e.reason||"",r=e.filename||t&&(t.fileName||t.sourceURL)||"",e=e.lineno||t&&(t.lineNumber||t.line)||0,t=t&&t.stack?t.stack.toString():r&&e?"at "+r+":"+e:"";""===n&&(n="An unspecified error occured."),S(n+="\n"+(t=t.startsWith(n)?t.substring(n.length):t).trim(),r,e)}function e(e,t,n){var r=e[t];void 0!==r&&r||(console.warn('Config option "'+t+'" is missing or empty. Falling back to default value: "'+n+'". Consider updating your WebGL template to include the missing config option.'),e[t]=n)}d=d||function(){};var o,m={canvas:t,webglContextAttributes:{preserveDrawingBuffer:!1,powerPreference:2},wasmFileSize:46478687,cacheControl:function(e){return e==m.dataUrl||e.match(/\.bundle/)?"must-revalidate":"no-store"},streamingAssetsUrl:"StreamingAssets",downloadProgress:{},deinitializers:[],intervals:{},setInterval:function(e,t){e=window.setInterval(e,t);return this.intervals[e]=!0,e},clearInterval:function(e){delete this.intervals[e],window.clearInterval(e)},preRun:[],postRun:[],print:function(e){console.log(e)},printErr:function(e){console.error(e),"string"==typeof e&&-1!=e.indexOf("wasm streaming compile failed")&&(-1!=e.toLowerCase().indexOf("mime")?c('HTTP Response Header "Content-Type" configured incorrectly on the server for file '+m.codeUrl+' , should be "application/wasm". Startup time performance will suffer.',"warning"):c('WebAssembly streaming compilation failed! This can happen for example if "Content-Encoding" HTTP header is incorrectly enabled on the server for file '+m.codeUrl+", but the file is not pre-compressed on disk (or vice versa). Check the Network tab in browser Devtools to debug server header configuration.","warning"))},locateFile:function(e){return"build.wasm"==e?this.codeUrl:e},disabledCanvasEvents:["contextmenu","dragstart"]};for(o in e(n,"companyName","Unity"),e(n,"productName","WebGL Player"),e(n,"productVersion","1.0"),n)m[o]=n[o];m.streamingAssetsUrl=new URL(m.streamingAssetsUrl,document.URL).href;var a=m.disabledCanvasEvents.slice();function i(e){e.preventDefault()}a.forEach(function(e){t.addEventListener(e,i)}),window.addEventListener("error",r),window.addEventListener("unhandledrejection",r);var s="",l="";function u(e){document.webkitCurrentFullScreenElement===t?t.style.width&&(s=t.style.width,l=t.style.height,t.style.width="100%",t.style.height="100%"):s&&(t.style.width=s,t.style.height=l,l=s="")}document.addEventListener("webkitfullscreenchange",u),m.deinitializers.push(function(){for(var e in m.disableAccessToMediaDevices(),a.forEach(function(e){t.removeEventListener(e,i)}),window.removeEventListener("error",r),window.removeEventListener("unhandledrejection",r),document.removeEventListener("webkitfullscreenchange",u),m.intervals)window.clearInterval(e);m.intervals={}}),m.QuitCleanup=function(){for(var e=0;e<m.deinitializers.length;e++)m.deinitializers[e]();m.deinitializers=[],"function"==typeof m.onQuit&&m.onQuit()};var h,f,p,g,b,y,w,v,C,P={Module:m,SetFullscreen:function(){if(m.SetFullscreen)return m.SetFullscreen.apply(m,arguments);m.print("Failed to set Fullscreen mode: Player not loaded yet.")},SendMessage:function(){if(m.SendMessage)return m.SendMessage.apply(m,arguments);m.print("Failed to execute SendMessage: Player not loaded yet.")},ConnectToProfiler:function(){if(m.ConnectToProfiler)return m.ConnectToProfiler.apply(m,arguments);m.print("Failed to execute ConnectToProfiler: Player not loaded yet.")},StopProfiling:function(){if(m.StopProfiling)return m.StopProfiling.apply(m,arguments);m.print("Failed to execute StopProfiling: Player not loaded yet.")},IsConnectedToProfiler:function(){if(m.IsConnectedToProfiler)return m.IsConnectedToProfiler.apply(m,arguments);m.print("Failed to execute IsConnectedToProfiler: Player not loaded yet.")},Quit:function(){return new Promise(function(e,t){m.shouldQuit=!0,m.onQuit=e})},GetMetricsInfo:function(){var e=Number(m._getMetricsInfo())>>>0,t=4+e,n=4+t,r=8+n,o=8+r,a=4+o,i=4+a,s=8+i,d=8+s,c=4+d,l=4+c,u=4+l;return{totalWASMHeapSize:m.HEAPU32[e>>2],usedWASMHeapSize:m.HEAPU32[t>>2],totalJSHeapSize:m.HEAPF64[n>>3],usedJSHeapSize:m.HEAPF64[r>>3],pageLoadTime:m.HEAPU32[o>>2],pageLoadTimeToFrame1:m.HEAPU32[a>>2],fps:m.HEAPF64[i>>3],movingAverageFps:m.HEAPF64[s>>3],assetLoadTime:m.HEAPU32[d>>2],webAssemblyStartupTime:m.HEAPU32[c>>2]-(m.webAssemblyTimeStart||0),codeDownloadTime:m.HEAPU32[l>>2],gameStartupTime:m.HEAPU32[u>>2],numJankedFrames:m.HEAPU32[4+u>>2]}}};function S(e,t,n){-1==e.indexOf("fullscreen error")&&(m.startupErrorHandler?m.startupErrorHandler(e,t,n):m.errorHandler&&m.errorHandler(e,t,n)||(console.log("Invoking error handler due to\n"+e),"function"==typeof dump&&dump("Invoking error handler due to\n"+e),S.didShowErrorMessage||(-1!=(e="An error occurred running the Unity content on this page. See your browser JavaScript console for more info. The error was:\n"+e).indexOf("DISABLE_EXCEPTION_CATCHING")?e="An exception has occurred, but exception handling has been disabled in this build. If you are the developer of this content, enable exceptions in your project WebGL player settings to be able to catch the exception or see the stack trace.":-1!=e.indexOf("Cannot enlarge memory arrays")?e="Out of memory. If you are the developer of this content, try allocating more memory to your WebGL build in the WebGL player settings.":-1==e.indexOf("Invalid array buffer length")&&-1==e.indexOf("Invalid typed array length")&&-1==e.indexOf("out of memory")&&-1==e.indexOf("could not allocate memory")||(e="The browser could not allocate enough memory for the WebGL content. If you are the developer of this content, try allocating less memory to your WebGL build in the WebGL player settings."),alert(e),S.didShowErrorMessage=!0)))}function T(e,t){if("symbolsUrl"!=e){var n=m.downloadProgress[e],r=(n=n||(m.downloadProgress[e]={started:!1,finished:!1,lengthComputable:!1,total:0,loaded:0}),"object"!=typeof t||"progress"!=t.type&&"load"!=t.type||(n.started||(n.started=!0,n.lengthComputable=t.lengthComputable),n.total=t.total,n.loaded=t.loaded,"load"==t.type&&(n.finished=!0)),0),o=0,a=0,i=0,s=0;for(e in m.downloadProgress){if(!(n=m.downloadProgress[e]).started)return;a++,n.lengthComputable?(r+=n.loaded,o+=n.total,i++):n.finished||s++}d(.9*(a?(a-s-(o?i*(o-r)/o:0))/a:0))}}function E(){var e=this;this.isConnected=this.connect().then(function(){return e.cleanUpCache()}),this.isConnected.catch(function(e){e="Error when initializing cache: "+e,console.log("[UnityCache] "+e)})}function U(e){console.log("[UnityCache] "+e)}function k(e){return k.link=k.link||document.createElement("a"),k.link.href=e,k.link.href}m.SystemInfo=function(){var e,t,n,r,o,a=navigator.userAgent+" ",i=[["Firefox","Firefox"],["OPR","Opera"],["Edg","Edge"],["SamsungBrowser","Samsung Browser"],["Trident","Internet Explorer"],["MSIE","Internet Explorer"],["Chrome","Chrome"],["CriOS","Chrome on iOS Safari"],["FxiOS","Firefox on iOS Safari"],["Safari","Safari"]];function s(e,t,n){return(e=RegExp(e,"i").exec(t))&&e[n]}for(var d=0;d<i.length;++d)if(t=s(i[d][0]+"[/ ](.*?)[ \\)]",a,1)){e=i[d][1];break}"Safari"==e&&(t=s("Version/(.*?) ",a,1)),"Internet Explorer"==e&&(t=s("rv:(.*?)\\)? ",a,1)||t);for(var c=[["Windows (.*?)[;)]","Windows"],["Android ([0-9_.]+)","Android"],["iPhone OS ([0-9_.]+)","iPhoneOS"],["iPad.*? OS ([0-9_.]+)","iPadOS"],["FreeBSD( )","FreeBSD"],["OpenBSD( )","OpenBSD"],["Linux|X11()","Linux"],["Mac OS X ([0-9_\\.]+)","MacOS"],["bot|google|baidu|bing|msn|teoma|slurp|yandex","Search Bot"]],l=0;l<c.length;++l)if(r=s(c[l][0],a,1)){n=c[l][1],r=r.replace(/_/g,".");break}var u;function h(){try{return window.WebAssembly?WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,5,3,1,0,1,10,13,1,11,0,65,0,65,0,65,1,252,11,0,11]))?WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,11,1,9,1,1,125,32,0,252,0,26,11]))?WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,10,1,8,1,1,126,32,0,194,26,11]))?WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,9,1,7,0,65,0,253,15,26,11]))?!!WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,10,1,8,0,6,64,1,25,1,11,11]))||"wasm-exceptions":"wasm-simd128":"sign-extend":"non-trapping fp-to-int":"bulk-memory":"WebAssembly"}catch(e){return"Exception: "+e}}r={"NT 5.0":"2000","NT 5.1":"XP","NT 5.2":"Server 2003","NT 6.0":"Vista","NT 6.1":"7","NT 6.2":"8","NT 6.3":"8.1","NT 10.0":"10"}[r]||r,webgpuVersion=0,(f=document.createElement("canvas"))&&(u=(p=f.getContext("webgl2"))?2:0,p||(p=f&&f.getContext("webgl"))&&(u=1),p&&(o=p.getExtension("WEBGL_debug_renderer_info")&&p.getParameter(37446)||p.getParameter(7937)));var f="undefined"!=typeof SharedArrayBuffer,p="object"==typeof WebAssembly&&"function"==typeof WebAssembly.compile,m=p&&!0===h();return{width:screen.width,height:screen.height,userAgent:a.trim(),browser:e||"Unknown browser",browserVersion:t||"Unknown version",mobile:/Mobile|Android|iP(ad|hone)/.test(navigator.appVersion),os:n||"Unknown OS",osVersion:r||"Unknown OS Version",gpu:o||"Unknown GPU",language:navigator.userLanguage||navigator.language,hasWebGL:u,hasWebGPU:webgpuVersion,hasCursorLock:!!document.body.requestPointerLock,hasFullscreen:!!document.body.requestFullscreen||!!document.body.webkitRequestFullscreen,hasThreads:f,hasWasm:p,hasWasm2023:m,missingWasm2023Feature:m?null:h(),hasWasmThreads:!1}}(),m.abortHandler=function(e){return S(e,"",0),!0},Error.stackTraceLimit=Math.max(Error.stackTraceLimit||0,50),m.readBodyWithProgress=function(a,i,s){var e=a.body?a.body.getReader():void 0,d=void 0!==a.headers.get("Content-Length"),c=function(e,t){if(!t)return 0;var t=e.headers.get("Content-Encoding"),n=parseInt(e.headers.get("Content-Length")),r=536870912;switch(t){case"br":return Math.min(Math.round(2*n),r);case"gzip":return Math.min(Math.round(1.6*n),r);default:return n}}(a,d),l=new Uint8Array(c),u=[],h=0,f=0;return d||console.warn("[UnityCache] Response is served without Content-Length header. Please reconfigure server to include valid Content-Length for better download performance."),function o(){return void 0===e?a.arrayBuffer().then(function(e){var t=new Uint8Array(e);return i({type:"progress",response:a,total:e.length,loaded:0,lengthComputable:d,chunk:s?t:null}),t}):e.read().then(function(e){if(e.done){if(h===c)return l;if(h<c)return l.slice(0,h);for(var t=new Uint8Array(h),n=(t.set(l,0),f),r=0;r<u.length;++r)t.set(u[r],n),n+=u[r].length;return t}return h+e.value.length<=l.length?(l.set(e.value,h),f=h+e.value.length):u.push(e.value),h+=e.value.length,i({type:"progress",response:a,total:Math.max(c,h),loaded:h,lengthComputable:d,chunk:s?e.value:null}),o()})}().then(function(e){return i({type:"load",response:a,total:e.length,loaded:e.length,lengthComputable:d,chunk:null}),a.parsedBody=e,a})},m.fetchWithProgress=function(e,t){var n=function(){};return t&&t.onProgress&&(n=t.onProgress),fetch(e,t).then(function(e){return m.readBodyWithProgress(e,n,t.enableStreamingDownload)})},m.UnityCache=(h={name:"UnityCache",version:4},f={name:"RequestMetaDataStore",version:1},p="RequestStore",g="WebAssembly",b=window.indexedDB||window.mozIndexedDB||window.webkitIndexedDB||window.msIndexedDB,y=null,E.getInstance=function(){return y=y||new E},E.destroyInstance=function(){return y?y.close().then(function(){y=null}):Promise.resolve()},E.prototype.clearCache=function(){var r=this;return this.isConnected.then(function(){return r.execute(f.name,"clear",[])}).then(function(){return r.cache.keys()}).then(function e(t){var n;return 0===t.length?Promise.resolve():(n=t.pop(),r.cache.delete(n).then(function(){return e(t)}))})},E.UnityCacheDatabase=h,E.RequestMetaDataStore=f,E.MaximumCacheSize=1073741824,E.prototype.loadRequest=function(e){var t=this;return t.isConnected.then(function(){return Promise.all([t.cache.match(e),t.loadRequestMetaData(e)])}).then(function(e){if(void 0!==e[0]&&void 0!==e[1])return{response:e[0],metaData:e[1]}})},E.prototype.loadRequestMetaData=function(e){e="string"==typeof e?e:e.url;return this.execute(f.name,"get",[e])},E.prototype.updateRequestMetaData=function(e){return this.execute(f.name,"put",[e])},E.prototype.storeRequest=function(e,t){var n=this;return n.isConnected.then(function(){return n.cache.put(e,t)})},E.prototype.close=function(){return this.isConnected.then(function(){this.database&&(this.database.close(),this.database=null),this.cache&&(this.cache=null)}.bind(this))},E.prototype.connect=function(){var o=this;return void 0===b?Promise.reject(new Error("Could not connect to cache: IndexedDB is not supported.")):void 0===window.caches?Promise.reject(new Error("Could not connect to cache: Cache API is not supported.")):new Promise(function(t,n){try{function r(){o.openDBTimeout&&(clearTimeout(o.openDBTimeout),o.openDBTimeout=null)}o.openDBTimeout=setTimeout(function(){void 0===o.database&&n(new Error("Could not connect to cache: Database timeout."))},2e4);var e=b.open(h.name,h.version);e.onupgradeneeded=o.upgradeDatabase.bind(o),e.onsuccess=function(e){r(),o.database=e.target.result,t()},e.onerror=function(e){r(),o.database=null,n(new Error("Could not connect to database."))}}catch(e){r(),o.database=null,o.cache=null,n(new Error("Could not connect to cache: Could not connect to database."))}}).then(function(){var e=h.name+"_"+m.companyName+"_"+m.productName;return caches.open(e)}).then(function(e){o.cache=e})},E.prototype.upgradeDatabase=function(e){var t,e=e.target.result;e.objectStoreNames.contains(f.name)||(t=e.createObjectStore(f.name,{keyPath:"url"}),["accessedAt","updatedAt"].forEach(function(e){t.createIndex(e,e)})),e.objectStoreNames.contains(p)&&e.deleteObjectStore(p),e.objectStoreNames.contains(g)&&e.deleteObjectStore(g)},E.prototype.execute=function(a,i,s){return this.isConnected.then(function(){return new Promise(function(t,n){try{var e,r,o;null===this.database?n(new Error("indexedDB access denied")):(e=-1!=["put","delete","clear"].indexOf(i)?"readwrite":"readonly",r=this.database.transaction([a],e).objectStore(a),"openKeyCursor"==i&&(r=r.index(s[0]),s=s.slice(1)),(o=r[i].apply(r,s)).onsuccess=function(e){t(e.target.result)},o.onerror=function(e){n(e)})}catch(e){n(e)}}.bind(this))}.bind(this))},E.prototype.getMetaDataEntries=function(){var r=this,o=0,a=[];return new Promise(function(t,n){var e=r.database.transaction([f.name],"readonly").objectStore(f.name).openCursor();e.onsuccess=function(e){e=e.target.result;e?(o+=e.value.size,a.push(e.value),e.continue()):t({metaDataEntries:a,cacheSize:o})},e.onerror=function(e){n(e)}})},E.prototype.cleanUpCache=function(){var i=this;return this.getMetaDataEntries().then(function(e){for(var t=e.metaDataEntries,n=e.cacheSize,r=[],o=[],a=0;a<t.length;++a)t[a].version==m.productVersion?o.push(t[a]):(r.push(t[a]),n-=t[a].size);o.sort(function(e,t){return e.accessedAt-t.accessedAt});for(a=0;a<o.length&&!(n<E.MaximumCacheSize);++a)r.push(o[a]),n-=o[a].size;return function e(){var t;return 0===r.length?Promise.resolve():(t=r.pop(),i.cache.delete(t.url).then(function(e){if(e)return r=t.url,new Promise(function(e,t){var n=i.database.transaction([f.name],"readwrite");n.objectStore(f.name).delete(r),n.oncomplete=e,n.onerror=t});var r}).then(e))}()})},E),m.cachedFetch=(w=m.UnityCache,v=m.fetchWithProgress,C=m.readBodyWithProgress,function(o,a){var e,t,i=w.getInstance(),s=k("string"==typeof o?o:o.url),d={enabled:(e=s,(!(t=a)||!t.method||"GET"===t.method)&&((!t||-1!=["must-revalidate","immutable"].indexOf(t.control))&&!!e.match("^https?://")))};function c(n,r){return fetch(n,r).then(function(e){var t;return!d.enabled||d.revalidated?e:304===e.status?(d.revalidated=!0,i.updateRequestMetaData(d.metaData).then(function(){U("'"+d.metaData.url+"' successfully revalidated and served from the browser cache")}).catch(function(e){U("'"+d.metaData.url+"' successfully revalidated but not stored in the browser cache due to the error: "+e)}),C(d.response,r.onProgress,r.enableStreamingDownload)):200==e.status?(d.response=e,d.metaData.updatedAt=d.metaData.accessedAt,d.revalidated=!0,t=e.clone(),C(e,r.onProgress,r.enableStreamingDownload).then(function(e){return d.metaData.size=e.parsedBody.length,Promise.all([i.storeRequest(n,t),i.updateRequestMetaData(d.metaData)]).then(function(){U("'"+s+"' successfully downloaded and stored in the browser cache")}).catch(function(e){U("'"+s+"' successfully downloaded but not stored in the browser cache due to the error: "+e)}),e})):(U("'"+s+"' request failed with status: "+e.status+" "+e.statusText),C(e,r.onProgress,r.enableStreamingDownload))})}return a&&(d.control=a.control,d.companyName=a.companyName,d.productName=a.productName,d.productVersion=a.productVersion),d.revalidated=!1,d.metaData={url:s,accessedAt:Date.now(),version:d.productVersion},d.response=null,d.enabled?i.loadRequest(s).then(function(e){var n,r,t;return e?(n=e.response,r=e.metaData,d.response=n,d.metaData.size=r.size,d.metaData.updatedAt=r.updatedAt,"immutable"==d.control?(d.revalidated=!0,i.updateRequestMetaData(r).then(function(){U("'"+d.metaData.url+"' served from the browser cache without revalidation")}),C(n,a.onProgress,a.enableStreamingDownload)):(e=s,(t=window.location.href.match(/^[a-z]+:\/\/[^\/]+/))&&!e.lastIndexOf(t[0],0)||!n.headers.get("Last-Modified")&&!n.headers.get("ETag")?(e=(a=a||{}).headers||{},a.headers=e,n.headers.get("Last-Modified")?(e["If-Modified-Since"]=n.headers.get("Last-Modified"),e["Cache-Control"]="no-cache"):n.headers.get("ETag")&&(e["If-None-Match"]=n.headers.get("ETag"),e["Cache-Control"]="no-cache"),c(o,a)):fetch(s,{method:"HEAD"}).then(function(t){return d.revalidated=["Last-Modified","ETag"].every(function(e){return!n.headers.get(e)||n.headers.get(e)==t.headers.get(e)}),d.revalidated?(i.updateRequestMetaData(r).then(function(){U("'"+d.metaData.url+"' successfully revalidated and served from the browser cache")}),C(d.response,a.onProgress,a.enableStreamingDownload)):c(o,a)}))):c(o,a)}).catch(function(e){return U("Failed to load '"+d.metaData.url+"' from browser cache due to the error: "+e),v(o,a)}):v(o,a)});var A={gzip:{hasUnityMarker:function(e){var t=10,n="UnityWeb Compressed Content (gzip)";if(t>e.length||31!=e[0]||139!=e[1])return!1;var r=e[3];if(4&r){if(t+2>e.length)return!1;if((t+=2+e[t]+(e[t+1]<<8))>e.length)return!1}if(8&r){for(;t<e.length&&e[t];)t++;if(t+1>e.length)return!1;t++}return 16&r&&String.fromCharCode.apply(null,e.subarray(t,t+n.length+1))==n+"\0"}},br:{hasUnityMarker:function(e){var t="UnityWeb Compressed Content (brotli)";if(!e.length)return!1;var n=1&e[0]?14&e[0]?4:7:1,r=e[0]&(1<<n)-1,o=1+(Math.log(t.length-1)/Math.log(2)>>3);if(commentOffset=1+n+2+1+2+(o<<3)+7>>3,17==r||commentOffset>e.length)return!1;for(var a=r+(6+(o<<4)+(t.length-1<<6)<<n),i=0;i<commentOffset;i++,a>>>=8)if(e[i]!=(255&a))return!1;return String.fromCharCode.apply(null,e.subarray(commentOffset,commentOffset+t.length))==t}}};function D(){var t,e,n,s,r,o=performance.now(),p=(new Promise(function(a,e){var i=document.createElement("script");i.src=m.frameworkUrl,i.onload=function(){if("undefined"==typeof unityFramework||!unityFramework){var e,t=[["br","br"],["gz","gzip"]];for(e in t){var n,r=t[e];if(m.frameworkUrl.endsWith("."+r[0]))return n="Unable to parse "+m.frameworkUrl+"!","file:"==location.protocol?void c(n+" Loading pre-compressed (brotli or gzip) content via a file:// URL without a web server is not supported by this browser. Please use a local development web server to host compressed Unity content, or use the Unity Build and Run option.","error"):(n+=' This can happen if build compression was enabled but web server hosting the content was misconfigured to not serve the file with HTTP Response Header "Content-Encoding: '+r[1]+'" present. Check browser Console and Devtools Network tab to debug.',"br"==r[0]&&"http:"==location.protocol&&(r=-1!=["localhost","127.0.0.1"].indexOf(location.hostname)?"":"Migrate your server to use HTTPS.",n=/Firefox/.test(navigator.userAgent)?"Unable to parse "+m.frameworkUrl+'!<br>If using custom web server, verify that web server is sending .br files with HTTP Response Header "Content-Encoding: br". Brotli compression may not be supported in Firefox over HTTP connections. '+r+' See <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1670675">https://bugzilla.mozilla.org/show_bug.cgi?id=1670675</a> for more information.':"Unable to parse "+m.frameworkUrl+'!<br>If using custom web server, verify that web server is sending .br files with HTTP Response Header "Content-Encoding: br". Brotli compression may not be supported over HTTP connections. Migrate your server to use HTTPS.'),void c(n,"error"))}c("Unable to parse "+m.frameworkUrl+"! The file is corrupt, or compression was misconfigured? (check Content-Encoding HTTP Response Header on web server)","error")}var o=unityFramework;unityFramework=null,i.onload=null,a(o)},i.onerror=function(e){c("Unable to load file "+m.frameworkUrl+"! Check that the file exists on the remote server. (also check browser Console and Devtools Network tab to debug)","error")},document.body.appendChild(i),m.deinitializers.push(function(){document.body.removeChild(i)})}).then(function(e){m.webAssemblyTimeStart=performance.now(),e(m),m.codeDownloadTimeEnd=performance.now()-o}),performance.now()),a=(T(t="dataUrl"),e=m.cacheControl(m[t]),n=m.companyName&&m.productName?m.cachedFetch:m.fetchWithProgress,s=m[t],r=/file:\/\//.exec(s)?"same-origin":void 0,n(m[t],{method:"GET",companyName:m.companyName,productName:m.productName,productVersion:m.productVersion,control:e,mode:r,onProgress:function(e){T(t,e)}}).then(function(e){var t,n,r,o,a,i;return A.gzip.hasUnityMarker(e.parsedBody)&&(t=["gzip","gzip"]),(t=A.br.hasUnityMarker(e.parsedBody)?["brotli","br"]:t)&&(n=e.headers.get("Content-Type"),r=e.headers.get("Content-Encoding"),a=0<(o=e.headers.get("Content-Length"))&&e.parsedBody.length!=o,i=0<o&&e.parsedBody.length==o,r!=t[1]?c("Failed to parse binary data file "+s+' (with "Content-Type: '+n+'"), because it is still '+t[0]+'-compressed. It should have been uncompressed by the browser, but it was unable to do so since the web server provided the compressed content without specifying the HTTP Response Header "Content-Encoding: '+t[1]+'" that would have informed the browser that decompression is needed. Please verify your web server hosting configuration to add the missing "Content-Encoding: '+t[1]+'" HTTP Response Header.',"error"):c(a?"Web server configuration error: it looks like the web server has been misconfigured to double-compress the data file "+s+"! That is, it looks like the web browser has decompressed the file, but it is still in compressed form, suggesting that an already compressed file was compressed a second time. (Content-Length: "+o+", obtained length: "+e.parsedBody.length+")":i?/^((?!chrome|android).)*safari/i.test(navigator.userAgent)&&"gzip"==r&&"application/octet-stream"==n?"Unable to load content due to Apple Safari bug https://bugs.webkit.org/show_bug.cgi?id=247421 . To work around this issue, please reconfigure your web server to serve "+s+" with Content-Type: application/gzip instead of Content-Type: application/octet-stream":"Malformed binary data? Received compressed data file "+s+', with "Content-Type: '+n+'", "Content-Encoding: '+t[1]+'", "Content-Length: '+o+'", which the web browser should have decompressed, but it seemingly did not (received file size is the same as compressed file size was). Double check that the integrity of the file is intact.':"Malformed binary data URL "+s+'. No "Content-Length" HTTP Response header present. Check browser console for more information.',"error"),console.error("Malformed data? Downloaded binary data file "+s+" (ArrayBuffer size: "+e.parsedBody.length+") and browser should have decompressed it, but it might have not. Dumping raw HTTP Response Headers if it might help debug:"),e.headers.forEach(function(e,t){console.error(t+": "+e)})),e.parsedBody}).catch(function(e){var t="Failed to download file "+s;"file:"==location.protocol?c(t+". Loading web pages via a file:// URL without a web server is not supported by this browser. Please use a local development web server to host Unity content, or use the Unity Build and Run option.","error"):console.error(t)}));m.preRun.push(function(){m.addRunDependency("dataUrl"),a.then(function(t){var e=new TextDecoder("utf-8"),n=0;function r(){var e=(t[n]|t[n+1]<<8|t[n+2]<<16|t[n+3]<<24)>>>0;return n+=4,e}function o(e){if(A.gzip.hasUnityMarker(t))throw e+'. Failed to parse binary data file, because it is still gzip-compressed and should have been uncompressed by the browser. Web server has likely provided gzip-compressed data without specifying the HTTP Response Header "Content-Encoding: gzip" with it to instruct the browser to decompress it. Please verify your web server hosting configuration.';if(A.br.hasUnityMarker(t))throw e+'. Failed to parse binary data file, because it is still brotli-compressed and should have been uncompressed by the browser. Web server has likely provided brotli-compressed data without specifying the HTTP Response Header "Content-Encoding: br" with it to instruct the browser to decompress it. Please verify your web server hosting configuration.';throw e}var a="UnityWebData1.0\0",i=e.decode(t.subarray(0,a.length)),s=(i!=a&&o('Unknown data format (id="'+i+'")'),n+=a.length,r());for(n+s>t.length&&o("Invalid binary data file header! (pos="+n+", headerSize="+s+", file length="+t.length+")");n<s;){var d=r(),c=r(),l=(d+c>t.length&&o("Invalid binary data file size! (offset="+d+", size="+c+", file length="+t.length+")"),r()),u=(n+l>t.length&&o("Invalid binary data file path name! (pos="+n+", length="+l+", file length="+t.length+")"),e.decode(t.subarray(n,n+l)));n+=l;for(var h=0,f=u.indexOf("/",h)+1;0<f;h=f,f=u.indexOf("/",h)+1)m.FS_createPath(u.substring(0,h),u.substring(h,f-1),!0,!0);m.FS_createDataFile(u,null,t.subarray(d,d+c),!0,!0,!0)}m.removeRunDependency("dataUrl"),m.dataUrlLoadEndTime=performance.now()-p})})}return new Promise(function(e,t){var n;m.SystemInfo.hasWebGL?1==m.SystemInfo.hasWebGL?(n='Your browser does not support graphics API "WebGL 2" which is required for this content.',"Safari"==m.SystemInfo.browser&&parseInt(m.SystemInfo.browserVersion)<15&&(m.SystemInfo.mobile||1<navigator.maxTouchPoints?n+="\nUpgrade to iOS 15 or later.":n+="\nUpgrade to Safari 15 or later."),t(n)):m.SystemInfo.hasWasm?(m.startupErrorHandler=t,d(0),m.postRun.push(function(){d(1),m.WebPlayer.WaitForInitialization().then(function(){delete m.startupErrorHandler,e(P),m.pageStartupTime=performance.now()})}),m.SystemInfo.hasWebGPU=!1,Promise.resolve(!1).then(function(){D()})):t("Your browser does not support WebAssembly."):t("Your browser does not support WebGL.")})}
+\ No newline at end of file
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js.meta b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js.meta
+new file mode 100644
+index 0000000..8151957
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.loader.js.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 6fb771aee0c0bfc4298523dfbad936de
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br
+new file mode 100644
+index 0000000..202b9e8
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br.meta b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br.meta
+new file mode 100644
+index 0000000..84c2053
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/Build/tojam-2026-WebGL-20260502-214837.wasm.br.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: ba9595b83af740d4e9cd3c221c7d3bad
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData.meta
+new file mode 100644
+index 0000000..31d262f
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData.meta
+@@ -0,0 +1,8 @@
++fileFormatVersion: 2
++guid: e687cd3b2134b6f4f9f920707ae724f0
++folderAsset: yes
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png
+new file mode 100644
+index 0000000..2e264c7
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png.meta
+new file mode 100644
+index 0000000..7a3797b
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/MemoryProfiler.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: bbbdc54f63a0d85418b9bca8a4baca34
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico
+new file mode 100644
+index 0000000..07db393
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico.meta
+new file mode 100644
+index 0000000..152fec3
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/favicon.ico.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 09f22ebc747594249ba7f820eeed8c88
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png
+new file mode 100644
+index 0000000..e7b6496
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png.meta
+new file mode 100644
+index 0000000..03d00ad
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/fullscreen-button.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 1da5e0bf2e476924592669db769790b8
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png
+new file mode 100644
+index 0000000..d01612f
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png.meta
+new file mode 100644
+index 0000000..0067a4a
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-dark.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 233c2706aa203504496e9c4d8aceb824
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png
+new file mode 100644
+index 0000000..593a329
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png.meta
+new file mode 100644
+index 0000000..e93933c
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-empty-light.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 36a0e88734b7b1248a913bd6574113ab
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png
+new file mode 100644
+index 0000000..c432c86
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png.meta
+new file mode 100644
+index 0000000..8a4bc7f
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-dark.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 56be094aa5294d247888140b7ec27109
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png
+new file mode 100644
+index 0000000..e683131
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png.meta
+new file mode 100644
+index 0000000..63dabb9
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/progress-bar-full-light.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 5f93c3b7a12c78543ab682d5c6b12230
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css
+new file mode 100644
+index 0000000..ee5a245
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css
+@@ -0,0 +1,16 @@
++body { padding: 0; margin: 0 }
++#unity-container { position: absolute }
++#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
++#unity-container.unity-mobile { position: fixed; width: 100%; height: 100% }
++#unity-canvas { background: #231F20 }
++.unity-mobile #unity-canvas { width: 100%; height: 100% }
++#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
++#unity-logo { width: 154px; height: 130px; background: url('unity-logo-dark.png') no-repeat center }
++#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
++#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
++#unity-footer { position: relative }
++.unity-mobile #unity-footer { display: none }
++#unity-logo-title-footer { float:left; width: 102px; height: 38px; background: url('unity-logo-title-footer.png') no-repeat center }
++#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
++#unity-fullscreen-button { cursor:pointer; float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
++#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css.meta
+new file mode 100644
+index 0000000..4602eda
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/style.css.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: 51616fc3cc96a6b449e892fac9bc8e9f
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png
+new file mode 100644
+index 0000000..2c33238
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png.meta
+new file mode 100644
+index 0000000..057f75a
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-dark.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: a606ff3334f317148973acf2bfc2c908
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png
+new file mode 100644
+index 0000000..9f0ab84
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png.meta
+new file mode 100644
+index 0000000..4f73d1a
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-light.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 3a18ce25673f2d84e95e1e8036456b3a
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png
+new file mode 100644
+index 0000000..168196c
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png.meta
+new file mode 100644
+index 0000000..bc41f68
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/unity-logo-title-footer.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 6c4ca8a3ca07b9449816cb790da558d5
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png
+new file mode 100644
+index 0000000..ba3aae9
+Binary files /dev/null and b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png differ
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png.meta b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png.meta
+new file mode 100644
+index 0000000..47048cb
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/TemplateData/webmemd-icon.png.meta
+@@ -0,0 +1,130 @@
++fileFormatVersion: 2
++guid: 1c2ca9f5675d5574aa96ebe91ca0a3cc
++TextureImporter:
++  internalIDToNameTable: []
++  externalObjects: {}
++  serializedVersion: 13
++  mipmaps:
++    mipMapMode: 0
++    enableMipMap: 1
++    sRGBTexture: 1
++    linearTexture: 0
++    fadeOut: 0
++    borderMipMap: 0
++    mipMapsPreserveCoverage: 0
++    alphaTestReferenceValue: 0.5
++    mipMapFadeDistanceStart: 1
++    mipMapFadeDistanceEnd: 3
++  bumpmap:
++    convertToNormalMap: 0
++    externalNormalMap: 0
++    heightScale: 0.25
++    normalMapFilter: 0
++    flipGreenChannel: 0
++  isReadable: 0
++  streamingMipmaps: 0
++  streamingMipmapsPriority: 0
++  vTOnly: 0
++  ignoreMipmapLimit: 0
++  grayScaleToAlpha: 0
++  generateCubemap: 6
++  cubemapConvolution: 0
++  seamlessCubemap: 0
++  textureFormat: 1
++  maxTextureSize: 2048
++  textureSettings:
++    serializedVersion: 2
++    filterMode: 1
++    aniso: 1
++    mipBias: 0
++    wrapU: 0
++    wrapV: 0
++    wrapW: 0
++  nPOTScale: 1
++  lightmap: 0
++  compressionQuality: 50
++  spriteMode: 0
++  spriteExtrude: 1
++  spriteMeshType: 1
++  alignment: 0
++  spritePivot: {x: 0.5, y: 0.5}
++  spritePixelsToUnits: 100
++  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
++  spriteGenerateFallbackPhysicsShape: 1
++  alphaUsage: 1
++  alphaIsTransparency: 0
++  spriteTessellationDetail: -1
++  textureType: 0
++  textureShape: 1
++  singleChannelComponent: 0
++  flipbookRows: 1
++  flipbookColumns: 1
++  maxTextureSizeSet: 0
++  compressionQualitySet: 0
++  textureFormatSet: 0
++  ignorePngGamma: 0
++  applyGammaDecoding: 0
++  swizzle: 50462976
++  cookieLightType: 0
++  platformSettings:
++  - serializedVersion: 4
++    buildTarget: DefaultTexturePlatform
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: Standalone
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  - serializedVersion: 4
++    buildTarget: WebGL
++    maxTextureSize: 2048
++    resizeAlgorithm: 0
++    textureFormat: -1
++    textureCompression: 1
++    compressionQuality: 50
++    crunchedCompression: 0
++    allowsAlphaSplitting: 0
++    overridden: 0
++    ignorePlatformSupport: 0
++    androidETC2FallbackOverride: 0
++    forceMaximumCompressionQuality_BC6H_BC7: 0
++  spriteSheet:
++    serializedVersion: 2
++    sprites: []
++    outline: []
++    customData: 
++    physicsShape: []
++    bones: []
++    spriteID: 
++    internalID: 0
++    vertices: []
++    indices: 
++    edges: []
++    weights: []
++    secondaryTextures: []
++    spriteCustomMetadata:
++      entries: []
++    nameFileIdTable: {}
++  mipmapLimitGroupName: 
++  pSDRemoveMatte: 0
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/index.html b/Assets/tojam-2026-WebGL-20260502-214837/index.html
+new file mode 100644
+index 0000000..4471d89
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/index.html
+@@ -0,0 +1,133 @@
++<!DOCTYPE html>
++<html lang="en-us">
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
++    <title>Unity Web Player | tojam-2026</title>
++    <link rel="shortcut icon" href="TemplateData/favicon.ico">
++    <link rel="stylesheet" href="TemplateData/style.css">
++  </head>
++  <body>
++    <div id="unity-container" class="unity-desktop">
++      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
++      <div id="unity-loading-bar">
++        <div id="unity-logo"></div>
++        <div id="unity-progress-bar-empty">
++          <div id="unity-progress-bar-full"></div>
++        </div>
++      </div>
++      <div id="unity-warning"> </div>
++      <div id="unity-footer">
++        <div id="unity-logo-title-footer"></div>
++        <div id="unity-fullscreen-button"></div>
++        <div id="unity-build-title">tojam-2026</div>
++      </div>
++    </div>
++    <script>
++      var canvas = document.querySelector("#unity-canvas");
++
++      // Shows a temporary message banner/ribbon for a few seconds, or
++      // a permanent error message on top of the canvas if type=='error'.
++      // If type=='warning', a yellow highlight color is used.
++      // Modify or remove this function to customize the visually presented
++      // way that non-critical warnings and error messages are presented to the
++      // user.
++      function unityShowBanner(msg, type) {
++        var warningBanner = document.querySelector("#unity-warning");
++        function updateBannerVisibility() {
++          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
++        }
++        var div = document.createElement('div');
++        div.innerHTML = msg;
++        warningBanner.appendChild(div);
++        if (type == 'error') div.style = 'background: red; padding: 10px;';
++        else {
++          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
++          setTimeout(function() {
++            warningBanner.removeChild(div);
++            updateBannerVisibility();
++          }, 5000);
++        }
++        updateBannerVisibility();
++      }
++
++      var buildUrl = "Build";
++      var loaderUrl = buildUrl + "/tojam-2026-WebGL-20260502-214837.loader.js";
++      var config = {
++        arguments: [],
++        dataUrl: buildUrl + "/tojam-2026-WebGL-20260502-214837.data.br",
++        frameworkUrl: buildUrl + "/tojam-2026-WebGL-20260502-214837.framework.js.br",
++        codeUrl: buildUrl + "/tojam-2026-WebGL-20260502-214837.wasm.br",
++        streamingAssetsUrl: "StreamingAssets",
++        companyName: "DefaultCompany",
++        productName: "tojam-2026",
++        productVersion: "0.1.0",
++        showBanner: unityShowBanner,
++        // errorHandler: function(err, url, line) {
++        //    alert("error " + err + " occurred at line " + line);
++        //    // Return 'true' if you handled this error and don't want Unity
++        //    // to process it further, 'false' otherwise.
++        //    return true;
++        // },
++      };
++
++      // By default, Unity keeps WebGL canvas render target size matched with
++      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
++      // Set this to false if you want to decouple this synchronization from
++      // happening inside the engine, and you would instead like to size up
++      // the canvas DOM size and WebGL render target sizes yourself.
++      // config.matchWebGLToCanvasSize = false;
++
++      // If you would like all file writes inside Unity Application.persistentDataPath
++      // directory to automatically persist so that the contents are remembered when
++      // the user revisits the site the next time, uncomment the following line:
++      // config.autoSyncPersistentDataPath = true;
++      // This autosyncing is currently not the default behavior to avoid regressing
++      // existing user projects that might rely on the earlier manual
++      // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
++      // expected to change.
++
++      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
++        // Mobile device style: fill the whole browser client area with the game canvas:
++
++        var meta = document.createElement('meta');
++        meta.name = 'viewport';
++        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
++        document.getElementsByTagName('head')[0].appendChild(meta);
++        document.querySelector("#unity-container").className = "unity-mobile";
++        canvas.className = "unity-mobile";
++
++        // To lower canvas resolution on mobile devices to gain some
++        // performance, uncomment the following line:
++        // config.devicePixelRatio = 1;
++
++
++      } else {
++        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
++        canvas.style.width = "960px";
++        canvas.style.height = "600px";
++      }
++
++      document.querySelector("#unity-loading-bar").style.display = "block";
++
++      var script = document.createElement("script");
++      script.src = loaderUrl;
++      script.onload = () => {
++        createUnityInstance(canvas, config, (progress) => {
++          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
++              }).then((unityInstance) => {
++                document.querySelector("#unity-loading-bar").style.display = "none";
++                document.querySelector("#unity-fullscreen-button").onclick = () => {
++                  unityInstance.SetFullscreen(1);
++                };
++
++              }).catch((message) => {
++                alert(message);
++              });
++            };
++
++      document.body.appendChild(script);
++
++    </script>
++  </body>
++</html>
+diff --git a/Assets/tojam-2026-WebGL-20260502-214837/index.html.meta b/Assets/tojam-2026-WebGL-20260502-214837/index.html.meta
+new file mode 100644
+index 0000000..d1de82d
+--- /dev/null
++++ b/Assets/tojam-2026-WebGL-20260502-214837/index.html.meta
+@@ -0,0 +1,7 @@
++fileFormatVersion: 2
++guid: df7d46e6e236ec043bcec7665465b617
++TextScriptImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 

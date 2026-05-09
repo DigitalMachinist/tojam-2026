@@ -273,11 +273,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778fbb70c05cb1e44a409944ea4e4375, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shadow
+  m_EditorClassIdentifier: Assembly-CSharp::ShadowMover
   anchor: {fileID: 243564152}
   speed: 2
-  drawDebugRayToAnchor: 0
-  debugRayColor: {r: 1, g: 0, b: 1, a: 1}
+  drawDebugRayToAnchor: 1
+  debugRayColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &448501123
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,11 +449,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0855b4904f70ff429403ee838200244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShadowManager
-  leafPivotParent: {fileID: 1451405565}
-  leafPivotPrefab: {fileID: 1525765307703660359, guid: 0fb517268b35d7f47acd2619ff1b3880, type: 3}
+  anchorPivotParent: {fileID: 1451405565}
+  anchorPivotPrefab: {fileID: 4480738532707307030, guid: 0fb517268b35d7f47acd2619ff1b3880, type: 3}
   shadowParent: {fileID: 610270447}
   shadowPrefab: {fileID: 933503780442904495, guid: b923b81db4877eb4cab02afb71854ac8, type: 3}
-  count: 5
+  count: 3
   radius: 3
 --- !u!1 &1031119600
 GameObject:
@@ -602,7 +602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1039182196}
   - component: {fileID: 1039182197}
-  - component: {fileID: 1039182198}
   m_Layer: 0
   m_Name: Pivot A
   m_TagString: Untagged
@@ -641,19 +640,6 @@ MonoBehaviour:
   axis: {x: 0, y: 0, z: 1}
   degreesPerSecond: 90
   randomizeOnStart: 0
---- !u!114 &1039182198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039182195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
-  color: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1266730497
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateAroundAxis
   axis: {x: 0, y: 0, z: 1}
-  degreesPerSecond: -120
+  degreesPerSecond: -15
   randomizeOnStart: 0
 --- !u!114 &1451405567
 MonoBehaviour:
@@ -860,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
-  color: {r: 0, g: 1, b: 1, a: 1}
+  color: {r: 1, g: 0.5019608, b: 0, a: 1}
 --- !u!1 &1927469285
 GameObject:
   m_ObjectHideFlags: 0

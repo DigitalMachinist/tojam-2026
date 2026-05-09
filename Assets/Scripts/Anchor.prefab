@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 505629610997289102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54,11 +54,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7460813237242478203}
-  - component: {fileID: 1525765307703660359}
-  - component: {fileID: 650014900603065736}
-  - component: {fileID: 8911071136784663382}
+  - component: {fileID: 4480738532707307030}
+  - component: {fileID: -6238359645391798389}
+  - component: {fileID: 460171440136172199}
   m_Layer: 0
-  m_Name: LeafPivot
+  m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -73,14 +73,14 @@ Transform:
   m_GameObject: {fileID: 3877923384626174195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7225899096357360036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1525765307703660359
+--- !u!114 &4480738532707307030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,24 +91,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a8d2b01bef895c478f81556d88d805a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LeafPivot
+  m_EditorClassIdentifier: Assembly-CSharp::AnchorPivot
   anchorTransform: {fileID: 7225899096357360036}
---- !u!114 &650014900603065736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3877923384626174195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eceac053b69d53949824e57d6b78dce2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RotateAroundAxis
-  axis: {x: 0, y: 0, z: 1}
-  degreesPerSecond: 90
-  randomizeOnStart: 1
---- !u!114 &8911071136784663382
+  minDistance: 2.5
+  maxDistance: 3
+  frequency: 0.25
+  phase: 0
+  orbitDegreesPerSecond: -60
+  randomizeLocalRotationOnStart: 1
+--- !u!114 &-6238359645391798389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,4 +111,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebc9423f85a9ce468ce09e622bb12d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugRayToParent
-  color: {r: 0, g: 1, b: 1, a: 1}
+  color: {r: 1, g: 0.9986277, b: 0, a: 1}
+--- !u!54 &460171440136172199
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3877923384626174195}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 56
+  m_CollisionDetection: 0
