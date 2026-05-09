@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ShadowMover : AnchoredMover
+public class ConstantSpeedMover : AnchoredMover
 {
-    [Tooltip("Speed constant. Velocity magnitude = speed * distance.")]
+    [Tooltip("Constant movement speed in units per second.")]
     [SerializeField] private float speed = 1f;
 
     [Tooltip("If true, draws a debug line from this object to its anchor each frame.")]
@@ -22,12 +22,23 @@ public class ShadowMover : AnchoredMover
 
     private void FixedUpdate()
     {
-        if (anchor == null) return;
+        if (anchor == null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
 
         Vector3 diff = anchor.position - rb.position;
-        Vector3 direction = diff.normalized;
-        //rb.linearVelocity = direction * diff.sqrMagnitude * speed;
-        rb.linearVelocity = direction * diff.magnitude * speed;
+        float distance = diff.magnitude;
+
+        if (distance <= speed * Time.fixedDeltaTime)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.MovePosition(anchor.position);
+            return;
+        }
+
+        rb.linearVelocity = (diff / distance) * speed;
     }
 
     private void Update()
