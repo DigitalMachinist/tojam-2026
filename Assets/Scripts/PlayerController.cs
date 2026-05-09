@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Transform that all orbit shadows will retarget to during an attack.")]
     [SerializeField] private Transform attackTarget;
 
-    [Tooltip("The Shadow Anchors object's Shadow component. Its anchor will be swapped on interact.")]
-    [SerializeField] private Shadow shadowAnchors;
+    [Tooltip("The Shadow Anchors object's mover component. Its anchor will be swapped on interact.")]
+    [SerializeField] private AnchoredMover shadowAnchors;
 
     [Tooltip("Transform that the Shadow Anchors will retarget to during an interact.")]
     [SerializeField] private Transform interactTarget;

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ShadowManager : MonoBehaviour
 {
-    [Tooltip("Parent transform for leaf pivot prefab instances.")]
-    [SerializeField] private Transform leafPivotParent;
+    [Tooltip("Parent transform for anchor pivot prefab instances.")]
+    [SerializeField] private Transform anchorPivotParent;
 
-    [Tooltip("Leaf pivot prefab to instantiate around this transform. Parented to this transform.")]
-    [SerializeField] private LeafPivot leafPivotPrefab;
+    [Tooltip("Anchor pivot prefab to instantiate around this transform. Parented to this transform.")]
+    [SerializeField] private AnchorPivot anchorPivotPrefab;
 
     [Tooltip("Parent transform for shadow prefab instances.")]
     [SerializeField] private Transform shadowParent;
 
-    [Tooltip("Shadow prefab spawned at the same position as the anchor, parented to followerParent.")]
-    [SerializeField] private Shadow shadowPrefab;
+    [Tooltip("Mover prefab spawned at the same position as the anchor, parented to shadowParent.")]
+    [SerializeField] private AnchoredMover shadowPrefab;
 
     [Tooltip("Number of instances to spawn evenly around the circle.")]
     [SerializeField] private int count = 8;
@@ -22,17 +22,17 @@ public class ShadowManager : MonoBehaviour
     [Tooltip("Radius of the circle in world units.")]
     [SerializeField] private float radius = 1f;
 
-    private readonly List<Shadow> shadows = new List<Shadow>();
+    private readonly List<AnchoredMover> shadows = new List<AnchoredMover>();
     private Coroutine retargetRoutine;
 
     private void Start()
     {
-        if (leafPivotParent == null || leafPivotPrefab == null || count <= 0)
+        if (anchorPivotParent == null || anchorPivotPrefab == null || count <= 0)
         {
             return;
         }
 
-        Vector3 center = leafPivotParent.position;
+        Vector3 center = anchorPivotParent.position;
         float step = 360f / count;
 
         for (int i = 0; i < count; i++)
@@ -41,12 +41,12 @@ public class ShadowManager : MonoBehaviour
             float angleRad = angleDeg * Mathf.Deg2Rad;
             Vector3 position = center + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f) * radius;
 
-            LeafPivot leafPivot = Instantiate(leafPivotPrefab, position, Quaternion.identity, leafPivotParent);
+            AnchorPivot anchorPivot = Instantiate(anchorPivotPrefab, position, Quaternion.identity, anchorPivotParent);
 
             if (shadowPrefab != null)
             {
-                Shadow shadow = Instantiate(shadowPrefab, position, Quaternion.identity, shadowParent);
-                shadow.SetAnchor(leafPivot.AnchorTransform);
+                AnchoredMover shadow = Instantiate(shadowPrefab, position, Quaternion.identity, shadowParent);
+                shadow.SetAnchor(anchorPivot.AnchorTransform);
                 shadows.Add(shadow);
             }
         }
