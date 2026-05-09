@@ -67,6 +67,17 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void ResetAll()
+    {
+        StopAllCoroutines();
+        foreach (var go in active)
+            if (go != null) Destroy(go);
+        active.Clear();
+        spawnCoroutine = null;
+        if (isActiveAndEnabled && spawnTable != null && spawnTable.Length > 0)
+            spawnCoroutine = StartCoroutine(SpawnCoroutine());
+    }
+
     private IEnumerator SpawnCoroutine()
     {
         while (true)
