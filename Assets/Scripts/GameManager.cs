@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using Unity.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -43,11 +41,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Rect spawnBounds = new Rect(-8f, -8f, 16f, 16f);
 
     [Space( 10 )]
-    [Header( "Player" )]
-    [SerializeField] private Canvas UITitle;
-    [SerializeField] private Canvas UIPause;
-    [SerializeField] private Canvas UIHUD;
-    [SerializeField] private Canvas UIGameOver;
+    [Header( "UI" )]
+    [SerializeField] List<UIScreen> screens = new();
 
     [Header("Audio")]
     [Tooltip("Audio clip to be played on Title Screen")]
@@ -97,7 +92,6 @@ public class GameManager : MonoBehaviour
             playerRigidbody.linearVelocity = Vector2.zero;
         }
 
-        Time.timeScale = 1f;
         playerStart?.Restart();
     }
 
@@ -147,35 +141,16 @@ public class GameManager : MonoBehaviour
 
     private void ShowScreen(ScreenType _screenType)
     {
-        switch ( _screenType )
+        foreach(UIScreen screen in screens)
         {
-            case ScreenType.Title:
-            UITitle.enabled = true;
-            UIHUD.enabled = false;
-            UIGameOver.enabled = false;
-            UIPause.enabled = false;
-            break;
-
-            case ScreenType.Pause:
-            UITitle.enabled = false;
-            UIHUD.enabled = false;
-            UIGameOver.enabled = false;
-            UIPause.enabled = true;
-            break;
-
-            case ScreenType.HUD:
-            UITitle.enabled = false;
-            UIHUD.enabled = true;
-            UIGameOver.enabled = false;
-            UIPause.enabled = false;
-            break;
-
-            case ScreenType.GameOver:
-            UITitle.enabled = false;
-            UIHUD.enabled = false;
-            UIGameOver.enabled = true;
-            UIPause.enabled = false;
-            break;
+            if(_screenType == screen.screenType)
+            {
+                screen.Activate();
+            }
+            else
+            {
+                screen.Deactivate();
+            }
         }
     }
 }
