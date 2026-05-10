@@ -671,6 +671,8 @@ MonoBehaviour:
   currentStats: {fileID: 9168092895577961227}
   controller: {fileID: 4042231494707810678}
   health: {fileID: 4086221166191643120}
+  spriteRenderer: {fileID: 5826675193757648273}
+  blinkInterval: 0.08
 --- !u!50 &4349997275128109440
 Rigidbody2D:
   serializedVersion: 5
@@ -697,7 +699,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &8628972149727686988
 CircleCollider2D:
   m_ObjectHideFlags: 0
