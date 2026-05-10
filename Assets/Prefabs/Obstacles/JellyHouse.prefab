@@ -49,9 +49,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1040973616549947494, guid: de16ed025630285409ae2db8836f8859, type: 3}
+      propertyPath: m_Size.x
+      value: 10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040973616549947494, guid: de16ed025630285409ae2db8836f8859, type: 3}
+      propertyPath: m_Size.y
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040973616549947494, guid: de16ed025630285409ae2db8836f8859, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d879bf13e9a799e4aa5f769a083f6fe3, type: 3}
+    - target: {fileID: 1040973616549947494, guid: de16ed025630285409ae2db8836f8859, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040973616549947494, guid: de16ed025630285409ae2db8836f8859, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776003541878745483, guid: de16ed025630285409ae2db8836f8859, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776003541878745483, guid: de16ed025630285409ae2db8836f8859, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 5.12
+      objectReference: {fileID: 0}
     - target: {fileID: 3776003541878745483, guid: de16ed025630285409ae2db8836f8859, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 10.24
@@ -202,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3988418234402542271, guid: de16ed025630285409ae2db8836f8859, type: 3}
       propertyPath: m_Name
-      value: Obstacle Variant
+      value: JellyHouse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -130,6 +130,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Restart()
+    {
+        IsInvulnerable = false;
+        CurrentHP = MaxHP;
+    }
+
     public void Revive(int hp)
     {
         CurrentHP = Mathf.Clamp(hp, 1, MaxHP);

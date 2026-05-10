@@ -3,6 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerWeaponStats", menuName = "Tojam/Player Weapon Stats", order = 2)]
 public class PlayerWeaponStats : ScriptableObject
 {
+    [Tooltip("Display name of this weapon.")]
+    [SerializeField] private string weaponName;
+
+    [Tooltip("Icon representing this weapon in the HUD.")]
+    [SerializeField] private Sprite sprite;
+
     [Tooltip("Base damage dealt per hit, before the damage multiplier is applied.")]
     [SerializeField] private int baseDamage = 1;
 
@@ -24,6 +30,8 @@ public class PlayerWeaponStats : ScriptableObject
     [Tooltip("Seconds the enemy's movement is suppressed after being knocked back.")]
     [SerializeField] private float stunDurationSeconds = 0.15f;
 
+    public string WeaponName => weaponName;
+    public Sprite Sprite => sprite;
     public int BaseDamage => baseDamage;
     public float Cooldown => cooldown;
     public PlayerWeaponEffect EffectPrefab => effectPrefab;
