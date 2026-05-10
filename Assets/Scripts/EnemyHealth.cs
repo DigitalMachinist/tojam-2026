@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private EnemyBody body;
 
     public event Action Died;
+    public event Action DamageTaken;
 
     public int CurrentHP { get; private set; }
     public int MaxHP { get; private set; }
@@ -54,6 +55,7 @@ public class EnemyHealth : MonoBehaviour
         CurrentHP -= applied;
 
         GameLog.Damage($"Enemy took {applied} damage ({CurrentHP}/{MaxHP})", this);
+        DamageTaken?.Invoke();
 
         if (CurrentHP == 0)
         {
