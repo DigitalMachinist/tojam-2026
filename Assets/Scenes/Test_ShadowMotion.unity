@@ -7204,6 +7204,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 116238373993908728, guid: 60685bdd13daeff438606cddb4afac5a, type: 3}
   m_PrefabInstance: {fileID: 1945234868}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1972947413 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 734843957192375187, guid: 015e4950861cdaa4db210d16a5689592, type: 3}
+  m_PrefabInstance: {fileID: 7687764415400686921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1975736453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8583,6 +8588,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5343956869285086481, guid: 015e4950861cdaa4db210d16a5689592, type: 3}
+      propertyPath: gameoverAudio
+      value: 
+      objectReference: {fileID: 1972947413}
     - target: {fileID: 5819272709923293120, guid: 015e4950861cdaa4db210d16a5689592, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
