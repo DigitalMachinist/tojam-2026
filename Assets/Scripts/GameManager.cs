@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using Unity.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -43,11 +41,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Rect spawnBounds = new Rect(-8f, -8f, 16f, 16f);
 
     [Space( 10 )]
-    [Header( "Player" )]
-    [SerializeField] private Canvas UITitle;
-    [SerializeField] private Canvas UIPause;
-    [SerializeField] private Canvas UIHUD;
-    [SerializeField] private Canvas UIGameOver;
+    [Header( "UI" )]
+    [SerializeField] List<UIScreen> screens = new();
+
+    [Header("Audio")]
+    [Tooltip("Audio clip to be played on Title Screen")]
+    [SerializeField] private AudioSource titleAudio;
+    [Tooltip("Audio clip to be played during gameplay")]
+    [SerializeField] private AudioSource gameplayAudio;
 
     private void OnEnable()
     {
@@ -71,6 +72,8 @@ public class GameManager : MonoBehaviour
         //Show Title Screen
         Time.timeScale = 0f;
         ShowScreen( ScreenType.Title );
+        
+        titleAudio.PlayDelayed(1);
 
         enemyManager?.ResetAll();
         shadowManager?.SetTargetCount(0);
@@ -89,12 +92,12 @@ public class GameManager : MonoBehaviour
             playerRigidbody.linearVelocity = Vector2.zero;
         }
 
-        Time.timeScale = 1f;
         playerStart?.Restart();
     }
 
     private void OnPlayerDied()
     {
+        gameplayAudio.Stop();
         Time.timeScale = 0f;
         GameLog.Death("Game over", this);
         // TODO: show game over view
@@ -119,6 +122,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         ShowScreen( ScreenType.HUD );
+        titleAudio.Stop();
+        gameplayAudio.PlayDelayed(1);
     }
 
     public void OnResumeSelected()
@@ -136,35 +141,16 @@ public class GameManager : MonoBehaviour
 
     private void ShowScreen(ScreenType _screenType)
     {
-        switch ( _screenType )
+        foreach(UIScreen screen in screens)
         {
-            case ScreenType.Title:
-            UITitle.enabled = true;
-            UIHUD.enabled = false;
-            UIGameOver.enabled = false;
-            UIPause.enabled = false;
-            break;
-
-            case ScreenType.Pause:
-            UITitle.enabled = false;
-            UIHUD.enabled = false;
-            UIGameOver.enabled = false;
-            UIPause.enabled = true;
-            break;
-
-            case ScreenType.HUD:
-            UITitle.enabled = false;
-            UIHUD.enabled = true;
-            UIGameOver.enabled = false;
-            UIPause.enabled = false;
-            break;
-
-            case ScreenType.GameOver:
-            UITitle.enabled = false;
-            UIHUD.enabled = false;
-            UIGameOver.enabled = true;
-            UIPause.enabled = false;
-            break;
+            if(_screenType == screen.screenType)
+            {
+                screen.Activate();
+            }
+            else
+            {
+                screen.Deactivate();
+            }
         }
     }
 }
