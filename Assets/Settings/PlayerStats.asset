@@ -25,3 +25,4 @@ MonoBehaviour:
     DamageMultiplier: 0.6
   - Shadows: 4
     DamageMultiplier: 0.5
+  animatorController: {fileID: 9100000, guid: d584cb64947b11047bb193646a975c4f, type: 2}

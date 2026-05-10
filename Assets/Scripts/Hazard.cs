@@ -14,6 +14,14 @@ public class Hazard : MonoBehaviour
     public int Damage => damage;
     public float DamageInterval => Mathf.Max(0.01f, damageInterval);
 
+    public void Initialize(EnemyStats newStats)
+    {
+        stats = newStats;
+        if (stats == null) return;
+        damage = stats.ContactDamage;
+        damageInterval = stats.ContactDamageIntervalSeconds;
+    }
+
     private Rigidbody2D rb;
 
     private void Awake()

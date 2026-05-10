@@ -30,7 +30,7 @@ public class PlayerShadows : MonoBehaviour
 
     private void OnHealthChanged(int _) => Reconcile();
 
-    private void Reconcile()
+    public void Reconcile()
     {
         if (health == null) return;
 

@@ -17,3 +17,5 @@ MonoBehaviour:
   effectPrefab: {fileID: 5419356369533716487, guid: 70749e827f3afe949939c4e19b3eab2a, type: 3}
   quantity: 1
   spawnDelay: 0.1
+  knockback: 10
+  stunDurationSeconds: 0.2

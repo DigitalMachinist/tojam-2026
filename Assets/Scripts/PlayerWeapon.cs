@@ -18,6 +18,8 @@ public class PlayerWeapon : MonoBehaviour
     public Vector2 MoveDirection { get; set; } = Vector2.right;
 
     public int CurrentDamage => stats != null ? Mathf.RoundToInt(stats.BaseDamage * DamageMultiplier) : 0;
+    public float CurrentKnockback => stats != null ? stats.Knockback : 0f;
+    public float CurrentStunDuration => stats != null ? stats.StunDurationSeconds : 0f;
 
     private void OnEnable()
     {
@@ -58,7 +60,7 @@ public class PlayerWeapon : MonoBehaviour
     private void SpawnEffect()
     {
         if (effectManager == null || stats == null || stats.EffectPrefab == null) return;
-        GameLog.Weapon($"Fired ({CurrentDamage} dmg)", this);
-        effectManager.Spawn(stats.EffectPrefab, transform.position, transform.rotation, effectsParent, CurrentDamage);
+        GameLog.Weapon($"Fired ({CurrentDamage} dmg, {CurrentKnockback} kb)", this);
+        effectManager.Spawn(stats.EffectPrefab, transform.position, transform.rotation, effectsParent, CurrentDamage, CurrentKnockback, CurrentStunDuration);
     }
 }

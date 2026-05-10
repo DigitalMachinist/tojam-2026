@@ -29,6 +29,17 @@ public class ShadowManager : MonoBehaviour
 
     public int CurrentCount => shadows.Count;
 
+    public void SetShadowMoversEnabled(bool value)
+    {
+        foreach (var shadow in shadows)
+        {
+            if (shadow == null) continue;
+            shadow.enabled = value;
+            if (!value && shadow.TryGetComponent<Rigidbody2D>(out var rb))
+                rb.linearVelocity = Vector2.zero;
+        }
+    }
+
     private void OnEnable()
     {
         if (playerShadows == null) return;
