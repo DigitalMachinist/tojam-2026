@@ -7,8 +7,8 @@ public class MoverAnimator : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
 
-    private static readonly int IsMovingLeftHash  = Animator.StringToHash("isMovingLeft");
-    private static readonly int IsMovingRightHash = Animator.StringToHash("isMovingRight");
+    private static readonly int IsMovingLeftHash  = Animator.StringToHash("IsMovingLeft");
+    private static readonly int IsMovingRightHash = Animator.StringToHash("IsMovingRight");
     private static readonly int MovementSpeedHash = Animator.StringToHash("MovementSpeed");
 
     public bool IsMovingLeft   { get; private set; }
@@ -26,7 +26,7 @@ public class MoverAnimator : MonoBehaviour
         Vector2 velocity = rb.linearVelocity;
 
         IsMovingLeft  = velocity.x < 0f;
-        IsMovingRight = velocity.x > 0f;
+        IsMovingRight = velocity.x >= 0f;
         MovementSpeed = velocity.magnitude;
 
         animator.SetBool(IsMovingLeftHash,  IsMovingLeft);

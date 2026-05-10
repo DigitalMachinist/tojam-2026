@@ -2,38 +2,23 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    [Tooltip("Stats asset to pull contact damage and interval from. Overrides the fields below when set.")]
-    [SerializeField] private EnemyStats stats;
+    [Tooltip("Current stats component on this enemy.")]
+    [SerializeField] private EnemyStatsCurrent stats;
 
-    [Tooltip("Damage dealt to the player on contact and on each stay-tick.")]
+    [Tooltip("Fallback damage if no stats component is assigned.")]
     [SerializeField] private int damage = 1;
 
-    [Tooltip("Seconds between damage ticks while the player remains in contact.")]
+    [Tooltip("Fallback damage interval if no stats component is assigned.")]
     [SerializeField] private float damageInterval = 1f;
 
-    public int Damage => damage;
-    public float DamageInterval => Mathf.Max(0.01f, damageInterval);
-
-    public void Initialize(EnemyStats newStats)
-    {
-        stats = newStats;
-        if (stats == null) return;
-        damage = stats.ContactDamage;
-        damageInterval = stats.ContactDamageIntervalSeconds;
-    }
+    public int Damage => stats != null ? stats.ContactDamage : damage;
+    public float DamageInterval => Mathf.Max(0.01f, stats != null ? stats.ContactDamageIntervalSeconds : damageInterval);
 
     private Rigidbody2D rb;
 
     private void Awake()
     {
         rb = GetComponentInParent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
-        if (stats == null) return;
-        damage = stats.ContactDamage;
-        damageInterval = stats.ContactDamageIntervalSeconds;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

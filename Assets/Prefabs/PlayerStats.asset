@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e076dae2fee955f4588b0c90173fdad8, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  defaultMaxHP: 5
+  maxHP: 5
   iframeDurationSeconds: 1
-  maxShadows: 4
-  defaultMaxWeaponSlots: 1
+  maxWeaponSlots: 1
   shadowDamageScaling:
   - Shadows: 1
     DamageMultiplier: 0.8
@@ -26,3 +25,19 @@ MonoBehaviour:
   - Shadows: 4
     DamageMultiplier: 0.5
   animatorController: {fileID: 9100000, guid: d584cb64947b11047bb193646a975c4f, type: 2}
+  movementSpeed: 3
+  attackRate: 1
+  startingWeapon: {fileID: 5754257079452159257, guid: 3707e486cc1a7a34c9eec348ede3f8d9, type: 3}
+  progressionTable:
+  - Level: 2
+    XPCost: 100
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 3
+    XPCost: 200
+    Powerup: {fileID: 11400000, guid: 3c008a4130d02bb47885b41cb0558572, type: 2}
+  - Level: 4
+    XPCost: 300
+    Powerup: {fileID: 11400000, guid: 2a42486e221837b45adcebf9fcf7fc51, type: 2}
+  - Level: 5
+    XPCost: 400
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}

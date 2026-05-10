@@ -467,6 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3965128965342227291}
+  - component: {fileID: 9168092895577961227}
   - component: {fileID: 6598817758309596786}
   - component: {fileID: 4086221166191643120}
   - component: {fileID: 1501320923186699919}
@@ -504,6 +505,19 @@ Transform:
   - {fileID: 328164250842737149}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9168092895577961227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8411875650125640662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f596d06a1ae0f47a1b7087fbcba783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsCurrent
+  stats: {fileID: 11400000, guid: 6bb352b9ff6a2ef42b500ae28681e18e, type: 2}
 --- !u!114 &6598817758309596786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647defe793d109c4cae55d6adcb83dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  stats: {fileID: 11400000, guid: 6bb352b9ff6a2ef42b500ae28681e18e, type: 2}
+  stats: {fileID: 9168092895577961227}
   body: {fileID: 6598817758309596786}
 --- !u!114 &1501320923186699919
 MonoBehaviour:
@@ -543,7 +557,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShadows
   health: {fileID: 4086221166191643120}
-  stats: {fileID: 11400000, guid: 6bb352b9ff6a2ef42b500ae28681e18e, type: 2}
 --- !u!114 &4042231494707810678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMover
   controller: {fileID: 4042231494707810678}
-  speed: 5
+  stats: {fileID: 9168092895577961227}
 --- !u!114 &2423470611431777720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42321ce33313cc5408ef9d8495c24ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapons
-  stats: {fileID: 11400000, guid: 6bb352b9ff6a2ef42b500ae28681e18e, type: 2}
+  stats: {fileID: 9168092895577961227}
   shadowManager: {fileID: 0}
   effectManager: {fileID: 0}
   playerController: {fileID: 4042231494707810678}
@@ -654,8 +667,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8492b1690d755e468d9c777eb763c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
-  stats: {fileID: 11400000, guid: 6bb352b9ff6a2ef42b500ae28681e18e, type: 2}
+  currentStats: {fileID: 9168092895577961227}
   controller: {fileID: 4042231494707810678}
+  health: {fileID: 4086221166191643120}
 --- !u!50 &4349997275128109440
 Rigidbody2D:
   serializedVersion: 5

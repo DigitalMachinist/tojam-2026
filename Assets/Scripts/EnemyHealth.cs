@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [Tooltip("Stats asset to read MaxHP from.")]
-    [SerializeField] private EnemyStats stats;
+    [Tooltip("Current stats component on this enemy.")]
+    [SerializeField] private EnemyStatsCurrent stats;
 
     [Tooltip("Body component whose weapon contact events drive damage.")]
     [SerializeField] private EnemyBody body;
@@ -13,11 +13,19 @@ public class EnemyHealth : MonoBehaviour
 
     public int CurrentHP { get; private set; }
     public int MaxHP { get; private set; }
+    public int XPValue { get; private set; }
     public bool IsDead => CurrentHP <= 0;
 
     private void Awake()
     {
-        MaxHP = stats != null ? stats.MaxHP : 1;
+        if (stats != null)
+        {
+            stats.MaxHPChanged   += val => MaxHP   = val;
+            stats.XPValueChanged += val => XPValue = val;
+            stats.Initialized    += () => { CurrentHP = MaxHP; Died = null; };
+            MaxHP   = stats.MaxHP;
+            XPValue = stats.XPValue;
+        }
         CurrentHP = MaxHP;
     }
 
@@ -36,14 +44,6 @@ public class EnemyHealth : MonoBehaviour
     private void OnWeaponContact(PlayerWeaponEffect effect)
     {
         TakeDamage(effect.Damage);
-    }
-
-    public void Initialize(EnemyStats newStats)
-    {
-        stats = newStats;
-        MaxHP = stats != null ? stats.MaxHP : 1;
-        CurrentHP = MaxHP;
-        Died = null;
     }
 
     public void TakeDamage(int amount)

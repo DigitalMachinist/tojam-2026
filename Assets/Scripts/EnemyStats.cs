@@ -4,16 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyStats", menuName = "Tojam/Enemy Stats", order = 1)]
 public class EnemyStats : ScriptableObject
 {
-    [Serializable]
-    public struct DropEntry
-    {
-        [Tooltip("Relative weight of this drop in the loot table.")]
-        public float Weight;
-
-        [Tooltip("Item to drop when this entry is selected.")]
-        public ItemDrop ItemDrop;
-    }
-
     [Tooltip("Maximum HP this enemy starts with.")]
     [SerializeField] private int maxHP = 3;
 
@@ -35,11 +25,11 @@ public class EnemyStats : ScriptableObject
     [Tooltip("Experience points awarded when this enemy is killed.")]
     [SerializeField] private int xpValue = 1;
 
+    [Tooltip("Uniform scale applied to this enemy at spawn.")]
+    [SerializeField] private float scale = 1f;
+
     [Tooltip("Animator controller assigned to the enemy's Animator component at spawn.")]
     [SerializeField] private RuntimeAnimatorController animatorController;
-
-    [Tooltip("Weighted loot table. One entry is selected at random on death.")]
-    [SerializeField] private DropEntry[] drops = new DropEntry[0];
 
     public int MaxHP => maxHP;
     public float MovementSpeed => movementSpeed;
@@ -48,6 +38,6 @@ public class EnemyStats : ScriptableObject
     public int ContactDamage => contactDamage;
     public float ContactDamageIntervalSeconds => contactDamageIntervalSeconds;
     public int XPValue => xpValue;
+    public float Scale => scale;
     public RuntimeAnimatorController AnimatorController => animatorController;
-    public DropEntry[] Drops => drops;
 }
