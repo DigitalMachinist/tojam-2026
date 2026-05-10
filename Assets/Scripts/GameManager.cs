@@ -1,7 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
+using Unity.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public enum ScreenType
+    {
+        Title,
+        Pause,
+        HUD,
+        GameOver
+    }
+
     [Header("Player")]
     [Tooltip("Health component whose Died event triggers game over.")]
     [SerializeField] private PlayerHealth playerHealth;
@@ -31,6 +42,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("World-space rect from which a random player spawn position is chosen on reset.")]
     [SerializeField] private Rect spawnBounds = new Rect(-8f, -8f, 16f, 16f);
 
+    [Space( 10 )]
+    [Header( "Player" )]
+    [SerializeField] private Canvas UITitle;
+    [SerializeField] private Canvas UIPause;
+    [SerializeField] private Canvas UIHUD;
+    [SerializeField] private Canvas UIGameOver;
+
     private void OnEnable()
     {
         if (playerHealth != null) playerHealth.Died += OnPlayerDied;
@@ -50,6 +68,10 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
+        //Show Title Screen
+        Time.timeScale = 0f;
+        ShowScreen( ScreenType.Title );
+
         enemyManager?.ResetAll();
         shadowManager?.SetTargetCount(0);
 
@@ -76,18 +98,73 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         GameLog.Death("Game over", this);
         // TODO: show game over view
+        ShowScreen( ScreenType.GameOver );
     }
 
     private void OnPauseRequested()
     {
         Time.timeScale = 0f;
         GameLog.Input("Pause requested", this);
-        // TODO: show main menu screen
+        //Show Pause Screen
+        ShowScreen( ScreenType.Pause );
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(spawnBounds.center, spawnBounds.size);
+    }
+
+    public void OnPlaySelected()
+    {
+        Time.timeScale = 1f;
+        ShowScreen( ScreenType.HUD );
+    }
+
+    public void OnResumeSelected()
+    {
+        Time.timeScale = 1f;
+        GameLog.Input( "Resume requested", this );
+        //Show Pause Screen
+        ShowScreen( ScreenType.HUD );
+    }
+
+    public void OnQuitSelected()
+    {
+        Application.Quit();
+    }
+
+    private void ShowScreen(ScreenType _screenType)
+    {
+        switch ( _screenType )
+        {
+            case ScreenType.Title:
+            UITitle.enabled = true;
+            UIHUD.enabled = false;
+            UIGameOver.enabled = false;
+            UIPause.enabled = false;
+            break;
+
+            case ScreenType.Pause:
+            UITitle.enabled = false;
+            UIHUD.enabled = false;
+            UIGameOver.enabled = false;
+            UIPause.enabled = true;
+            break;
+
+            case ScreenType.HUD:
+            UITitle.enabled = false;
+            UIHUD.enabled = true;
+            UIGameOver.enabled = false;
+            UIPause.enabled = false;
+            break;
+
+            case ScreenType.GameOver:
+            UITitle.enabled = false;
+            UIHUD.enabled = false;
+            UIGameOver.enabled = true;
+            UIPause.enabled = false;
+            break;
+        }
     }
 }
