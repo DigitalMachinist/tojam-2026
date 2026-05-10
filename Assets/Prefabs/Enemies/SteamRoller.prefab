@@ -94,8 +94,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: -0.15, y: -0.1}
+  m_Radius: 1.8
 --- !u!1 &8857538151435367397
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStart
   hazard: {fileID: 585090383113778015}
   mover: {fileID: 1600189197117517455}
+  body: {fileID: 8673157270922730634}
   rb: {fileID: 2495178083617311374}
 --- !u!114 &3570779536559571705
 MonoBehaviour:
@@ -255,6 +256,7 @@ MonoBehaviour:
   health: {fileID: 5135788871399146685}
   hazard: {fileID: 585090383113778015}
   mover: {fileID: 1600189197117517455}
+  body: {fileID: 8673157270922730634}
   rb: {fileID: 2495178083617311374}
 --- !u!114 &3495369462599075676
 MonoBehaviour:
@@ -270,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
   stats: {fileID: 2900664413442223452}
   mover: {fileID: 1600189197117517455}
-  health: {fileID: 0}
+  health: {fileID: 5135788871399146685}
 --- !u!114 &1588651564030101468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,15 +359,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f6e8fe3e21faa3241b0955b15cd95011, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!50 &2495178083617311374
 Rigidbody2D:
@@ -428,5 +430,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: -0.15, y: -0.1}
+  m_Radius: 1.8
