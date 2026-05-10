@@ -9,15 +9,21 @@ public class EnemyAnimator : MonoBehaviour
     [Tooltip("Mover whose Rigidbody2D velocity drives the directional animation parameters.")]
     [SerializeField] private AnchoredMover mover;
 
+    [Tooltip("Health component whose Died event drives the IsDead parameter.")]
+    [SerializeField] private EnemyHealth health;
+
     private Animator animator;
     private Rigidbody2D moverRb;
 
     private static readonly int IsMovingLeftHash  = Animator.StringToHash("IsMovingLeft");
     private static readonly int IsMovingRightHash = Animator.StringToHash("IsMovingRight");
+    private static readonly int IsDeadHash        = Animator.StringToHash("IsDead");
+    private static readonly int HitHash           = Animator.StringToHash("Hit");
 
     public bool IsMovingLeft   { get; private set; }
     public bool IsMovingRight  { get; private set; }
     public float MovementSpeed { get; private set; }
+    public bool IsDead         { get; private set; }
 
     private void Awake()
     {
@@ -29,26 +35,48 @@ public class EnemyAnimator : MonoBehaviour
     private void Start()
     {
         if (stats != null)
-        {
             MovementSpeed = stats.MovementSpeed;
-        }
     }
 
     private void OnEnable()
     {
-        if (stats == null) return;
-        stats.Initialized          += OnInitialized;
+        IsDead = false;
+        animator.SetBool(IsDeadHash, false);
+        animator.ResetTrigger(HitHash);
+        if (stats != null)
+            stats.Initialized += OnInitialized;
+        if (health != null)
+        {
+            health.DamageTaken += OnDamageTaken;
+            health.Died        += OnDied;
+        }
     }
 
     private void OnDisable()
     {
-        if (stats == null) return;
-        stats.Initialized          -= OnInitialized;
+        if (stats != null)
+            stats.Initialized -= OnInitialized;
+        if (health != null)
+        {
+            health.DamageTaken -= OnDamageTaken;
+            health.Died        -= OnDied;
+        }
     }
 
     private void OnInitialized()
     {
         ApplyAnimatorController();
+    }
+
+    private void OnDamageTaken()
+    {
+        animator.SetTrigger(HitHash);
+    }
+
+    private void OnDied()
+    {
+        IsDead = true;
+        animator.SetBool(IsDeadHash, true);
     }
 
     private void ApplyAnimatorController()

@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStart
   hazard: {fileID: 4038259543176810039}
   mover: {fileID: 1711201553845516206}
+  body: {fileID: 7185003876267013799}
   rb: {fileID: 8768703235685494076}
 --- !u!114 &994264203291726466
 MonoBehaviour:
@@ -159,6 +160,7 @@ MonoBehaviour:
   health: {fileID: 4909166254918999370}
   hazard: {fileID: 4038259543176810039}
   mover: {fileID: 1711201553845516206}
+  body: {fileID: 7185003876267013799}
   rb: {fileID: 8768703235685494076}
 --- !u!114 &5972802471511799690
 MonoBehaviour:
@@ -174,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
   stats: {fileID: 8613030112306635924}
   mover: {fileID: 1711201553845516206}
+  health: {fileID: 4909166254918999370}
 --- !u!114 &6799282103622343990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +202,7 @@ Animator:
   m_GameObject: {fileID: 7423330473572846397}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 759bd3695a514454f8ce8df37102f500, type: 2}
+  m_Controller: {fileID: 9100000, guid: 71e09d31586945d42bb026760567da94, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -260,15 +263,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a4a8970d771cba34c973f07fbe4064c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!50 &8768703235685494076
 Rigidbody2D:
@@ -331,8 +334,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0.05, y: -0.3}
+  m_Radius: 0.7
 --- !u!1 &8188546228476032467
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,5 +430,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0.05, y: -0.3}
+  m_Radius: 0.7

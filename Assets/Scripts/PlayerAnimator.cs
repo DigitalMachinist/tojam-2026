@@ -18,11 +18,13 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int IsMovingRightHash  = Animator.StringToHash("IsMovingRight");
     private static readonly int MovementSpeedHash  = Animator.StringToHash("MovementSpeed");
     private static readonly int IsInvulnerableHash = Animator.StringToHash("IsInvulnerable");
+    private static readonly int IsDeadHash         = Animator.StringToHash("IsDead");
 
     public bool IsMovingLeft   { get; private set; }
     public bool IsMovingRight  { get; private set; }
     public float MovementSpeed { get; private set; }
     public bool IsInvulnerable { get; private set; }
+    public bool IsDead         { get; private set; }
 
     private void Awake()
     {
@@ -38,6 +40,8 @@ public class PlayerAnimator : MonoBehaviour
             MovementSpeed = currentStats.MovementSpeed;
             animator.SetFloat(MovementSpeedHash, MovementSpeed);
         }
+        IsDead = false;
+        animator.SetBool(IsDeadHash, false);
     }
 
     private void OnEnable()
@@ -46,6 +50,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             health.BeganIframes += OnBeganIframes;
             health.EndedIframes += OnEndedIframes;
+            health.Died         += OnDied;
         }
         if (currentStats != null)
             currentStats.MovementSpeedChanged += OnMovementSpeedChanged;
@@ -57,9 +62,16 @@ public class PlayerAnimator : MonoBehaviour
         {
             health.BeganIframes -= OnBeganIframes;
             health.EndedIframes -= OnEndedIframes;
+            health.Died         -= OnDied;
         }
         if (currentStats != null)
             currentStats.MovementSpeedChanged -= OnMovementSpeedChanged;
+    }
+
+    private void OnDied()
+    {
+        IsDead = true;
+        animator.SetBool(IsDeadHash, true);
     }
 
     private void OnBeganIframes()

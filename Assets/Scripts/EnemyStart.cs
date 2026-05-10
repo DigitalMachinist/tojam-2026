@@ -10,6 +10,9 @@ public class EnemyStart : MonoBehaviour
     [Tooltip("Mover to re-enable on restart.")]
     [SerializeField] private ConstantSpeedMover mover;
 
+    [Tooltip("Body to re-enable on restart so weapon contacts register again.")]
+    [SerializeField] private EnemyBody body;
+
     [Tooltip("Rigidbody to unfreeze on restart.")]
     [SerializeField] private Rigidbody2D rb;
 
@@ -24,6 +27,7 @@ public class EnemyStart : MonoBehaviour
     {
         if (hazard != null) hazard.enabled = true;
         if (mover != null) mover.enabled = true;
+        if (body != null) body.enabled = true;
         if (rb != null) rb.constraints = originalConstraints;
         Restarted?.Invoke();
     }

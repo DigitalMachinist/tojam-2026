@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerWeaponEffect : MonoBehaviour
 {
+    [Tooltip("Animation component driving the attack clip.")]
+    [SerializeField] private Animation _animation;
+
     [Tooltip("AnimationClip to play. Leave null to use coroutine-driven mode.")]
     [SerializeField] private AnimationClip attackClip;
 
@@ -10,13 +13,6 @@ public class PlayerWeaponEffect : MonoBehaviour
     public float Knockback { get; private set; }
     public float StunDuration { get; private set; }
     public PlayerWeaponEffect SourcePrefab { get; private set; }
-
-    private Animation _animation;
-
-    private void Awake()
-    {
-        _animation = GetComponent<Animation>();
-    }
 
     public void Play(Vector3 position, Quaternion rotation, EffectManager manager, int damage, float knockback, float stunDuration, PlayerWeaponEffect sourcePrefab)
     {
