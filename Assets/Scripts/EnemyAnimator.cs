@@ -18,6 +18,7 @@ public class EnemyAnimator : MonoBehaviour
     private static readonly int IsMovingLeftHash  = Animator.StringToHash("IsMovingLeft");
     private static readonly int IsMovingRightHash = Animator.StringToHash("IsMovingRight");
     private static readonly int IsDeadHash        = Animator.StringToHash("IsDead");
+    private static readonly int HitHash           = Animator.StringToHash("Hit");
 
     public bool IsMovingLeft   { get; private set; }
     public bool IsMovingRight  { get; private set; }
@@ -34,19 +35,21 @@ public class EnemyAnimator : MonoBehaviour
     private void Start()
     {
         if (stats != null)
-        {
             MovementSpeed = stats.MovementSpeed;
-        }
-        IsDead = false;
-        animator.SetBool(IsDeadHash, false);
     }
 
     private void OnEnable()
     {
+        IsDead = false;
+        animator.SetBool(IsDeadHash, false);
+        animator.ResetTrigger(HitHash);
         if (stats != null)
             stats.Initialized += OnInitialized;
         if (health != null)
-            health.Died += OnDied;
+        {
+            health.DamageTaken += OnDamageTaken;
+            health.Died        += OnDied;
+        }
     }
 
     private void OnDisable()
@@ -54,12 +57,20 @@ public class EnemyAnimator : MonoBehaviour
         if (stats != null)
             stats.Initialized -= OnInitialized;
         if (health != null)
-            health.Died -= OnDied;
+        {
+            health.DamageTaken -= OnDamageTaken;
+            health.Died        -= OnDied;
+        }
     }
 
     private void OnInitialized()
     {
         ApplyAnimatorController();
+    }
+
+    private void OnDamageTaken()
+    {
+        animator.SetTrigger(HitHash);
     }
 
     private void OnDied()
