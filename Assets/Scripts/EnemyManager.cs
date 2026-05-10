@@ -1,20 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[Serializable]
-public struct EnemySpawnEntry
-{
-    [Tooltip("Relative weight of this entry in the spawn table.")]
-    public float Weight;
-
-    [Tooltip("Stats to apply to the enemy when this entry is selected.")]
-    public EnemyStats Stats;
-
-    [Tooltip("Enemy prefab to spawn for this entry.")]
-    public GameObject Prefab;
-}
 
 public class EnemyManager : MonoBehaviour
 {
@@ -27,8 +13,8 @@ public class EnemyManager : MonoBehaviour
     [Tooltip("Camera used to determine the off-screen spawn ring. Falls back to Camera.main.")]
     [SerializeField] private Camera spawnCamera;
 
-    [Tooltip("Seconds between spawn attempts.")]
-    [SerializeField] private float spawnInterval = 3f;
+    [Tooltip("Spawn table and enemy scaling configuration.")]
+    [SerializeField] private EnemySpawns enemySpawns;
 
     [Tooltip("Seconds an enemy remains visible after dying before returning to the pool.")]
     [SerializeField] private float deathLingerDuration = 2f;
@@ -39,22 +25,21 @@ public class EnemyManager : MonoBehaviour
     [Tooltip("How many world units outside the camera edge enemies are allowed to spawn.")]
     [SerializeField] private float spawnMargin = 2f;
 
-    [Tooltip("Weighted list of enemy types to spawn.")]
-    [SerializeField] private EnemySpawnEntry[] spawnTable;
-
     private readonly List<GameObject> active = new();
     private readonly Dictionary<GameObject, List<GameObject>> pool = new();
 
     private Coroutine spawnCoroutine;
+    private PlayerStatsCurrent playerStats;
 
     private void Awake()
     {
         if (spawnCamera == null) spawnCamera = Camera.main;
+        if (player != null) playerStats = player.GetComponent<PlayerStatsCurrent>();
     }
 
     private void OnEnable()
     {
-        if (spawnTable == null || spawnTable.Length == 0) return;
+        if (enemySpawns == null || enemySpawns.SpawnTable == null || enemySpawns.SpawnTable.Length == 0) return;
         spawnCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
@@ -74,7 +59,7 @@ public class EnemyManager : MonoBehaviour
             if (go != null) Destroy(go);
         active.Clear();
         spawnCoroutine = null;
-        if (isActiveAndEnabled && spawnTable != null && spawnTable.Length > 0)
+        if (isActiveAndEnabled && enemySpawns != null && enemySpawns.SpawnTable != null && enemySpawns.SpawnTable.Length > 0)
             spawnCoroutine = StartCoroutine(SpawnCoroutine());
     }
 
@@ -82,7 +67,7 @@ public class EnemyManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(enemySpawns.SpawnInterval);
             SpawnEnemy();
         }
     }
@@ -94,18 +79,20 @@ public class EnemyManager : MonoBehaviour
 
         var go = GetFromPool(entry.Prefab);
 
-        var health = go.GetComponentInChildren<EnemyHealth>();
-        var hazard = go.GetComponentInChildren<Hazard>();
-        var mover = go.GetComponentInChildren<ConstantSpeedMover>();
-        var enemyStart = go.GetComponentInChildren<EnemyStart>();
+        int playerLevel  = playerStats != null ? playerStats.Level : 1;
 
-        health?.Initialize(entry.Stats);
-        hazard?.Initialize(entry.Stats);
+        var statsCurrent = go.GetComponentInChildren<EnemyStatsCurrent>();
+        var mover        = go.GetComponentInChildren<ConstantSpeedMover>();
+        var enemyStart   = go.GetComponentInChildren<EnemyStart>();
+
+        statsCurrent?.Initialize(entry.Stats, enemySpawns, playerLevel);
         enemyStart?.Restart();
+
+        go.transform.localScale = entry.Prefab.transform.localScale * (statsCurrent != null ? statsCurrent.Scale : 1f);
 
         if (mover != null)
         {
-            mover.Speed = entry.Stats.MovementSpeed;
+            mover.Speed = statsCurrent != null ? statsCurrent.MovementSpeed : entry.Stats.MovementSpeed;
             mover.SetAnchor(player);
         }
 
@@ -118,10 +105,15 @@ public class EnemyManager : MonoBehaviour
         active.Add(go);
         GameLog.Enemy($"Spawned {entry.Stats.name} at {spawnPos} ({active.Count} active)", this);
 
-        var capturedGo = go;
+        var capturedGo     = go;
         var capturedPrefab = entry.Prefab;
+        var health         = go.GetComponentInChildren<EnemyHealth>();
         if (health != null)
-            health.Died += () => OnEnemyDied(capturedGo, capturedPrefab);
+            health.Died += () =>
+            {
+                playerStats?.AwardXP(health.XPValue);
+                OnEnemyDied(capturedGo, capturedPrefab);
+            };
     }
 
     private void OnEnemyDied(GameObject go, GameObject prefab)
@@ -168,20 +160,21 @@ public class EnemyManager : MonoBehaviour
 
     private bool TryPickEntry(out EnemySpawnEntry result)
     {
+        var table = enemySpawns.SpawnTable;
         float total = 0f;
-        foreach (var e in spawnTable) total += Mathf.Max(0f, e.Weight);
+        foreach (var e in table) total += Mathf.Max(0f, e.Weight);
 
         if (total <= 0f) { result = default; return false; }
 
         float roll = UnityEngine.Random.Range(0f, total);
         float cumulative = 0f;
-        foreach (var e in spawnTable)
+        foreach (var e in table)
         {
             cumulative += Mathf.Max(0f, e.Weight);
             if (roll < cumulative) { result = e; return true; }
         }
 
-        result = spawnTable[spawnTable.Length - 1];
+        result = table[table.Length - 1];
         return true;
     }
 

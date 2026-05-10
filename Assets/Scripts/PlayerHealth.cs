@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Tooltip("Stats asset that provides the default maximum HP.")]
-    [SerializeField] private PlayerStats stats;
+    [Tooltip("Current stats component providing MaxHP and IframeDurationSeconds.")]
+    [SerializeField] private PlayerStatsCurrent stats;
 
     [Tooltip("Body component whose hazard contact events drive damage.")]
     [SerializeField] private PlayerBody body;
@@ -27,23 +27,49 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        MaxHP = stats != null ? stats.DefaultMaxHP : 1;
+        MaxHP = stats != null ? stats.MaxHP : 1;
         iframeDuration = stats != null ? stats.IframeDurationSeconds : 0f;
         CurrentHP = MaxHP;
     }
 
     private void OnEnable()
     {
-        if (body == null) return;
-        body.HazardContactEntered += OnHazardContact;
-        body.HazardContactTicked += OnHazardContact;
+        if (body != null)
+        {
+            body.HazardContactEntered += OnHazardContact;
+            body.HazardContactTicked += OnHazardContact;
+        }
+        if (stats != null)
+        {
+            stats.MaxHPChanged += OnMaxHPChanged;
+            stats.IframeDurationChanged += OnIframeDurationChanged;
+        }
     }
 
     private void OnDisable()
     {
-        if (body == null) return;
-        body.HazardContactEntered -= OnHazardContact;
-        body.HazardContactTicked -= OnHazardContact;
+        if (body != null)
+        {
+            body.HazardContactEntered -= OnHazardContact;
+            body.HazardContactTicked -= OnHazardContact;
+        }
+        if (stats != null)
+        {
+            stats.MaxHPChanged -= OnMaxHPChanged;
+            stats.IframeDurationChanged -= OnIframeDurationChanged;
+        }
+    }
+
+    private void OnMaxHPChanged(int newMax)
+    {
+        int delta = newMax - MaxHP;
+        MaxHP = newMax;
+        if (delta > 0) Heal(delta);
+    }
+
+    private void OnIframeDurationChanged(float newDuration)
+    {
+        iframeDuration = newDuration;
     }
 
     private void OnHazardContact(Hazard hazard)

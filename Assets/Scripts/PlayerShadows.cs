@@ -6,9 +6,6 @@ public class PlayerShadows : MonoBehaviour
     [Tooltip("Health component whose damage/heal events drive shadow count.")]
     [SerializeField] private PlayerHealth health;
 
-    [Tooltip("Stats asset providing MaxShadows.")]
-    [SerializeField] private PlayerStats stats;
-
     public event Action<int> ShadowAdded;
     public event Action<int> ShadowRemoved;
 
@@ -35,8 +32,7 @@ public class PlayerShadows : MonoBehaviour
         if (health == null) return;
 
         int missing = health.MaxHP - health.CurrentHP;
-        int cap = stats != null ? stats.MaxShadows : missing;
-        int target = Mathf.Clamp(missing, 0, cap);
+        int target = Mathf.Clamp(missing, 0, health.MaxHP - 1);
 
         if (target == CurrentCount) return;
 
