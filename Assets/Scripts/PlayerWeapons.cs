@@ -166,6 +166,37 @@ public class PlayerWeapons : MonoBehaviour
         return shadowEffects;
     }
 
+    public void Restart()
+    {
+        foreach (var w in allInstances)
+            if (w != null) Destroy(w.gameObject);
+        allInstances.Clear();
+
+        if (effectsParent != null)
+        {
+            Destroy(effectsParent.gameObject);
+            effectsParent = null;
+        }
+
+        if (stats == null || weaponPrefabs == null)
+        {
+            validPrefabs = new PlayerWeapon[0];
+            return;
+        }
+
+        int limit = stats.MaxWeaponSlots;
+        var valid = new List<PlayerWeapon>();
+        foreach (var prefab in weaponPrefabs)
+        {
+            if (valid.Count >= limit) break;
+            if (prefab != null) valid.Add(prefab);
+        }
+        validPrefabs = valid.ToArray();
+
+        foreach (var prefab in validPrefabs)
+            allInstances.Add(SpawnWeapon(prefab, transform));
+    }
+
     public void SetWeaponsEnabled(bool value)
     {
         foreach (var w in allInstances)

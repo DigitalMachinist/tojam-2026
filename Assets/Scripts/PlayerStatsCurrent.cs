@@ -60,6 +60,25 @@ public class PlayerStatsCurrent : MonoBehaviour
         }
     }
 
+    public void Restart()
+    {
+        if (stats == null) return;
+        Level = 1;
+        XP = 0;
+        MaxHP = stats.MaxHP;
+        IframeDurationSeconds = stats.IframeDurationSeconds;
+        MaxWeaponSlots = stats.MaxWeaponSlots;
+        MovementSpeed = stats.MovementSpeed;
+        AttackRate = stats.AttackRate;
+        MaxHPChanged?.Invoke(MaxHP);
+        IframeDurationChanged?.Invoke(IframeDurationSeconds);
+        MaxWeaponSlotsChanged?.Invoke(MaxWeaponSlots);
+        MovementSpeedChanged?.Invoke(MovementSpeed);
+        AttackRateChanged?.Invoke(AttackRate);
+        LevelChanged?.Invoke(Level);
+        XPChanged?.Invoke(XP);
+    }
+
     public void ApplyPowerup(Powerup powerup)
     {
         if (powerup == null) return;
