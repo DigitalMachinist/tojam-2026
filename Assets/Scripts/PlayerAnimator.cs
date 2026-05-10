@@ -3,27 +3,81 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
-    [Tooltip("Stats asset whose AnimatorController is assigned to the Animator on Awake.")]
-    [SerializeField] private PlayerStats stats;
+    [Tooltip("Current stats component providing AnimatorController and MovementSpeed.")]
+    [SerializeField] private PlayerStatsCurrent currentStats;
 
-    [Tooltip("Controller whose MoveInput drives the animation parameters.")]
+    [Tooltip("Controller whose MoveInput drives the directional animation parameters.")]
     [SerializeField] private PlayerController controller;
+
+    [Tooltip("Health component whose iframe events drive the IsInvulnerable parameter.")]
+    [SerializeField] private PlayerHealth health;
 
     private Animator animator;
 
-    private static readonly int IsMovingLeftHash  = Animator.StringToHash("isMovingLeft");
-    private static readonly int IsMovingRightHash = Animator.StringToHash("isMovingRight");
-    private static readonly int MovementSpeedHash = Animator.StringToHash("MovementSpeed");
+    private static readonly int IsMovingLeftHash   = Animator.StringToHash("IsMovingLeft");
+    private static readonly int IsMovingRightHash  = Animator.StringToHash("IsMovingRight");
+    private static readonly int MovementSpeedHash  = Animator.StringToHash("MovementSpeed");
+    private static readonly int IsInvulnerableHash = Animator.StringToHash("IsInvulnerable");
 
     public bool IsMovingLeft   { get; private set; }
     public bool IsMovingRight  { get; private set; }
     public float MovementSpeed { get; private set; }
+    public bool IsInvulnerable { get; private set; }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        if (stats != null && stats.AnimatorController != null)
-            animator.runtimeAnimatorController = stats.AnimatorController;
+        if (currentStats != null && currentStats.AnimatorController != null)
+            animator.runtimeAnimatorController = currentStats.AnimatorController;
+    }
+
+    private void Start()
+    {
+        if (currentStats != null)
+        {
+            MovementSpeed = currentStats.MovementSpeed;
+            animator.SetFloat(MovementSpeedHash, MovementSpeed);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (health != null)
+        {
+            health.BeganIframes += OnBeganIframes;
+            health.EndedIframes += OnEndedIframes;
+        }
+        if (currentStats != null)
+            currentStats.MovementSpeedChanged += OnMovementSpeedChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (health != null)
+        {
+            health.BeganIframes -= OnBeganIframes;
+            health.EndedIframes -= OnEndedIframes;
+        }
+        if (currentStats != null)
+            currentStats.MovementSpeedChanged -= OnMovementSpeedChanged;
+    }
+
+    private void OnBeganIframes()
+    {
+        IsInvulnerable = true;
+        animator.SetBool(IsInvulnerableHash, true);
+    }
+
+    private void OnEndedIframes()
+    {
+        IsInvulnerable = false;
+        animator.SetBool(IsInvulnerableHash, false);
+    }
+
+    private void OnMovementSpeedChanged(float speed)
+    {
+        MovementSpeed = speed;
+        animator.SetFloat(MovementSpeedHash, MovementSpeed);
     }
 
     private void Update()
@@ -32,11 +86,9 @@ public class PlayerAnimator : MonoBehaviour
 
         IsMovingLeft  = input.x < 0f;
         IsMovingRight = input.x > 0f;
-        MovementSpeed = input.magnitude;
 
         animator.SetBool(IsMovingLeftHash,  IsMovingLeft);
         animator.SetBool(IsMovingRightHash, IsMovingRight);
-        animator.SetFloat(MovementSpeedHash, MovementSpeed);
     }
 
     // AnimationEvent handlers

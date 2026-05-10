@@ -10,6 +10,12 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private EffectManager effectManager;
 
     private Transform effectsParent;
+    private PlayerStatsCurrent playerStats;
+
+    private void Awake()
+    {
+        playerStats = GetComponentInParent<PlayerStatsCurrent>();
+    }
 
     public void SetEffectManager(EffectManager manager) => effectManager = manager;
     public void SetEffectsParent(Transform parent) => effectsParent = parent;
@@ -42,7 +48,8 @@ public class PlayerWeapon : MonoBehaviour
         while (true)
         {
             yield return StartCoroutine(FireBurst());
-            yield return new WaitForSeconds(stats != null ? stats.Cooldown : 1f);
+            float attackRate = playerStats != null ? Mathf.Max(0.01f, playerStats.AttackRate) : 1f;
+            yield return new WaitForSeconds((stats != null ? stats.Cooldown : 1f) / attackRate);
         }
     }
 

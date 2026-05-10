@@ -39,8 +39,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: BlinkCooldown
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsInvulnerable
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1260754839631831130}
@@ -64,8 +64,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: BlinkCooldown
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsInvulnerable
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4674025256499249531}
@@ -104,7 +104,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f6f44160eae214346a6ee7e68c289732, type: 2}
+  m_Motion: {fileID: 7400000, guid: 56af01267fd494145b37f0bdce8d7411, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -132,7 +132,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2b0032833981b64478e4b7f9b901cb8e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7da03c8f5e9c5814296c442d0866a654, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -147,10 +147,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingLeft
+    m_ConditionEvent: IsMovingLeft
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingRight
+    m_ConditionEvent: IsMovingRight
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4674025256499249531}
@@ -175,10 +175,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isMovingRight
+    m_ConditionEvent: IsMovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingLeft
+    m_ConditionEvent: IsMovingLeft
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3814670347876006953}
@@ -231,10 +231,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isMovingLeft
+    m_ConditionEvent: IsMovingLeft
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingRight
+    m_ConditionEvent: IsMovingRight
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1096854260255960466}
@@ -259,25 +259,25 @@ AnimatorController:
   m_Name: SlimeController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isMovingLeft
+  - m_Name: IsInvulnerable
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: isMovingRight
+  - m_Name: IsMovingLeft
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Speed
-    m_Type: 1
-    m_DefaultFloat: 1
+  - m_Name: IsMovingRight
+    m_Type: 4
+    m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: BlinkCooldown
+  - m_Name: MovementSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
@@ -317,7 +317,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 22c0e4710b8adbe4ea34e70ba4aa9357, type: 2}
+  m_Motion: {fileID: 7400000, guid: f3dcafc0d9840b1408e716f26e66517d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -332,10 +332,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingLeft
+    m_ConditionEvent: IsMovingLeft
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMovingRight
+    m_ConditionEvent: IsMovingRight
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3814670347876006953}
@@ -360,10 +360,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingLeft
+    m_ConditionEvent: IsMovingLeft
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingRight
+    m_ConditionEvent: IsMovingRight
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4674025256499249531}
@@ -388,10 +388,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isMovingLeft
+    m_ConditionEvent: IsMovingLeft
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMovingRight
+    m_ConditionEvent: IsMovingRight
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1096854260255960466}
