@@ -29,9 +29,13 @@ public class PlayerStats : ScriptableObject
     [Tooltip("Damage multiplier per shadow count.")]
     [SerializeField] private ShadowDamageEntry[] shadowDamageScaling = new ShadowDamageEntry[0];
 
+    [Tooltip("Animator controller assigned to the player's Animator component on Awake.")]
+    [SerializeField] private RuntimeAnimatorController animatorController;
+
     public int DefaultMaxHP => defaultMaxHP;
     public float IframeDurationSeconds => iframeDurationSeconds;
     public int MaxShadows => maxShadows;
     public int DefaultMaxWeaponSlots => defaultMaxWeaponSlots;
     public ShadowDamageEntry[] ShadowDamageScaling => shadowDamageScaling;
+    public RuntimeAnimatorController AnimatorController => animatorController;
 }
