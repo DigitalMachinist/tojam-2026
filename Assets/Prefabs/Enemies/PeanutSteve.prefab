@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStart
   hazard: {fileID: 5919907925663450531}
   mover: {fileID: 8988443714917493476}
+  body: {fileID: 9070015963988478657}
   rb: {fileID: 477342396171672328}
 --- !u!114 &5419859654692947985
 MonoBehaviour:
@@ -255,6 +256,7 @@ MonoBehaviour:
   health: {fileID: 1214568653423880669}
   hazard: {fileID: 5919907925663450531}
   mover: {fileID: 8988443714917493476}
+  body: {fileID: 9070015963988478657}
   rb: {fileID: 477342396171672328}
 --- !u!114 &9092914778339488857
 MonoBehaviour:
@@ -270,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
   stats: {fileID: 6017784311399983621}
   mover: {fileID: 8988443714917493476}
+  health: {fileID: 1214568653423880669}
 --- !u!114 &8447507349986278619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,15 +359,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f7b03c1fcd874e94c8b061b61b4bcd50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!50 &477342396171672328
 Rigidbody2D:

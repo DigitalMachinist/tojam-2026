@@ -48,7 +48,7 @@ MonoBehaviour:
   player: {fileID: 0}
   spawnCamera: {fileID: 0}
   enemySpawns: {fileID: 11400000, guid: 68dcd1e081f743c4b9bce060d6336c9b, type: 2}
-  deathLingerDuration: 3
+  deathLingerDuration: 5
   worldBounds:
     serializedVersion: 2
     x: 2
