@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<UIScreen> screens = new();
 
     [Header("Audio")]
-    [Tooltip("Audio clip to be played on Title Screen")]
+    [Tooltip("AudioSource to be used during title screen.")]
     [SerializeField] private AudioSource titleAudio;
-    [Tooltip("Audio clip to be played during gameplay")]
+    [Tooltip("AudioSource to be used during gameplay.")]
     [SerializeField] private AudioSource gameplayAudio;
 
     private void OnEnable()
