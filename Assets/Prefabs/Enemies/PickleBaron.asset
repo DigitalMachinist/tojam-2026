@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ed25c126c3d67b4ab8db37672403017, type: 3}
-  m_Name: EnemyStats
+  m_Name: PickleBaron
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  maxHP: 25
-  movementSpeed: 2
-  knockback: 5
-  weight: 1
+  maxHP: 15
+  movementSpeed: 3
+  knockback: 2
+  weight: 0.5
   contactDamage: 1
   contactDamageIntervalSeconds: 1
   xpValue: 10
-  animatorController: {fileID: 0}
-  drops: []
+  animatorController: {fileID: 9100000, guid: 71e09d31586945d42bb026760567da94, type: 2}

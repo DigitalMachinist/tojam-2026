@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    [Tooltip("Stats asset providing DefaultMaxWeaponSlots and ShadowDamageScaling.")]
-    [SerializeField] private PlayerStats stats;
+    [Tooltip("Current stats component providing MaxWeaponSlots and ShadowDamageScaling.")]
+    [SerializeField] private PlayerStatsCurrent stats;
 
     [Tooltip("Shadow manager whose spawn/despawn events drive weapon instance lifecycle on shadows.")]
     [SerializeField] private ShadowManager shadowManager;
@@ -15,7 +15,7 @@ public class PlayerWeapons : MonoBehaviour
     [Tooltip("Controller providing MoveInput for weapon direction.")]
     [SerializeField] private PlayerController playerController;
 
-    [Tooltip("Ordered weapon prefabs. Up to DefaultMaxWeaponSlots non-null entries are used.")]
+    [Tooltip("Ordered weapon prefabs. Up to MaxWeaponSlots non-null entries are used.")]
     [SerializeField] private PlayerWeapon[] weaponPrefabs;
 
     private PlayerWeapon[] validPrefabs;
@@ -31,7 +31,7 @@ public class PlayerWeapons : MonoBehaviour
             return;
         }
 
-        int limit = stats.DefaultMaxWeaponSlots;
+        int limit = stats.MaxWeaponSlots;
         var valid = new List<PlayerWeapon>();
         foreach (var prefab in weaponPrefabs)
         {
@@ -43,16 +43,50 @@ public class PlayerWeapons : MonoBehaviour
 
     private void OnEnable()
     {
-        if (shadowManager == null) return;
-        shadowManager.ShadowSpawned += OnShadowSpawned;
-        shadowManager.ShadowDespawned += OnShadowDespawned;
+        if (shadowManager != null)
+        {
+            shadowManager.ShadowSpawned += OnShadowSpawned;
+            shadowManager.ShadowDespawned += OnShadowDespawned;
+        }
+        if (stats != null)
+            stats.MaxWeaponSlotsChanged += OnMaxWeaponSlotsChanged;
     }
 
     private void OnDisable()
     {
-        if (shadowManager == null) return;
-        shadowManager.ShadowSpawned -= OnShadowSpawned;
-        shadowManager.ShadowDespawned -= OnShadowDespawned;
+        if (shadowManager != null)
+        {
+            shadowManager.ShadowSpawned -= OnShadowSpawned;
+            shadowManager.ShadowDespawned -= OnShadowDespawned;
+        }
+        if (stats != null)
+            stats.MaxWeaponSlotsChanged -= OnMaxWeaponSlotsChanged;
+    }
+
+    private void OnMaxWeaponSlotsChanged(int newLimit)
+    {
+        if (weaponPrefabs == null) return;
+
+        var newValid = new List<PlayerWeapon>();
+        foreach (var prefab in weaponPrefabs)
+        {
+            if (newValid.Count >= newLimit) break;
+            if (prefab != null) newValid.Add(prefab);
+        }
+
+        for (int i = validPrefabs.Length; i < newValid.Count; i++)
+        {
+            var prefab = newValid[i];
+            allInstances.Add(SpawnWeapon(prefab, transform));
+            foreach (var kvp in shadowInstances)
+            {
+                var instance = SpawnWeapon(prefab, kvp.Key.transform);
+                allInstances.Add(instance);
+                kvp.Value.Add(instance);
+            }
+        }
+
+        validPrefabs = newValid.ToArray();
     }
 
     private void Start()

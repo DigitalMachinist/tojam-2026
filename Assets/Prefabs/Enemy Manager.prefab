@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521da4df23a1cc24a944a32fdefa2e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  spawnTable: []
   spawnParent: {fileID: 0}
   player: {fileID: 0}
   spawnCamera: {fileID: 0}
-  spawnInterval: 2
+  enemySpawns: {fileID: 11400000, guid: 68dcd1e081f743c4b9bce060d6336c9b, type: 2}
   deathLingerDuration: 3
   worldBounds:
     serializedVersion: 2
