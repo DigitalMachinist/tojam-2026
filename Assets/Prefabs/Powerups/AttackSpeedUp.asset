@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Attack Speed Up
   maxHPIncrease: 0
   movementSpeedBonus: 0
-  attackRateBonus: 1.1
+  attackRateBonus: 1.03
   weaponSlotsIncrease: 0
   iframeDurationBonus: 0
   knockback: 0
