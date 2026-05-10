@@ -24,8 +24,14 @@ public class AnchorPivot : MonoBehaviour
     [SerializeField] private bool randomizeLocalRotationOnStart = false;
 
     public Transform AnchorTransform => anchorTransform;
+    public float MinDistance => minDistance;
 
     private Vector3 initialLocalDirection;
+
+    public void SetInitialDirection(Vector3 direction)
+    {
+        initialLocalDirection = direction.sqrMagnitude > 0f ? direction.normalized : Vector3.right;
+    }
 
     private void Awake()
     {

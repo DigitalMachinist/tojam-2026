@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888527899631004029}
   - component: {fileID: 1038203607039852751}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
