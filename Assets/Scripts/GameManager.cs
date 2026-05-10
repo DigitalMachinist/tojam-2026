@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource titleAudio;
     [Tooltip("AudioSource to be used during gameplay.")]
     [SerializeField] private AudioSource gameplayAudio;
+    [Tooltip("AudioSource to be used during game over screen")]
+    [SerializeField] private AudioSource gameoverAudio;
 
     private void OnEnable()
     {
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
         //Show Title Screen
         Time.timeScale = 0f;
         ShowScreen( ScreenType.Title );
-        
+        gameoverAudio.Stop();
         titleAudio.PlayDelayed(1);
 
         enemyManager?.ResetAll();
@@ -98,10 +100,12 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDied()
     {
         gameplayAudio.Stop();
+        gameoverAudio.Play();
         Time.timeScale = 0f;
         GameLog.Death("Game over", this);
         // TODO: show game over view
         ShowScreen( ScreenType.GameOver );
+        
     }
 
     private void OnPauseRequested()

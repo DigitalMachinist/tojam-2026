@@ -18,6 +18,6 @@ MonoBehaviour:
   weight: 0.5
   contactDamage: 1
   contactDamageIntervalSeconds: 1
-  xpValue: 8
+  xpValue: 12
   scale: 1
   animatorController: {fileID: 9100000, guid: 71e09d31586945d42bb026760567da94, type: 2}
