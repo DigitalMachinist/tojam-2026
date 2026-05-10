@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SteamRoller
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   maxHP: 100
-  movementSpeed: 1
+  movementSpeed: 0.8
   knockback: 10
   weight: 10
   contactDamage: 1
   contactDamageIntervalSeconds: 1
-  xpValue: 50
+  xpValue: 40
   scale: 1
   animatorController: {fileID: 9100000, guid: fea22854aea75e842b18c1155bcb8ba9, type: 2}

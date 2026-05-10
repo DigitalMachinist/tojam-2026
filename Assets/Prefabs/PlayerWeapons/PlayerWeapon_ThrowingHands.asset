@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e1ed03fd1e16949adc337cbd179859, type: 3}
   m_Name: PlayerWeapon_ThrowingHands
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponStats
-  baseDamage: 10
+  baseDamage: 15
   cooldown: 2
   effectPrefab: {fileID: 5419356369533716487, guid: 70749e827f3afe949939c4e19b3eab2a, type: 3}
   quantity: 1
   spawnDelay: 0.1
   knockback: 10
-  stunDurationSeconds: 0.2
+  stunDurationSeconds: 0.25
