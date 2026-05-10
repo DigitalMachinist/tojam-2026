@@ -22,6 +22,12 @@ MonoBehaviour:
   - Weight: 2
     Stats: {fileID: 11400000, guid: f23eaa4570b4910488ed706d2414393a, type: 2}
     Prefab: {fileID: 7423330473572846397, guid: 4fa59fc05a343e6499ad36da83a3fd23, type: 3}
-  - Weight: 1
+  - Weight: 2
     Stats: {fileID: 11400000, guid: 582e757d8050ceb44b2cb5632fd23673, type: 2}
     Prefab: {fileID: 7423330473572846397, guid: 65e3f314840002740bbe534a03b67351, type: 3}
+  - Weight: 2
+    Stats: {fileID: 11400000, guid: 5312ad6b63d01734594e017eec6b210e, type: 2}
+    Prefab: {fileID: 6009036617769425788, guid: da1ffc1cd90ecfd428451396fd40aedf, type: 3}
+  - Weight: 1
+    Stats: {fileID: 11400000, guid: ac77db44632c7da49a7f84ea68f27b0e, type: 2}
+    Prefab: {fileID: 8857538151435367397, guid: 26826319df6ebbd4b84be36a93c8577b, type: 3}

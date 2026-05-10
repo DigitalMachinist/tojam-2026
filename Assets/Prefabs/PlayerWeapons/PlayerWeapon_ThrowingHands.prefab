@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1695260122245039765}
   - component: {fileID: 5754257079452159257}
   m_Layer: 0
-  m_Name: TestWeapon
+  m_Name: PlayerWeapon_ThrowingHands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

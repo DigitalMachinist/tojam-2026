@@ -51,6 +51,13 @@ public class PlayerBody : MonoBehaviour
                 contacts.RemoveAt(i);
                 continue;
             }
+            if (!c.Hazard.isActiveAndEnabled)
+            {
+                contacts.RemoveAt(i);
+                GameLog.Contact($"Hazard disabled, clearing contact: {c.Hazard.name}", c.Hazard);
+                HazardContactExited?.Invoke(c.Hazard);
+                continue;
+            }
             if (now >= c.NextTickTime)
             {
                 GameLog.Contact($"Hazard tick: {c.Hazard.name}", c.Hazard);

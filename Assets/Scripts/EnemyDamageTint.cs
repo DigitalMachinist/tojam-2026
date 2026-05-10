@@ -16,6 +16,7 @@ public class EnemyDamageTint : MonoBehaviour
     {
         if (health != null) health.DamageTaken += UpdateTint;
         if (enemyStart != null) enemyStart.Restarted += ResetTint;
+        ResetTint();
     }
 
     private void OnDisable()

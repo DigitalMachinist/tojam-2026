@@ -11,6 +11,9 @@ public class EnemyDeath : MonoBehaviour
     [Tooltip("Mover to disable on death.")]
     [SerializeField] private ConstantSpeedMover mover;
 
+    [Tooltip("Body to disable on death so weapon contacts stop registering.")]
+    [SerializeField] private EnemyBody body;
+
     [Tooltip("Rigidbody to freeze on death.")]
     [SerializeField] private Rigidbody2D rb;
 
@@ -28,6 +31,7 @@ public class EnemyDeath : MonoBehaviour
     {
         if (hazard != null) hazard.enabled = false;
         if (mover != null) mover.enabled = false;
+        if (body != null) body.enabled = false;
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
