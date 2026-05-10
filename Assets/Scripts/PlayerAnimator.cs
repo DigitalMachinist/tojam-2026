@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -12,7 +13,14 @@ public class PlayerAnimator : MonoBehaviour
     [Tooltip("Health component whose iframe events drive the IsInvulnerable parameter.")]
     [SerializeField] private PlayerHealth health;
 
+    [Tooltip("Sprite renderer to blink during iframes.")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Tooltip("Seconds each visible/invisible phase lasts during iframes.")]
+    [SerializeField] private float blinkInterval = 0.08f;
+
     private Animator animator;
+    private Coroutine blinkCoroutine;
 
     private static readonly int IsMovingLeftHash   = Animator.StringToHash("IsMovingLeft");
     private static readonly int IsMovingRightHash  = Animator.StringToHash("IsMovingRight");
@@ -78,12 +86,32 @@ public class PlayerAnimator : MonoBehaviour
     {
         IsInvulnerable = true;
         animator.SetBool(IsInvulnerableHash, true);
+        if (spriteRenderer != null)
+            blinkCoroutine = StartCoroutine(BlinkCoroutine());
     }
 
     private void OnEndedIframes()
     {
         IsInvulnerable = false;
         animator.SetBool(IsInvulnerableHash, false);
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
+        }
+        if (spriteRenderer != null)
+            spriteRenderer.enabled = true;
+    }
+
+    private IEnumerator BlinkCoroutine()
+    {
+        while (true)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(blinkInterval);
+        }
     }
 
     private void OnMovementSpeedChanged(float speed)
