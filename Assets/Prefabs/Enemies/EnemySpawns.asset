@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8e454c77c5c2b4a92c60e146ca8fe5, type: 3}
   m_Name: EnemySpawns
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawns
-  spawnInterval: 2
+  baseSpawnInterval: 2
+  maxHP: 1.05
+  scale: 1.05
+  spawnInterval: 0.98
+  xpValue: 1.2
+  movementSpeed: 1.05
   spawnTable:
   - Weight: 2
     Stats: {fileID: 11400000, guid: f23eaa4570b4910488ed706d2414393a, type: 2}
@@ -20,7 +25,3 @@ MonoBehaviour:
   - Weight: 1
     Stats: {fileID: 11400000, guid: 582e757d8050ceb44b2cb5632fd23673, type: 2}
     Prefab: {fileID: 7423330473572846397, guid: 65e3f314840002740bbe534a03b67351, type: 3}
-  maxHP: 1.05
-  scale: 1.05
-  xpValue: 1.2
-  movementSpeed: 1.05

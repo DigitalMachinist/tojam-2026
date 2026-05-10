@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class EnemyStart : MonoBehaviour
 {
+    public event Action Restarted;
     [Tooltip("Hazard to re-enable on restart.")]
     [SerializeField] private Hazard hazard;
 
@@ -23,5 +25,6 @@ public class EnemyStart : MonoBehaviour
         if (hazard != null) hazard.enabled = true;
         if (mover != null) mover.enabled = true;
         if (rb != null) rb.constraints = originalConstraints;
+        Restarted?.Invoke();
     }
 }

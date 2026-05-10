@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7527426856647464969}
   - component: {fileID: 994264203291726466}
   - component: {fileID: 405905663056768052}
+  - component: {fileID: 7256376793845197026}
   - component: {fileID: 9145104768854675417}
   - component: {fileID: 643741029674941163}
   - component: {fileID: 8768703235685494076}
@@ -173,6 +174,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
   stats: {fileID: 8613030112306635924}
   mover: {fileID: 1711201553845516206}
+--- !u!114 &7256376793845197026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423330473572846397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d379a322c9644784ebb68fccc2a19b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageTint
+  health: {fileID: 4909166254918999370}
+  enemyStart: {fileID: 7527426856647464969}
+  spriteRenderer: {fileID: 643741029674941163}
 --- !u!95 &9145104768854675417
 Animator:
   serializedVersion: 7
