@@ -49,6 +49,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas UIHUD;
     [SerializeField] private Canvas UIGameOver;
 
+    [Header("Audio")]
+    [Tooltip("Audio clip to be played on Title Screen")]
+    [SerializeField] private AudioSource titleAudio;
+    [Tooltip("Audio clip to be played during gameplay")]
+    [SerializeField] private AudioSource gameplayAudio;
+
     private void OnEnable()
     {
         if (playerHealth != null) playerHealth.Died += OnPlayerDied;
@@ -71,6 +77,8 @@ public class GameManager : MonoBehaviour
         //Show Title Screen
         Time.timeScale = 0f;
         ShowScreen( ScreenType.Title );
+        
+        titleAudio.PlayDelayed(1);
 
         enemyManager?.ResetAll();
         shadowManager?.SetTargetCount(0);
@@ -95,6 +103,7 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerDied()
     {
+        gameplayAudio.Stop();
         Time.timeScale = 0f;
         GameLog.Death("Game over", this);
         // TODO: show game over view
@@ -119,6 +128,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         ShowScreen( ScreenType.HUD );
+        titleAudio.Stop();
+        gameplayAudio.PlayDelayed(1);
     }
 
     public void OnResumeSelected()
