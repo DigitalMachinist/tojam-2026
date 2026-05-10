@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed25c126c3d67b4ab8db37672403017, type: 3}
   m_Name: Corn
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  maxHP: 25
-  movementSpeed: 2
+  maxHP: 40
+  movementSpeed: 1.75
   knockback: 5
   weight: 1
   contactDamage: 1
   contactDamageIntervalSeconds: 1
-  xpValue: 10
+  xpValue: 15
+  scale: 1
   animatorController: {fileID: 9100000, guid: 759bd3695a514454f8ce8df37102f500, type: 2}
-  drops: []

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHP: 5
-  iframeDurationSeconds: 1
-  maxWeaponSlots: 1
+  iframeDurationSeconds: 2
+  maxWeaponSlots: 4
   shadowDamageScaling:
   - Shadows: 1
     DamageMultiplier: 0.8
@@ -24,20 +24,190 @@ MonoBehaviour:
     DamageMultiplier: 0.6
   - Shadows: 4
     DamageMultiplier: 0.5
+  - Shadows: 5
+    DamageMultiplier: 0.4
   animatorController: {fileID: 9100000, guid: d584cb64947b11047bb193646a975c4f, type: 2}
-  movementSpeed: 3
+  movementSpeed: 4
   attackRate: 1
   startingWeapon: {fileID: 5754257079452159257, guid: 3707e486cc1a7a34c9eec348ede3f8d9, type: 3}
   progressionTable:
-  - Level: 2
-    XPCost: 100
+  - Level: 1
+    XPCost: 50
     Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 2
+    XPCost: 110
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
   - Level: 3
-    XPCost: 200
-    Powerup: {fileID: 11400000, guid: 3c008a4130d02bb47885b41cb0558572, type: 2}
+    XPCost: 182
+    Powerup: {fileID: 0}
   - Level: 4
-    XPCost: 300
-    Powerup: {fileID: 11400000, guid: 2a42486e221837b45adcebf9fcf7fc51, type: 2}
+    XPCost: 268
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
   - Level: 5
-    XPCost: 400
+    XPCost: 372
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 6
+    XPCost: 496
+    Powerup: {fileID: 0}
+  - Level: 7
+    XPCost: 645
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 8
+    XPCost: 824
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 9
+    XPCost: 1039
+    Powerup: {fileID: 11400000, guid: 134a04d77514eb7479b1dcbf037d867d, type: 2}
+  - Level: 10
+    XPCost: 1297
+    Powerup: {fileID: 0}
+  - Level: 11
+    XPCost: 1607
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 12
+    XPCost: 1979
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 13
+    XPCost: 2425
+    Powerup: {fileID: 11400000, guid: 016dec1b646c7a3499348fcdac823910, type: 2}
+  - Level: 14
+    XPCost: 2960
+    Powerup: {fileID: 0}
+  - Level: 15
+    XPCost: 3602
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 16
+    XPCost: 4372
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 17
+    XPCost: 5296
+    Powerup: {fileID: 0}
+  - Level: 18
+    XPCost: 6405
+    Powerup: {fileID: 0}
+  - Level: 19
+    XPCost: 7736
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 20
+    XPCost: 9333
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 21
+    XPCost: 11250
+    Powerup: {fileID: 0}
+  - Level: 22
+    XPCost: 13550
+    Powerup: {fileID: 0}
+  - Level: 23
+    XPCost: 16310
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 24
+    XPCost: 19622
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 25
+    XPCost: 23597
+    Powerup: {fileID: 11400000, guid: 134a04d77514eb7479b1dcbf037d867d, type: 2}
+  - Level: 26
+    XPCost: 28367
+    Powerup: {fileID: 11400000, guid: 016dec1b646c7a3499348fcdac823910, type: 2}
+  - Level: 27
+    XPCost: 34091
+    Powerup: {fileID: 0}
+  - Level: 28
+    XPCost: 40960
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 29
+    XPCost: 49202
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 30
+    XPCost: 59093
+    Powerup: {fileID: 0}
+  - Level: 31
+    XPCost: 70962
+    Powerup: {fileID: 0}
+  - Level: 32
+    XPCost: 85205
+    Powerup: {fileID: 0}
+  - Level: 33
+    XPCost: 102296
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 34
+    XPCost: 122805
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 35
+    XPCost: 147416
+    Powerup: {fileID: 0}
+  - Level: 36
+    XPCost: 176949
+    Powerup: {fileID: 0}
+  - Level: 37
+    XPCost: 212389
+    Powerup: {fileID: 0}
+  - Level: 38
+    XPCost: 254917
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 39
+    XPCost: 305951
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 40
+    XPCost: 367191
+    Powerup: {fileID: 0}
+  - Level: 41
+    XPCost: 440680
+    Powerup: {fileID: 0}
+  - Level: 42
+    XPCost: 528866
+    Powerup: {fileID: 0}
+  - Level: 43
+    XPCost: 634690
+    Powerup: {fileID: 0}
+  - Level: 44
+    XPCost: 761678
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 45
+    XPCost: 917064
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 46
+    XPCost: 1096927
+    Powerup: {fileID: 11400000, guid: 134a04d77514eb7479b1dcbf037d867d, type: 2}
+  - Level: 47
+    XPCost: 1316363
+    Powerup: {fileID: 11400000, guid: 016dec1b646c7a3499348fcdac823910, type: 2}
+  - Level: 48
+    XPCost: 1579686
+    Powerup: {fileID: 0}
+  - Level: 49
+    XPCost: 1895673
+    Powerup: {fileID: 0}
+  - Level: 50
+    XPCost: 2274858
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 51
+    XPCost: 2729880
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 52
+    XPCost: 3275906
+    Powerup: {fileID: 0}
+  - Level: 53
+    XPCost: 3931138
+    Powerup: {fileID: 0}
+  - Level: 54
+    XPCost: 4717416
+    Powerup: {fileID: 0}
+  - Level: 55
+    XPCost: 5660949
+    Powerup: {fileID: 0}
+  - Level: 56
+    XPCost: 6793189
+    Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}
+  - Level: 57
+    XPCost: 8151877
+    Powerup: {fileID: 11400000, guid: e513166291668214c9e6ab505caa6330, type: 2}
+  - Level: 58
+    XPCost: 9782303
+    Powerup: {fileID: 11400000, guid: 016dec1b646c7a3499348fcdac823910, type: 2}
+  - Level: 59
+    XPCost: 11738814
+    Powerup: {fileID: 0}
+  - Level: 60
+    XPCost: 14086627
     Powerup: {fileID: 11400000, guid: 40000abf3681d0f4d93b750a0cec3c3e, type: 2}

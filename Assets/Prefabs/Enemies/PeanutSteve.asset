@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed25c126c3d67b4ab8db37672403017, type: 3}
   m_Name: PeanutSteve
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  maxHP: 25
-  movementSpeed: 2
+  maxHP: 10
+  movementSpeed: 3.5
   knockback: 5
   weight: 1
   contactDamage: 1
   contactDamageIntervalSeconds: 1
-  xpValue: 10
+  xpValue: 5
   scale: 1
   animatorController: {fileID: 9100000, guid: ccd016185ef621c469a6dd6ec7bb271d, type: 2}

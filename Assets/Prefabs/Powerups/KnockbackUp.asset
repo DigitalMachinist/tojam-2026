@@ -18,7 +18,7 @@ MonoBehaviour:
   attackRateBonus: 0
   weaponSlotsIncrease: 0
   iframeDurationBonus: 0
-  knockback: 1.1
+  knockback: 1.025
   weaponDamage: 0
   weaponScale: 0
   weaponAttackRate: 0

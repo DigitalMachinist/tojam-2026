@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   displayName: Movement Speed Up
   maxHPIncrease: 0
-  movementSpeedBonus: 1.1
+  movementSpeedBonus: 1.05
   attackRateBonus: 0
   weaponSlotsIncrease: 0
   iframeDurationBonus: 0
   knockback: 0
   weaponDamage: 0
-  weaponAttackSpeed: 0
   weaponScale: 0
   weaponAttackRate: 0
   weaponKnockback: 0
+  weaponQuantity: 0
   newWeapon: {fileID: 0}
